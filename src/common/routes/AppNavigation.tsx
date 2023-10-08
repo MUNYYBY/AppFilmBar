@@ -7,6 +7,7 @@ import {navigationRef} from '../utils/NavigatorUtils';
 import Colors from '../styles/Colors';
 import Home from '../../container/Home/Home';
 import {NavScreenTags} from '../constants/NavScreenTags';
+import Splash from '../../container/Splash/Splash';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,11 +16,11 @@ const AppNavigation = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        animation: 'slide_from_right',
         contentStyle: {
           backgroundColor: Colors.WHITE_COLOR,
         },
       }}>
+      <Stack.Screen name={NavScreenTags.SPLASH} component={Splash} />
       <Stack.Screen name={NavScreenTags.HOME} component={Home} />
     </Stack.Navigator>
   );
