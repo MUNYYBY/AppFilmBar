@@ -1,17 +1,16 @@
 import {
-  clearLocalStorageSession,
-  setLocalStorageRegion,
-  setLocalStorageSession,
-  setLocalStorageToken,
-} from '@pigeonship/common/utils/LocalStorageUtils';
-import {
-  GET_LOCATION,
   LOAD_SESSION_SUCCESS,
   LOGOUT_SUCCESS,
   LOG_IN_SUCCESS,
   SIGN_UP_SUCCESS,
   UPDATE_USER_DATA,
 } from '../../constants/ActionTypes';
+import {
+  clearLocalStorageSession,
+  setLocalStorageRegion,
+  setLocalStorageSession,
+  setLocalStorageToken,
+} from '../../utils/LocalStorageUtils';
 
 const initialState = {
   data: {},
