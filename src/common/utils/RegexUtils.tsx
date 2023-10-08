@@ -1,0 +1,33 @@
+export const regexUtils = {
+  maskedPhoneNumberRegex: [
+    /\d/,
+    /\d/,
+    /\d/,
+    '-',
+    /\d/,
+    /\d/,
+    /\d/,
+    '-',
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+  ],
+  displayMaskedPhoneNumberRegex: [
+    /\d/,
+    /\d/,
+    /\d/,
+    /\d/,
+    ' ',
+    /\d/,
+    /\d/,
+    ' ',
+    /\d/,
+    /\d/,
+    ' ',
+    /\d/,
+    /\d/,
+  ],
+  passwordRegex:
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{1,}$/,
+};

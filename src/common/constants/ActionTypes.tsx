@@ -1,0 +1,23 @@
+/**
+ * Actions names used in redux actions
+ */
+export const FETCH_DATA_ERROR = 'FETCH_DATA_ERROR';
+export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
+export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
+export const CLEAR_DATA_SUCCESS = 'CLEAR_DATA_SUCCESS';
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+export const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
+export const GET_USER_DATA = 'GET_USER_DATA';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOAD_SESSION_SUCCESS = 'LOAD_SESSION_SUCCESS';
+export const THEME_SUCCESS = 'THEME_SUCCESS';
+export const CHANGE_LANUAGE_SUCCESS = 'CHANGE_LANUAGE_SUCCESS';
+export const GET_LOCATION = 'GET_LOCATION';
+export const SET_DELIVERY_MODE = 'SET_DELIVERY_MODE';
+export const SET_IS_ONLINE = 'SET_IS_ONLINE';
+export const SCAN_ID = 'SCAN_ID';
+export const SIGNATURE_IMAGE = 'SIGNATURE_IMAGE';
+export const SET_PICKUP_SCANS = 'SET_PICKUP_SCANS';
+export const SET_DROPOFF_SCANS = 'SET_DROPOFF_SCANS';
+export const SET_REFRESH = 'SET_REFRESH';
