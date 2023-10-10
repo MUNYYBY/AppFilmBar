@@ -1,7 +1,7 @@
 import {View, Text, SafeAreaView} from 'react-native';
 import React from 'react';
-import CustomHeader from '@pigeonship/common/component/customHeader';
 import styles from './styles';
+import CustomHeader from '../../components/customHeader';
 
 interface Props {
   headerTitle: string;

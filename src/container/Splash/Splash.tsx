@@ -28,7 +28,7 @@ const Splash = ({navigation}: any) => {
     //         props.navigation.navigate(NavScreenTags.AUTH_STACK);
     //     }
     // }
-    navigation.navigate(NavScreenTags.HOME);
+    navigation.navigate(NavScreenTags.SIGN_IN);
     SplashScreen.hide();
     return () => {};
     // eslint-disable-next-line react-hooks/exhaustive-deps

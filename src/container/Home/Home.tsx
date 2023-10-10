@@ -27,6 +27,20 @@ export default function Home() {
             <Image source={Images.MESSAGES_ICON} style={styles.appIcon} />
           </TouchableOpacity>
         </View>
+        <View style={styles.iconsStacks}>
+          <TouchableOpacity>
+            <Image source={Images.CALLER_ICON} style={styles.appIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={Images.CONTACTS_ICON} style={styles.appIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={Images.SETTINGS_ICON} style={styles.appIcon} />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Image source={Images.MESSAGES_ICON} style={styles.appIcon} />
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     </View>
   );

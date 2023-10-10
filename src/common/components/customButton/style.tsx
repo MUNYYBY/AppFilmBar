@@ -4,11 +4,11 @@ import {
   scaleSize,
   scaleSizeHeight,
 } from '../../utils/ScaleSheetUtils';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Colors from '../../styles/Colors';
 
 const styles = StyleSheet.create({
   btnView: {
-    backgroundColor: Colors.YELLOW_COLOR,
+    backgroundColor: Colors.PRIMARY,
     paddingVertical: scaleSize(15),
     borderRadius: scaleSize(60),
     alignItems: 'center',

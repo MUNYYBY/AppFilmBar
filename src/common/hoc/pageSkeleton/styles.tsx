@@ -1,6 +1,6 @@
-import Colors from '@pigeonship/common/styles/Colors';
-import {scaleSize} from '@pigeonship/common/utils/ScaleSheetUtils';
 import {StyleSheet} from 'react-native';
+import Colors from '../../styles/Colors';
+import {scaleSize} from '../../utils/ScaleSheetUtils';
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,

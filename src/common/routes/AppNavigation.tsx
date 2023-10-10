@@ -8,6 +8,9 @@ import Colors from '../styles/Colors';
 import Home from '../../container/Home/Home';
 import {NavScreenTags} from '../constants/NavScreenTags';
 import Splash from '../../container/Splash/Splash';
+import AuthStack from './AuthStack';
+import Login from '../../container/Login/Login';
+import Signup from '../../container/Signup/Signup';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +24,9 @@ const AppNavigation = () => {
         },
       }}>
       <Stack.Screen name={NavScreenTags.SPLASH} component={Splash} />
+      {/* <Stack.Screen name={NavScreenTags.AUTH_STACK} component={AuthStack} /> */}
+      <Stack.Screen name={NavScreenTags.SIGN_IN} component={Login} />
+      <Stack.Screen name={NavScreenTags.SIGN_UP} component={Signup} />
       <Stack.Screen name={NavScreenTags.HOME} component={Home} />
     </Stack.Navigator>
   );

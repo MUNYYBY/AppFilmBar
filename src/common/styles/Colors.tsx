@@ -2,6 +2,8 @@
  * colors used in the app
  */
 export const Colors = {
+  PRIMARY: '#F18865',
+  SECONDARY: '#3E568A',
   WHITE_COLOR: '#FFFFFF',
   WHITE_COLOR_85: '#F2F2F2',
   BACKGROUND: '#F2F2F2',
