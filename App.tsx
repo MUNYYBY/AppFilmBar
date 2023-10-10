@@ -24,6 +24,7 @@ function App(): JSX.Element {
         animated={true}
         backgroundColor={'white'}
         barStyle={'dark-content'}
+        translucent={true}
       />
       <AppNavigation />
     </Provider>
