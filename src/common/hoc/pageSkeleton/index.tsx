@@ -1,4 +1,4 @@
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import CustomHeader from '../../components/customHeader';
@@ -6,7 +6,7 @@ import CustomHeader from '../../components/customHeader';
 interface Props {
   headerTitle: string;
   leftIconPress?: any;
-  headerRightContent?: any;
+  headerRightContent?: React.ReactNode;
   hasHeader: boolean;
   children: any;
 }

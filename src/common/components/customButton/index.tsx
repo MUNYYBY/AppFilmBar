@@ -9,6 +9,7 @@ interface Props {
   buttonText?: any;
   shouldEnable?: boolean;
   loading?: boolean;
+  varient?: 'primary' | 'secondary';
 }
 
 const CustomButton = (props: Props) => {
@@ -18,8 +19,9 @@ const CustomButton = (props: Props) => {
     <TouchableOpacity
       disabled={shouldEnable === false ? true : loading ? true : false}
       onPress={onPress}
+      activeOpacity={0.75}
       style={[
-        styles.btnView,
+        props.varient === 'secondary' ? styles.btnViewSec : styles.btnView,
         shouldEnable === false ? styles.disabledBtnView : {},
         buttonStyle ?? {},
       ]}>
@@ -28,7 +30,7 @@ const CustomButton = (props: Props) => {
       ) : (
         <Text
           style={[
-            styles.btnTxt,
+            props.varient === 'secondary' ? styles.btnTxtSec : styles.btnTxt,
             shouldEnable === false ? styles.disabledBtnTxt : {},
             buttonText ?? {},
           ]}>
