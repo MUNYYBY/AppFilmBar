@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/no-unstable-nested-components */
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -8,9 +7,9 @@ import Colors from '../styles/Colors';
 import Home from '../../container/Home/Home';
 import {NavScreenTags} from '../constants/NavScreenTags';
 import Splash from '../../container/Splash/Splash';
-import AuthStack from './AuthStack';
-import Login from '../../container/Login/Login';
-import Signup from '../../container/Signup/Signup';
+import Login from '../../container/Auth/Login/Login';
+import Signup from '../../container/Auth/Signup/Signup';
+import ScheduleStack from './ScheduleStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,10 +23,13 @@ const AppNavigation = () => {
         },
       }}>
       <Stack.Screen name={NavScreenTags.SPLASH} component={Splash} />
-      {/* <Stack.Screen name={NavScreenTags.AUTH_STACK} component={AuthStack} /> */}
       <Stack.Screen name={NavScreenTags.SIGN_IN} component={Login} />
       <Stack.Screen name={NavScreenTags.SIGN_UP} component={Signup} />
       <Stack.Screen name={NavScreenTags.HOME} component={Home} />
+      <Stack.Screen
+        name={NavScreenTags.SCHEDULE_STACK}
+        component={ScheduleStack}
+      />
     </Stack.Navigator>
   );
 

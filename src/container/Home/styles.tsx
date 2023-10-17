@@ -24,7 +24,12 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontWeight: '700',
-    fontSize: scaleSize(50),
+    fontSize: scaleSize(80),
+    color: Colors.WHITE_COLOR,
+  },
+  timeTextSec: {
+    fontWeight: '400',
+    fontSize: scaleSize(20),
     color: Colors.WHITE_COLOR,
   },
   appIcon: {

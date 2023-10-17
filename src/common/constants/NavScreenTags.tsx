@@ -19,4 +19,8 @@ export const NavScreenTags = {
   SIGN_UP_WITH_EMAIL: 'SignupWithEmail',
   RESET_PASSWORD: 'ResetPassword',
   SETTINGS: 'Settings',
+  SCHEDULE_STACK: 'ScheduleStack',
+  SCHEDULE_SPLASH: 'ScheduleSplash',
+  SCHEDULE_HOME: 'ScheduleHome',
+  ADD_TASK: 'AddTask',
 };

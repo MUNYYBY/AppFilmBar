@@ -1,16 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text} from 'react-native';
 import React, {useState} from 'react';
-import PageSkeleton from '../../common/hoc/pageSkeleton';
+import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import styles from './styles';
-import CustomButton from '../../common/components/customButton';
+import CustomButton from '../../../common/components/customButton';
 import {useForm} from 'react-hook-form';
-import {scaleFontSize, scaleSize} from '../../common/utils/ScaleSheetUtils';
+import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 
-import CustomErrorText from '../../common/components/customErrorText';
-import {showAlert, showToast} from '../../common/utils/AlertUtils';
+import CustomErrorText from '../../../common/components/customErrorText';
+import {showAlert, showToast} from '../../../common/utils/AlertUtils';
 import Icon2 from 'react-native-vector-icons/MaterialIcons';
-import Colors from '../../common/styles/Colors';
+import Colors from '../../../common/styles/Colors';
 
 export default function DeleteAccount() {
   const {

@@ -1,19 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useRef, useState} from 'react';
-import PageSkeleton from '../../common/hoc/pageSkeleton';
+import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import styles from './styles';
-import CustomButton from '../../common/components/customButton';
+import CustomButton from '../../../common/components/customButton';
 import {useForm} from 'react-hook-form';
-import CustomInput from '../../common/components/customInput';
-import {InputTypes} from '../../common/constants/InputTypes';
-import {FIELD_NAMES} from '../../common/constants/FieldNames';
-import {scaleFontSize, scaleSize} from '../../common/utils/ScaleSheetUtils';
-import {navigate} from '../../common/utils/NavigatorUtils';
-import {NavScreenTags} from '../../common/constants/NavScreenTags';
-import CustomErrorText from '../../common/components/customErrorText';
-import {showToast} from '../../common/utils/AlertUtils';
-import Colors from '../../common/styles/Colors';
+import CustomInput from '../../../common/components/customInput';
+import {InputTypes} from '../../../common/constants/InputTypes';
+import {FIELD_NAMES} from '../../../common/constants/FieldNames';
+import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
+import {navigate} from '../../../common/utils/NavigatorUtils';
+import {NavScreenTags} from '../../../common/constants/NavScreenTags';
+import CustomErrorText from '../../../common/components/customErrorText';
+import {showToast} from '../../../common/utils/AlertUtils';
+import Colors from '../../../common/styles/Colors';
 
 export default function ForgotPassword() {
   const {

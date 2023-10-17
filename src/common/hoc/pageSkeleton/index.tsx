@@ -6,6 +6,7 @@ import CustomHeader from '../../components/customHeader';
 interface Props {
   headerTitle: string;
   leftIconPress?: any;
+  headerRightContent?: any;
   hasHeader: boolean;
   children: any;
 }
@@ -16,6 +17,7 @@ const PageSkeleton = (props: Props) => {
         <CustomHeader
           headerTitle={props.headerTitle}
           onPress={props.leftIconPress}
+          rightContent={props.headerRightContent}
         />
       ) : null}
       <View style={styles.childrenView}>{props.children}</View>

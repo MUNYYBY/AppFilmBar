@@ -2,9 +2,9 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Colors from '../styles/Colors';
 import {NavScreenTags} from '../constants/NavScreenTags';
-import ForgotPassword from '../../container/ForgotPassword/ForgotPassword';
-import Signup from '../../container/Signup/Signup';
-import Login from '../../container/Login/Login';
+import ForgotPassword from '../../container/Auth/ForgotPassword/ForgotPassword';
+import Signup from '../../container/Auth/Signup/Signup';
+import Login from '../../container/Auth/Login/Login';
 const AuthStack = () => {
   const Stack = createNativeStackNavigator();
 

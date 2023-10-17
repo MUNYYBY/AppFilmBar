@@ -20,12 +20,6 @@ function App(): JSX.Element {
 
   return (
     <Provider store={store}>
-      <StatusBar
-        animated={true}
-        backgroundColor={'white'}
-        barStyle={'dark-content'}
-        translucent={true}
-      />
       <AppNavigation />
     </Provider>
   );

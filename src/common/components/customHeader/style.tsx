@@ -13,15 +13,21 @@ export const styles = StyleSheet.create({
     paddingVertical: scaleSize(17),
     // paddingHorizontal: scaleSize(15),
     alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  center: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   headerTxt: {
-    // fontWeight: '400',
-    fontSize: scaleFontSize(20),
+    fontSize: scaleFontSize(24),
     lineHeight: scaleSizeHeight(24),
     textAlign: 'center',
     fontFamily: 'Lato-Regular',
   },
   headerVw: {
-    flex: 1,
+    // flex: 1,
+    marginLeft: scaleSize(10),
   },
 });

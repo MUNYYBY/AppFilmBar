@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {scaleFontSize, scaleSize} from '../../common/utils/ScaleSheetUtils';
-import Colors from '../../common/styles/Colors';
+import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 
 const styles = StyleSheet.create({
   LoginContainer: {
@@ -9,7 +8,6 @@ const styles = StyleSheet.create({
   textMain: {
     fontSize: scaleFontSize(32),
     fontWeight: 'bold',
-    color: Colors.BLACK_COLOR,
   },
   textSec: {
     fontSize: scaleSize(16),
