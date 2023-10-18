@@ -10,21 +10,18 @@ const styles = StyleSheet.create({
   textInputVw: {
     width: '100%',
     alignSelf: 'center',
-    borderRadius: scaleSize(60),
-    // borderWidth: 1,
+    borderRadius: scaleSize(10),
     alignItems: 'center',
   },
   textInput: {
     width: '100%',
-    // padding: scaleSize(18),
     height: scaleSize(55),
-    borderRadius: scaleSize(60),
+    borderRadius: scaleSize(10),
+    borderWidth: scaleSize(1.25),
     textAlignVertical: 'center',
     alignSelf: 'flex-start',
     fontSize: scaleFontSize(14),
     fontFamily: 'Lato-Regular',
-    // fontWeight: '400',
-    borderWidth: 1,
     backgroundColor: '#EEEEEE',
     paddingRight: scaleSize(70),
   },
@@ -32,7 +29,6 @@ const styles = StyleSheet.create({
     color: Colors.ERROR_COLOR,
     fontSize: scaleFontSize(14),
     marginTop: scaleSize(1),
-    // fontWeight: '400',
     fontFamily: 'Lato-Regular',
   },
   titleVw: {
@@ -46,8 +42,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginVertical: scaleSize(8),
-    borderRadius: scaleSize(60),
-    borderColor: 'blue',
+    borderRadius: scaleSize(10),
   },
   leftAccessoriesVw: {
     alignSelf: 'center',
@@ -65,10 +60,9 @@ const styles = StyleSheet.create({
   successErrorIconVw: {
     flex: 1,
     alignSelf: 'center',
-    width: scaleSize(13),
     marginLeft: scaleSize(3),
     position: 'absolute',
-    top: scaleSize(22),
+    top: scaleSize(18),
     right: scaleSize(15),
   },
 
@@ -77,14 +71,14 @@ const styles = StyleSheet.create({
   },
   txtContainer: {
     backgroundColor: Colors.CARD_BACKGROUND,
-    borderRadius: scaleSize(60),
-    // padding: scaleSize(18),
+    borderRadius: scaleSize(10),
     flexDirection: 'row',
     alignItems: 'center',
     flexGrow: 1,
+    borderWidth: scaleSize(1.25),
+    borderColor: Colors.INPUT_BORDER,
   },
   codeTxt: {
-    // fontWeight: '400',
     paddingLeft: scaleSize(10),
     fontSize: scaleFontSize(14),
     lineHeight: scaleSizeHeight(16.8),
@@ -93,7 +87,6 @@ const styles = StyleSheet.create({
   txtInput: {
     fontSize: scaleFontSize(14),
     paddingHorizontal: scaleSize(10),
-    // padding: scaleSize(18),
     height: scaleSize(55),
     flex: 1,
     fontFamily: 'Lato-Regular',

@@ -90,7 +90,6 @@ export default function Login() {
               rules={{
                 required: 'Email is required',
               }}
-              shouldAutoFocus={true}
             />
             <CustomInput
               placeholder={'Password'}

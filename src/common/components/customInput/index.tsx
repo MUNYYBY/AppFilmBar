@@ -230,9 +230,7 @@ const CustomInput = (props: Props) => {
               style={[
                 styles.textInput,
                 {
-                  borderColor: error
-                    ? Colors.ERROR_COLOR
-                    : Colors.INPUT_BACKGROUND,
+                  borderColor: error ? Colors.ERROR_COLOR : Colors.INPUT_BORDER,
                 },
                 {
                   paddingLeft: props.isLeftAccessories
@@ -452,9 +450,8 @@ const CustomInput = (props: Props) => {
               onCancel={() => {
                 setOpen(false);
               }}
-              mode="date"
-              maximumDate={new Date()}
-              minimumDate={new Date('1965-01-01')}
+              mode="datetime"
+              minimumDate={new Date()}
             />
             <Pressable style={{width: '100%'}} onPress={() => setOpen(true)}>
               <View
@@ -463,7 +460,7 @@ const CustomInput = (props: Props) => {
                   {
                     borderColor: error
                       ? Colors.ERROR_COLOR
-                      : Colors.INPUT_BACKGROUND,
+                      : Colors.INPUT_BORDER,
                   },
                   {
                     paddingLeft: props.isLeftAccessories
@@ -476,20 +473,15 @@ const CustomInput = (props: Props) => {
                   },
                 ]}>
                 <Text style={{color: Colors.GRAY_COLOR}}>
-                  {moment(date).format('MM-DD-YYYY')}
+                  {moment(date).format('dddd, DD MMM, yyyy hh:mm a')}
                 </Text>
               </View>
               <View style={[styles.successErrorIconVw]}>
-                {/* <Image
-                  source={Images.CALENDER_ICON}
-                  style={{
-                    marginHorizontal: scaleSize(-15),
-                    marginVertical: scaleSize(-5),
-                    width: scaleSize(20),
-                    height: undefined,
-                    aspectRatio: 1,
-                  }}
-                /> */}
+                <MaterialIcon
+                  name="clock-time-eight-outline"
+                  size={24}
+                  color={'black'}
+                />
               </View>
               {error?.message && props.shouldShowError === undefined ? (
                 <View style={styles.errorView}>
