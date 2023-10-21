@@ -23,4 +23,7 @@ export const NavScreenTags = {
   SCHEDULE_SPLASH: 'ScheduleSplash',
   SCHEDULE_HOME: 'ScheduleHome',
   ADD_TASK: 'AddTask',
+  CALLERAPP_STACK: 'CallerAppStack',
+  CALLERAPP_SPLASH: 'Caller App Splash',
+  CALLERAPP_HOME: 'Caller App Home',
 };

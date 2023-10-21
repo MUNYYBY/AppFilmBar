@@ -10,6 +10,7 @@ import Splash from '../../container/Splash/Splash';
 import Login from '../../container/Auth/Login/Login';
 import Signup from '../../container/Auth/Signup/Signup';
 import ScheduleStack from './ScheduleStack';
+import CallerAppStack from './CallerAppStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,10 @@ const AppNavigation = () => {
       <Stack.Screen
         name={NavScreenTags.SCHEDULE_STACK}
         component={ScheduleStack}
+      />
+      <Stack.Screen
+        name={NavScreenTags.CALLERAPP_STACK}
+        component={CallerAppStack}
       />
     </Stack.Navigator>
   );
