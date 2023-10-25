@@ -4,11 +4,12 @@ import styles from './styles';
 import {navigate} from '../../utils/NavigatorUtils';
 import {NavScreenTags} from '../../constants/NavScreenTags';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../../styles/Colors';
 import {scaleSize} from '../../utils/ScaleSheetUtils';
 import moment from 'moment';
 
-export default function CustomContact({contact, user, key}: any) {
+export default function CustomContact({contact, user, key, isCall}: any) {
   return (
     <>
       <TouchableOpacity
@@ -21,18 +22,22 @@ export default function CustomContact({contact, user, key}: any) {
             <IconMaterial
               name="account-circle"
               color={Colors.BLACK_COLOR}
-              size={70}
+              size={60}
             />
           </View>
           <View>
             <Text style={styles.mainText}>{contact.name}</Text>
-            <Text style={styles.secText}>Available</Text>
+            {!isCall && <Text style={styles.secText}>Available</Text>}
           </View>
         </View>
         <View>
-          <Text style={styles.secText}>
-            {moment(contact.createdOn).fromNow()}
-          </Text>
+          {!isCall ? (
+            <Text style={styles.secText}>
+              {moment(contact.createdOn).fromNow()}
+            </Text>
+          ) : (
+            <Icon name="add-call" size={26} color="black" />
+          )}
         </View>
       </TouchableOpacity>
       <View style={styles.devider} />

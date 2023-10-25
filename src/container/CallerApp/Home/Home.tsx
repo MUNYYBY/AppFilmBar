@@ -13,10 +13,11 @@ import Colors from '../../../common/styles/Colors';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import Dailer from '../Dailer/Dailer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Contacts from '../Contacts/Contacts';
 
 const renderScene = SceneMap({
   0: Dailer,
-  1: Dailer,
+  1: Contacts,
 });
 
 export default function CallerAppHome() {

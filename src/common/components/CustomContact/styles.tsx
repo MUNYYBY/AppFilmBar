@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   devider: {
-    backgroundColor: 'rgba(0,0,0,0.24)',
+    backgroundColor: 'rgba(0,0,0,0.15)',
     height: 1,
     width: '100%',
     marginVertical: scaleSize(8.5),
