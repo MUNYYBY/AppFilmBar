@@ -11,6 +11,7 @@ import Login from '../../container/Auth/Login/Login';
 import Signup from '../../container/Auth/Signup/Signup';
 import ScheduleStack from './ScheduleStack';
 import CallerAppStack from './CallerAppStack';
+import MessagesAppStack from './MessagesAppStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +35,10 @@ const AppNavigation = () => {
       <Stack.Screen
         name={NavScreenTags.CALLERAPP_STACK}
         component={CallerAppStack}
+      />
+      <Stack.Screen
+        name={NavScreenTags.MESSAGES_STACK}
+        component={MessagesAppStack}
       />
     </Stack.Navigator>
   );
