@@ -29,4 +29,5 @@ export const NavScreenTags = {
   MESSAGES_STACK: 'MessagesAppStack',
   MESSAGES_SPLASH: 'Messages App Splash',
   MESSAGES_HOME: 'Messages App Home',
+  MESSAGES_CHAT: 'Messages App Chat',
 };

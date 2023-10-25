@@ -4,6 +4,7 @@ import Colors from '../styles/Colors';
 import {NavScreenTags} from '../constants/NavScreenTags';
 import MessagesSplash from '../../container/Messages/Splash/Splash';
 import MessagesAppHome from '../../container/Messages/Home/Home';
+import ChatScreen from '../../container/Messages/Chat/Chat';
 
 const MessagesAppStack = () => {
   const Stack = createNativeStackNavigator();
@@ -25,6 +26,7 @@ const MessagesAppStack = () => {
         name={NavScreenTags.MESSAGES_HOME}
         component={MessagesAppHome}
       />
+      <Stack.Screen name={NavScreenTags.MESSAGES_CHAT} component={ChatScreen} />
     </Stack.Navigator>
   );
 };

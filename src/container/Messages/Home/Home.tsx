@@ -1,40 +1,29 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
-  StatusBar,
-  TouchableOpacity,
   View,
-  useWindowDimensions,
+  Text,
+  ActivityIndicator,
+  TouchableOpacity,
+  StatusBar,
 } from 'react-native';
-import React from 'react';
-import PageSkeleton from '../../../common/hoc/pageSkeleton';
-import {TabView, SceneMap, TabBar, TabBarProps} from 'react-native-tab-view';
-import Colors from '../../../common/styles/Colors';
-import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
+import React, {useState} from 'react';
+import {ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Dailer from '../../CallerApp/Dailer/Dailer';
+import PageSkeleton from '../../../common/hoc/pageSkeleton';
+import styles from './styles';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
+import CustomContact from '../../../common/components/CustomContact/CustomContact';
 
-const renderScene = SceneMap({
-  0: Dailer,
-  1: Dailer,
-});
-
-export default function MessagesAppHome() {
-  const layout = useWindowDimensions();
-
-  const [index, setIndex] = React.useState(0);
-  const [routes] = React.useState([
-    {key: 0, title: 'Call'},
-    {key: 1, title: 'Contacts'},
+export default function InboxScreen() {
+  const [contacts, setContacts] = useState<any>([
+    {name: 'Muneeb', createdOn: '2021-09-12T12:00:00.000Z'},
+    {name: 'Muneeb', createdOn: '2021-09-12T12:00:00.000Z'},
   ]);
-  const renderTabBar = (props: TabBarProps) => (
-    <TabBar
-      {...props}
-      indicatorStyle={{backgroundColor: Colors.GREEN_COLOR}}
-      style={{backgroundColor: Colors.WHITE_COLOR, color: Colors.BLACK_COLOR}}
-      activeColor={Colors.BLACK_COLOR}
-      inactiveColor="rgba(0,0,0,0.5)"
-    />
-  );
+  const [filterContacts, setFilterContacts] = useState<null | []>(contacts);
+  const [value, setValue] = useState('');
+  const [user, setUser] = useState<any>(false);
+  const [refreshing, setRefreshing] = React.useState(false);
 
   return (
     <>
@@ -44,24 +33,52 @@ export default function MessagesAppHome() {
         backgroundColor="white"
         translucent={false}
       />
-      <TouchableOpacity
-        style={{
-          marginTop: scaleSize(20),
-          alignItems: 'flex-end',
-          paddingHorizontal: scaleSize(16),
-        }}>
-        <Icon name="plus" size={40} color={Colors.BLACK_COLOR} />
-      </TouchableOpacity>
       <PageSkeleton hasHeader={false} headerTitle="">
-        <View style={{marginHorizontal: scaleSize(-16), flex: 1}}>
-          <TabView
-            navigationState={{index, routes}}
-            renderScene={renderScene}
-            renderTabBar={renderTabBar}
-            onIndexChange={setIndex}
-            initialLayout={{width: layout.width}}
-          />
+        <View style={styles.headerContent}>
+          <Text style={{fontSize: scaleSize(32), fontWeight: '500'}}>
+            Messages
+          </Text>
+          <TouchableOpacity>
+            <Icon name="plus" size={36} color={Colors.BLACK_COLOR} />
+          </TouchableOpacity>
         </View>
+        <ScrollView style={styles.scrollContainer}>
+          <View style={styles.secContainer}>
+            {!filterContacts ? (
+              <View style={{marginTop: 40}}>
+                <ActivityIndicator size={32} color={Colors.PRIMARY_COLOR_1} />
+              </View>
+            ) : filterContacts.length === 0 ? (
+              <View
+                style={{
+                  marginTop: 40,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginHorizontal: scaleSize(35),
+                }}>
+                <Text
+                  style={{
+                    fontSize: scaleSize(16),
+                    fontWeight: '500',
+                    textAlign: 'center',
+                    color: Colors.WHITE_COLOR_85,
+                  }}>
+                  No contacts available, please start a chat with new user!
+                </Text>
+              </View>
+            ) : (
+              <View style={styles.messagesStack}>
+                {filterContacts.map((contact: any, index: number) => {
+                  return (
+                    <CustomContact contact={contact} user={user} key={index} />
+                  );
+                })}
+              </View>
+            )}
+          </View>
+          <View style={{height: 65}} />
+        </ScrollView>
       </PageSkeleton>
     </>
   );
