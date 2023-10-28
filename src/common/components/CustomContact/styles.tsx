@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   mainText: {
     fontSize: scaleFontSize(20),
     color: Colors.BLACK_COLOR,
-    fontWeight: '500',
+    fontWeight: '400',
   },
   secText: {
     fontSize: scaleFontSize(16),
@@ -14,10 +14,10 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   devider: {
-    backgroundColor: 'rgba(0,0,0,0.15)',
+    backgroundColor: 'rgba(0,0,0,0.065)',
     height: 1,
     width: '100%',
-    marginVertical: scaleSize(8.5),
+    marginVertical: scaleSize(15),
   },
   contactcontainer: {
     backgroundColor: 'rgba(256,256,265,0.10)',

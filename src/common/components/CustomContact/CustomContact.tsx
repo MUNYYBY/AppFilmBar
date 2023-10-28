@@ -1,15 +1,23 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 import styles from './styles';
 import {navigate} from '../../utils/NavigatorUtils';
 import {NavScreenTags} from '../../constants/NavScreenTags';
-import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Colors from '../../styles/Colors';
 import {scaleSize} from '../../utils/ScaleSheetUtils';
 import moment from 'moment';
+import {Images} from '../../constants/Images';
 
-export default function CustomContact({contact, user, key, isCall}: any) {
+interface Props {
+  contact: any;
+  user?: any;
+  key?: any;
+  isCall?: any;
+  isMale?: boolean;
+}
+
+export default function CustomContact(props: Props) {
+  const {contact, user, key, isCall, isMale} = props;
   return (
     <>
       <TouchableOpacity
@@ -18,12 +26,8 @@ export default function CustomContact({contact, user, key, isCall}: any) {
         activeOpacity={0.65}
         key={key}>
         <View style={styles.innerContainer}>
-          <View style={{marginRight: scaleSize(5)}}>
-            <IconMaterial
-              name="account-circle"
-              color={Colors.BLACK_COLOR}
-              size={60}
-            />
+          <View style={{marginRight: scaleSize(10)}}>
+            <Image source={isMale ? Images.CONTACT_2 : Images.CONTACT_1} />
           </View>
           <View>
             <Text style={styles.mainText}>{contact.name}</Text>

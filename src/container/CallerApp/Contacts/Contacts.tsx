@@ -11,6 +11,20 @@ export default function Contacts() {
         <CustomContact
           contact={{name: 'Muneeb', createdOn: '2021-09-12T12:00:00.000Z'}}
           isCall={true}
+          isMale={true}
+        />
+        <CustomContact
+          contact={{name: 'Hira', createdOn: '2021-09-12T12:00:00.000Z'}}
+          isCall={true}
+        />
+        <CustomContact
+          contact={{name: 'Umer', createdOn: '2021-09-12T12:00:00.000Z'}}
+          isCall={true}
+          isMale={true}
+        />
+        <CustomContact
+          contact={{name: 'Areesha', createdOn: '2021-09-12T12:00:00.000Z'}}
+          isCall={true}
         />
       </ScrollView>
     </PageSkeleton>
