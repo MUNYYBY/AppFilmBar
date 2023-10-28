@@ -1,16 +1,8 @@
 import {
   CHANGE_LANUAGE_SUCCESS,
-  CLEAR_DATA_SUCCESS,
-  FETCH_DATA_ERROR,
-  FETCH_DATA_REQUEST,
-  FETCH_DATA_SUCCESS,
-  SCAN_ID,
-  SET_DELIVERY_MODE,
-  SET_DROPOFF_SCANS,
   SET_IS_ONLINE,
-  SET_PICKUP_SCANS,
   SET_REFRESH,
-  SIGNATURE_IMAGE,
+  SET_WALLPAPER,
   THEME_SUCCESS,
 } from '../../constants/ActionTypes';
 
@@ -22,6 +14,7 @@ const initialState = {
   isDark: false,
   isOnline: false,
   isRefresh: false,
+  wallpaper: 1,
 };
 
 const SettingsReducer = (state: any = initialState, action: any) => {
@@ -53,7 +46,12 @@ const SettingsReducer = (state: any = initialState, action: any) => {
         isRefresh: action.payload.isRefresh,
       };
     }
-
+    case SET_WALLPAPER: {
+      return {
+        ...state,
+        wallpaper: action.payload.wallpaper,
+      };
+    }
     default: {
       return state;
     }

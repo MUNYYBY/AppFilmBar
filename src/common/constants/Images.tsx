@@ -2,7 +2,9 @@
  *  Images paths
  */
 export const Images = {
-  BACKGROUND: require('../assets/wallpapers/BACKGROUND.png'),
+  BACKGROUND_1: require('../assets/wallpapers/BACKGROUND_1.png'),
+  BACKGROUND_2: require('../assets/wallpapers/BACKGROUND_2.png'),
+  BACKGROUND_3: require('../assets/wallpapers/BACKGROUND_3.png'),
   CALLER_ICON: require('../assets/app-icons/caller-app.png'),
   MESSAGES_ICON: require('../assets/app-icons/messages-app.png'),
   CONTACTS_ICON: require('../assets/app-icons/contacts-app.png'),
