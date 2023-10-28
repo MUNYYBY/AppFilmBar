@@ -4,7 +4,7 @@ import Colors from '../../styles/Colors';
 
 const styles = StyleSheet.create({
   mainText: {
-    fontSize: scaleFontSize(20),
+    fontSize: scaleFontSize(18),
     color: Colors.BLACK_COLOR,
     fontWeight: '400',
   },
