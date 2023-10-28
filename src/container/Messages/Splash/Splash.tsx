@@ -31,8 +31,8 @@ export default function MessagesSplash() {
         <Image
           source={Images.MESSAGES_ICON}
           style={{
-            height: scaleSize(60),
-            width: scaleSize(60),
+            height: scaleSize(50),
+            width: scaleSize(50),
             resizeMode: 'contain',
             transform: [
               {

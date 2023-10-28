@@ -7,6 +7,7 @@ export const Images = {
   MESSAGES_ICON: require('../assets/app-icons/messages-app.png'),
   CONTACTS_ICON: require('../assets/app-icons/contacts-app.png'),
   SETTINGS_ICON: require('../assets/app-icons/settings-app.png'),
+  SCHEDULE_ICON: require('../assets/app-icons/schedule-app.png'),
 };
 
 export const WelcomeImages = {};

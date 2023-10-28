@@ -29,10 +29,10 @@ export default function ScheduleSplash() {
           backgroundColor: 'white',
         }}>
         <Image
-          source={Images.SETTINGS_ICON}
+          source={Images.SCHEDULE_ICON}
           style={{
-            height: scaleSize(60),
-            width: scaleSize(60),
+            height: scaleSize(50),
+            width: scaleSize(50),
             resizeMode: 'contain',
             transform: [
               {

@@ -33,18 +33,18 @@ export default function Home() {
               onPress={() => navigate(NavScreenTags.CALLERAPP_STACK)}>
               <Image source={Images.CALLER_ICON} style={styles.appIcon} />
             </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.65}>
-              <Image source={Images.CONTACTS_ICON} style={styles.appIcon} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.65}
-              onPress={() => navigate(NavScreenTags.SCHEDULE_STACK)}>
-              <Image source={Images.SETTINGS_ICON} style={styles.appIcon} />
-            </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.65}
               onPress={() => navigate(NavScreenTags.MESSAGES_STACK)}>
               <Image source={Images.MESSAGES_ICON} style={styles.appIcon} />
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.65}
+              onPress={() => navigate(NavScreenTags.SCHEDULE_STACK)}>
+              <Image source={Images.SCHEDULE_ICON} style={[styles.appIcon]} />
+            </TouchableOpacity>
+            <TouchableOpacity activeOpacity={0.65}>
+              <Image source={Images.SETTINGS_ICON} style={styles.appIcon} />
             </TouchableOpacity>
           </View>
         </SafeAreaView>
