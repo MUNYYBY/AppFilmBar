@@ -18,6 +18,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import {goBack} from '../../../common/utils/NavigatorUtils';
 import CustomButton from '../../../common/components/customButton';
+import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 
 const RecievedMessageContainer = ({msg, date}: any) => (
   <>
@@ -65,77 +66,82 @@ export default function ChatScreen({route}: any) {
     }
   };
   return (
-    <PageSkeleton headerTitle="" hasHeader={false}>
-      <StatusBar
-        animated={true}
-        barStyle={'dark-content'}
+    <>
+      <CustomStatusbar
+        barStyle="dark-content"
         backgroundColor="rgba(0,0,0,0.05)"
-        translucent={false}
       />
-      <View style={{height: '100%'}}>
-        <View style={[styles.headerContainer, styles.container]}>
-          <View style={styles.innerContainer}>
-            <TouchableOpacity onPress={() => goBack()}>
-              <Icon name="chevron-back" size={24} color={Colors.WHITE_COLOR} />
-            </TouchableOpacity>
-            <View style={{marginRight: scaleSize(10)}}>
-              <IconMaterial
-                name="account-circle"
-                color={Colors.PRIMARY_COLOR_2}
-                size={50}
-              />
-            </View>
-            <View>
-              <Text style={styles.mainText}>Munyyb</Text>
-              <Text style={styles.secText}>Available</Text>
-            </View>
-          </View>
-        </View>
-        <ScrollView
-          style={styles.scrollViewStyle}
-          ref={scrollViewRef}
-          contentContainerStyle={{
-            justifyContent: 'flex-end',
-            flexGrow: 1,
-          }}
-          onContentSizeChange={() =>
-            scrollViewRef.current.scrollToEnd({animated: true})
-          }>
-          {messages.map((message: any, index: number) => {
-            return message.type === 'reciever' ? (
-              <View key={index}>
-                <RecievedMessageContainer
-                  msg={message.msg}
-                  date={message.date}
+
+      <PageSkeleton headerTitle="" hasHeader={false}>
+        <View style={{height: '100%'}}>
+          <View style={[styles.headerContainer, styles.container]}>
+            <View style={styles.innerContainer}>
+              <TouchableOpacity onPress={() => goBack()}>
+                <Icon
+                  name="chevron-back"
+                  size={24}
+                  color={Colors.WHITE_COLOR}
+                />
+              </TouchableOpacity>
+              <View style={{marginRight: scaleSize(10)}}>
+                <IconMaterial
+                  name="account-circle"
+                  color={Colors.PRIMARY_COLOR_2}
+                  size={50}
                 />
               </View>
-            ) : (
-              <View key={index}>
-                <SendMessageContainer msg={message.msg} date={message.date} />
+              <View>
+                <Text style={styles.mainText}>Munyyb</Text>
+                <Text style={styles.secText}>Available</Text>
               </View>
-            );
-          })}
-        </ScrollView>
-        <View style={[styles.lowerContainer, styles.container]}>
-          <TextInput
-            style={styles.InputField}
-            onChangeText={text => onChangeText(text)}
-            value={value}
-            placeholder={'Type here...'}
-            placeholderTextColor={Colors.WHITE_COLOR_85}
-            returnKeyType={'send'}
-            multiline={true}
-            editable={true}
-            onSubmitEditing={Keyboard.dismiss}
-            autoFocus={true}
-          />
-          <CustomButton
-            title={<Icon name="send" size={20} color={Colors.WHITE_COLOR} />}
-            onPress={handleSendMessage}
-            buttonStyle={{width: 50, height: 50}}
-          />
+            </View>
+          </View>
+          <ScrollView
+            style={styles.scrollViewStyle}
+            ref={scrollViewRef}
+            contentContainerStyle={{
+              justifyContent: 'flex-end',
+              flexGrow: 1,
+            }}
+            onContentSizeChange={() =>
+              scrollViewRef.current.scrollToEnd({animated: true})
+            }>
+            {messages.map((message: any, index: number) => {
+              return message.type === 'reciever' ? (
+                <View key={index}>
+                  <RecievedMessageContainer
+                    msg={message.msg}
+                    date={message.date}
+                  />
+                </View>
+              ) : (
+                <View key={index}>
+                  <SendMessageContainer msg={message.msg} date={message.date} />
+                </View>
+              );
+            })}
+          </ScrollView>
+          <View style={[styles.lowerContainer, styles.container]}>
+            <TextInput
+              style={styles.InputField}
+              onChangeText={text => onChangeText(text)}
+              value={value}
+              placeholder={'Type here...'}
+              placeholderTextColor={Colors.WHITE_COLOR_85}
+              returnKeyType={'send'}
+              multiline={true}
+              editable={true}
+              onSubmitEditing={Keyboard.dismiss}
+              autoFocus={true}
+            />
+            <CustomButton
+              title={<Icon name="send" size={20} color={Colors.WHITE_COLOR} />}
+              onPress={handleSendMessage}
+              buttonStyle={{width: 50, height: 50}}
+            />
+          </View>
         </View>
-      </View>
-    </PageSkeleton>
+      </PageSkeleton>
+    </>
   );
 }

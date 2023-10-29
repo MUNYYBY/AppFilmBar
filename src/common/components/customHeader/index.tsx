@@ -20,7 +20,7 @@ const CustomHeader = (props: Props) => {
       <View style={styles.center}>
         <TouchableOpacity
           onPress={props.onPress ? props.onPress : backButtonHandler}>
-          <Icon name="chevron-left" size={40} color={'#000'} />
+          <Icon name="chevron-left" size={35} color={'#000'} />
         </TouchableOpacity>
         <View style={styles.headerVw}>
           <Text style={styles.headerTxt}>{props.headerTitle}</Text>

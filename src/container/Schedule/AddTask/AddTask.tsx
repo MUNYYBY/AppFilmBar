@@ -9,6 +9,7 @@ import MessagesTask from './MessagesTask';
 import CallTask from './CallTask';
 import VideoCallTask from './VideoCallTask';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
+import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 
 const renderScene = SceneMap({
   0: MessagesTask,
@@ -36,25 +37,29 @@ export default function AddTask() {
   );
 
   return (
-    <PageSkeleton
-      hasHeader={true}
-      headerTitle="Schedule task"
-      headerRightContent={
-        <CustomButton
-          onPress={() => {}}
-          title={'Schedule'}
-          varient="secondary"
-        />
-      }>
-      <View style={{marginHorizontal: scaleSize(-16), flex: 1}}>
-        <TabView
-          navigationState={{index, routes}}
-          renderScene={renderScene}
-          renderTabBar={renderTabBar}
-          onIndexChange={setIndex}
-          initialLayout={{width: layout.width}}
-        />
-      </View>
-    </PageSkeleton>
+    <>
+      <CustomStatusbar barStyle="dark-content" />
+
+      <PageSkeleton
+        hasHeader={true}
+        headerTitle="Schedule task"
+        headerRightContent={
+          <CustomButton
+            onPress={() => {}}
+            title={'Schedule'}
+            varient="secondary"
+          />
+        }>
+        <View style={{marginHorizontal: scaleSize(-16), flex: 1}}>
+          <TabView
+            navigationState={{index, routes}}
+            renderScene={renderScene}
+            renderTabBar={renderTabBar}
+            onIndexChange={setIndex}
+            initialLayout={{width: layout.width}}
+          />
+        </View>
+      </PageSkeleton>
+    </>
   );
 }

@@ -14,6 +14,7 @@ import Colors from '../../../common/styles/Colors';
 import {navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomErrorText from '../../../common/components/customErrorText';
+import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 
 export default function Login() {
   const {
@@ -61,12 +62,7 @@ export default function Login() {
 
   return (
     <>
-      <StatusBar
-        animated={true}
-        barStyle={'dark-content'}
-        backgroundColor="white"
-      />
-
+      <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
         <View style={styles.LoginContainer}>
           <Text style={styles.textMain}>Login</Text>

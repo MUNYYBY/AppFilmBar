@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, StatusBar, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
@@ -8,16 +8,12 @@ import Colors from '../../../common/styles/Colors';
 import styles from './styles';
 import {navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
+import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 
 export default function ScheduleHome() {
   return (
     <>
-      <StatusBar
-        animated={true}
-        barStyle={'dark-content'}
-        backgroundColor="white"
-        translucent={false}
-      />
+      <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
         <View style={styles.headerContent}>
           <Text style={{fontSize: scaleSize(24), fontWeight: '500'}}>

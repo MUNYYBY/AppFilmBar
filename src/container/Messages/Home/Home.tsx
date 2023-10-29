@@ -1,11 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  TouchableOpacity,
-  StatusBar,
-} from 'react-native';
+import {View, Text, ActivityIndicator, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {ScrollView} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -14,6 +8,7 @@ import styles from './styles';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import CustomContact from '../../../common/components/CustomContact/CustomContact';
+import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 
 export default function InboxScreen() {
   const [contacts, setContacts] = useState<any>([
@@ -27,12 +22,7 @@ export default function InboxScreen() {
 
   return (
     <>
-      <StatusBar
-        animated={true}
-        barStyle={'dark-content'}
-        backgroundColor="white"
-        translucent={false}
-      />
+      <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
         <View style={styles.headerContent}>
           <Text style={{fontSize: scaleSize(32), fontWeight: '500'}}>

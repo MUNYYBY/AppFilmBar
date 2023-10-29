@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerContainer: {
+    marginTop: scaleSize(19.9),
     paddingVertical: scaleSize(20),
     marginBottom: scaleSize(10),
     borderBottomEndRadius: scaleSize(10),

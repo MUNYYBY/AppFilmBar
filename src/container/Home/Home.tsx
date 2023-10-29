@@ -13,7 +13,7 @@ export default function Home() {
   const settings = useSelector((state: any) => state.settings);
   return (
     <>
-      <CustomStatusbar />
+      <CustomStatusbar barStyle="light-content" />
       <View style={styles.container}>
         <Image
           source={

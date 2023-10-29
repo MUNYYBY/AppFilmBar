@@ -8,12 +8,12 @@ import IconIoni from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
 
 interface Props {
+  barStyle: 'dark-content' | 'light-content';
   backgroundColor?: string;
-  barStyle?: 'dark-content' | 'light-content';
 }
 
 export default function CustomStatusbar(props: Props) {
-  const {backgroundColor, barStyle} = props;
+  const {barStyle, backgroundColor} = props;
 
   //** redux */
   const settings = useSelector((state: any) => state.settings);
@@ -21,20 +21,23 @@ export default function CustomStatusbar(props: Props) {
   return (
     Platform.OS !== 'ios' && (
       <View
-        style={{
-          backgroundColor,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          zIndex: 2000,
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          paddingVertical: scaleSize(12.5),
-          paddingHorizontal: scaleSize(20),
-        }}>
+        style={[
+          {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            zIndex: 2000,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: scaleSize(12.5),
+            paddingHorizontal: scaleSize(20),
+            backgroundColor: backgroundColor,
+          },
+          // backgroundColor && {},
+        ]}>
         <Text
           style={{
             fontSize: scaleFontSize(16),

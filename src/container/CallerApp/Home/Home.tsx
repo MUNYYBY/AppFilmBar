@@ -1,10 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  StatusBar,
-  TouchableOpacity,
-  View,
-  useWindowDimensions,
-} from 'react-native';
+import {TouchableOpacity, View, useWindowDimensions} from 'react-native';
 import React from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import CustomButton from '../../../common/components/customButton';
@@ -14,6 +9,7 @@ import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import Dailer from '../Dailer/Dailer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Contacts from '../Contacts/Contacts';
+import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 
 const renderScene = SceneMap({
   0: Dailer,
@@ -40,21 +36,16 @@ export default function CallerAppHome() {
 
   return (
     <>
-      <StatusBar
-        animated={true}
-        barStyle={'dark-content'}
-        backgroundColor="white"
-        translucent={false}
-      />
-      <TouchableOpacity
-        style={{
-          marginTop: scaleSize(20),
-          alignItems: 'flex-end',
-          paddingHorizontal: scaleSize(16),
-        }}>
-        <Icon name="plus" size={40} color={Colors.BLACK_COLOR} />
-      </TouchableOpacity>
+      <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
+        <TouchableOpacity
+          style={{
+            marginTop: scaleSize(20),
+            alignItems: 'flex-end',
+            paddingHorizontal: scaleSize(16),
+          }}>
+          <Icon name="plus" size={40} color={Colors.BLACK_COLOR} />
+        </TouchableOpacity>
         <View style={{marginHorizontal: scaleSize(-16), flex: 1}}>
           <TabView
             navigationState={{index, routes}}

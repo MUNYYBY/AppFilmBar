@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerTxt: {
-    fontSize: scaleFontSize(24),
+    fontSize: scaleFontSize(22),
     lineHeight: scaleSizeHeight(24),
     textAlign: 'center',
     fontFamily: 'Lato-Regular',
