@@ -12,10 +12,6 @@ export default function Home() {
   const settings = useSelector((state: any) => state.settings);
   return (
     <>
-      <View style={{position: 'absolute', top: -10, left: 0, zIndex: 1000}}>
-        <Text style={{color: 'white'}}>hello</Text>
-      </View>
-
       <View style={styles.container}>
         <Image
           source={

@@ -3,8 +3,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Colors from '../styles/Colors';
 import {NavScreenTags} from '../constants/NavScreenTags';
 import SettingsSplash from '../../container/SettingsApp/Splash/Splash';
-import SettingsHome from '../../container/SettingsApp/Home/ScheduleHome';
+import SettingsHome from '../../container/SettingsApp/Home/SettingsHome';
 import SettingsChangeWallpaper from '../../container/SettingsApp/ChangeWallpaper/ChangeWallpaper';
+import ChangeMobileConnection from '../../container/SettingsApp/ChangeMobileConnection/ChangeMobileConnection';
+import ChangeDateTime from '../../container/SettingsApp/ChangeDateTime/ChangeDateTime';
+import ChangeBatteryPercentage from '../../container/SettingsApp/ChangeBatteryPercentage/ChangeBatteryPercentage';
 
 const SettingsStack = () => {
   const Stack = createNativeStackNavigator();
@@ -29,6 +32,18 @@ const SettingsStack = () => {
       <Stack.Screen
         name={NavScreenTags.SETTINGS_CHANGE_WALLPAPER}
         component={SettingsChangeWallpaper}
+      />
+      <Stack.Screen
+        name={NavScreenTags.SETTINGS_CHANGE_MOBILE_CONNECTION}
+        component={ChangeMobileConnection}
+      />
+      <Stack.Screen
+        name={NavScreenTags.SETTINGS_CHANGE_DATE_DATE}
+        component={ChangeDateTime}
+      />
+      <Stack.Screen
+        name={NavScreenTags.SETTINGS_CHANGE_BATTERY_PERCENTAGE}
+        component={ChangeBatteryPercentage}
       />
     </Stack.Navigator>
   );
