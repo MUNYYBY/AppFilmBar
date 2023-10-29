@@ -7,21 +7,35 @@
 
 import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
-import {LogBox, StatusBar} from 'react-native';
+import {LogBox, StatusBar, Text, View} from 'react-native';
 import AppStore from './src/common/redux/store/AppStore';
 import AppNavigation from './src/common/routes/AppNavigation';
+import {Immersive} from 'react-native-immersive';
 
 function App(): JSX.Element {
   const store = AppStore({});
+
+  const restoreImmersive = () => {
+    __DEV__ && console.warn('Immersive State Changed!');
+    Immersive.on();
+  };
+  Immersive.addImmersiveListener(restoreImmersive);
+  // Immersive.removeImmersiveListener(restoreImmersive);
+
+  StatusBar.setTranslucent(true);
+  StatusBar.setBackgroundColor('transparent');
+  StatusBar.setHidden(true);
 
   useEffect(() => {
     LogBox.ignoreAllLogs();
   }, []);
 
   return (
-    <Provider store={store}>
-      <AppNavigation />
-    </Provider>
+    <>
+      <Provider store={store}>
+        <AppNavigation />
+      </Provider>
+    </>
   );
 }
 

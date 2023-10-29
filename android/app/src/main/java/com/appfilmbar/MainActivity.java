@@ -6,6 +6,7 @@ import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactActivityDelegate;
 import org.devio.rn.splashscreen.SplashScreen;
+import com.rnimmersive.RNImmersiveModule;
 
 public class MainActivity extends ReactActivity {
 
@@ -37,4 +38,12 @@ public class MainActivity extends ReactActivity {
         // If you opted-in for the New Architecture, we enable the Fabric Renderer.
         DefaultNewArchitectureEntryPoint.getFabricEnabled());
   }
+  @Override
+  public void onWindowFocusChanged(boolean hasFocus) {
+    super.onWindowFocusChanged(hasFocus);
+
+      if (hasFocus && RNImmersiveModule.getInstance() != null) {
+         RNImmersiveModule.getInstance().emitImmersiveStateChangeEvent();
+   }
+ }
 }
