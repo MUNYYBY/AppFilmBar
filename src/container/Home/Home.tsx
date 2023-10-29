@@ -7,11 +7,13 @@ import moment from 'moment';
 import {navigate} from '../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../common/constants/NavScreenTags';
 import {useSelector} from 'react-redux';
+import CustomStatusbar from '../../common/components/customStatusbar/CustomStatusbar';
 
 export default function Home() {
   const settings = useSelector((state: any) => state.settings);
   return (
     <>
+      <CustomStatusbar />
       <View style={styles.container}>
         <Image
           source={

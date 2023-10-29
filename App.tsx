@@ -11,6 +11,7 @@ import {LogBox, StatusBar, Text, View} from 'react-native';
 import AppStore from './src/common/redux/store/AppStore';
 import AppNavigation from './src/common/routes/AppNavigation';
 import {Immersive} from 'react-native-immersive';
+import CustomStatusbar from './src/common/components/customStatusbar/CustomStatusbar';
 
 function App(): JSX.Element {
   const store = AppStore({});
