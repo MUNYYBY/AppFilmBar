@@ -5,6 +5,7 @@ import moment from 'moment';
 import {scaleFontSize, scaleSize} from '../../utils/ScaleSheetUtils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconIoni from 'react-native-vector-icons/Ionicons';
+import {useSelector} from 'react-redux';
 
 interface Props {
   backgroundColor?: string;
@@ -13,6 +14,9 @@ interface Props {
 
 export default function CustomStatusbar(props: Props) {
   const {backgroundColor, barStyle} = props;
+
+  //** redux */
+  const settings = useSelector((state: any) => state.settings);
 
   return (
     Platform.OS !== 'ios' && (
@@ -36,7 +40,7 @@ export default function CustomStatusbar(props: Props) {
             fontSize: scaleFontSize(16),
             color: barStyle === 'dark-content' ? 'black' : 'white',
           }}>
-          {moment().format('HH:MM')}
+          {moment(settings.time).format('MM:HH')}
         </Text>
         <View
           style={{
@@ -51,18 +55,36 @@ export default function CustomStatusbar(props: Props) {
             size={scaleSize(16)}
             style={{paddingLeft: 7.5}}
           />
-          <Icon
-            name="wifi"
-            color={barStyle === 'dark-content' ? 'black' : 'white'}
-            size={scaleSize(16)}
-            style={{paddingLeft: 7.5}}
-          />
-          <IconIoni
-            name="battery-full"
-            color={barStyle === 'dark-content' ? 'black' : 'white'}
-            size={scaleSize(18)}
-            style={{paddingLeft: 7.5}}
-          />
+          {settings.isWifi && (
+            <Icon
+              name="wifi"
+              color={barStyle === 'dark-content' ? 'black' : 'white'}
+              size={scaleSize(16)}
+              style={{paddingLeft: 7.5}}
+            />
+          )}
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <IconIoni
+              name="battery-full"
+              color={barStyle === 'dark-content' ? 'black' : 'white'}
+              size={scaleSize(18)}
+              style={{paddingLeft: 7.5}}
+            />
+            <Text
+              style={{
+                fontSize: scaleFontSize(14),
+                color: barStyle === 'dark-content' ? 'black' : 'white',
+                marginLeft: scaleSize(5),
+              }}>
+              {settings.battery}%
+            </Text>
+          </View>
         </View>
       </View>
     )

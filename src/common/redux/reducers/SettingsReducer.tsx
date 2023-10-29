@@ -1,7 +1,13 @@
+import moment from 'moment';
 import {
   CHANGE_LANUAGE_SUCCESS,
+  SET_BATTERY,
+  SET_DATE,
   SET_IS_ONLINE,
+  SET_IS_WIFI,
   SET_REFRESH,
+  SET_SIGNALS,
+  SET_TIME,
   SET_WALLPAPER,
   THEME_SUCCESS,
 } from '../../constants/ActionTypes';
@@ -15,6 +21,11 @@ const initialState = {
   isOnline: false,
   isRefresh: false,
   wallpaper: 1,
+  time: moment(),
+  date: moment(),
+  battery: 100,
+  signals: 5,
+  isWifi: true,
 };
 
 const SettingsReducer = (state: any = initialState, action: any) => {
@@ -50,6 +61,36 @@ const SettingsReducer = (state: any = initialState, action: any) => {
       return {
         ...state,
         wallpaper: action.payload.wallpaper,
+      };
+    }
+    case SET_TIME: {
+      return {
+        ...state,
+        time: action.payload.time,
+      };
+    }
+    case SET_DATE: {
+      return {
+        ...state,
+        date: action.payload.date,
+      };
+    }
+    case SET_BATTERY: {
+      return {
+        ...state,
+        battery: action.payload.battery,
+      };
+    }
+    case SET_IS_WIFI: {
+      return {
+        ...state,
+        isWifi: action.payload.isWifi,
+      };
+    }
+    case SET_SIGNALS: {
+      return {
+        ...state,
+        signals: action.payload.signals,
       };
     }
     default: {
