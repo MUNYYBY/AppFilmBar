@@ -3,6 +3,7 @@ import {
   CHANGE_LANUAGE_SUCCESS,
   SET_BATTERY,
   SET_DATE,
+  SET_DATE_AND_TIME,
   SET_IS_ONLINE,
   SET_IS_WIFI,
   SET_REFRESH,
@@ -21,8 +22,8 @@ const initialState = {
   isOnline: false,
   isRefresh: false,
   wallpaper: 1,
-  time: moment(),
-  date: moment(),
+  time: String(moment()),
+  date: String(moment()),
   battery: 100,
   signals: 5,
   isWifi: true,
@@ -72,6 +73,13 @@ const SettingsReducer = (state: any = initialState, action: any) => {
     case SET_DATE: {
       return {
         ...state,
+        date: action.payload.date,
+      };
+    }
+    case SET_DATE_AND_TIME: {
+      return {
+        ...state,
+        time: action.payload.time,
         date: action.payload.date,
       };
     }

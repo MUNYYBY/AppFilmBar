@@ -43,7 +43,7 @@ export default function CustomStatusbar(props: Props) {
             fontSize: scaleFontSize(16),
             color: barStyle === 'dark-content' ? 'black' : 'white',
           }}>
-          {moment(settings.time).format('MM:HH')}
+          {moment(settings.time).format('hh:mm')}
         </Text>
         <View
           style={{

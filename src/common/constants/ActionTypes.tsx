@@ -18,6 +18,7 @@ export const SET_REFRESH = 'SET_REFRESH';
 export const SET_WALLPAPER = 'SET_WALLPAPER';
 export const SET_TIME = 'SET_TIME';
 export const SET_DATE = 'SET_DATE';
+export const SET_DATE_AND_TIME = 'SET_DATE_AND_TIME';
 export const SET_IS_WIFI = 'SET_IS_WIFI';
 export const SET_BATTERY = 'SET_BATTERY';
 export const SET_SIGNALS = 'SET_SIGNALS';

@@ -429,23 +429,20 @@ const CustomInput = (props: Props) => {
     const [date, setDate] = useState(new Date());
     const [open, setOpen] = useState(false);
 
-    function handleOnChange(onChange: any) {
-      onChange(date);
-    }
     return (
       <Controller
         control={props.control}
         rules={props.rules}
-        render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
+        render={({field: {onChange, value}, fieldState: {error}}) => (
           <>
             <DatePicker
               modal
               open={open}
               date={date}
-              onConfirm={(date: any) => {
+              onConfirm={(d: any) => {
+                setDate(d);
                 setOpen(false);
-                handleOnChange(onChange);
-                setDate(date);
+                onChange(d);
               }}
               onCancel={() => {
                 setOpen(false);

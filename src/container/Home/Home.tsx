@@ -28,10 +28,10 @@ export default function Home() {
         <SafeAreaView style={styles.safeAreaViewContainer}>
           <View style={styles.dateAndTimeContainer}>
             <Text style={styles.timeText}>
-              {moment(settings.time).format('MM')}
+              {moment(settings.time).format('hh')}
             </Text>
             <Text style={styles.timeText}>
-              {moment(settings.time).format('HH')}
+              {moment(settings.time).format('mm')}
             </Text>
             <Text style={styles.timeTextSec}>
               {moment(settings.date).format('dddd, YYYY')}
