@@ -8,7 +8,6 @@ import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import CustomInput from '../../../common/components/customInput';
 import {InputTypes} from '../../../common/constants/InputTypes';
 import CustomButton from '../../../common/components/customButton';
-import moment from 'moment';
 import {SET_BATTERY} from '../../../common/constants/ActionTypes';
 
 export default function ChangeBatteryPercentage() {

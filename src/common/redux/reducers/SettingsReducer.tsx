@@ -4,12 +4,14 @@ import {
   SET_BATTERY,
   SET_DATE,
   SET_DATE_AND_TIME,
+  SET_IS_NO_SERVICE,
   SET_IS_ONLINE,
   SET_IS_WIFI,
   SET_REFRESH,
   SET_SIGNALS,
   SET_TIME,
   SET_WALLPAPER,
+  SET_WIFI_AND_SERVICE,
   THEME_SUCCESS,
 } from '../../constants/ActionTypes';
 
@@ -27,6 +29,7 @@ const initialState = {
   battery: 100,
   signals: 5,
   isWifi: true,
+  isNoService: false,
 };
 
 const SettingsReducer = (state: any = initialState, action: any) => {
@@ -92,6 +95,19 @@ const SettingsReducer = (state: any = initialState, action: any) => {
     case SET_IS_WIFI: {
       return {
         ...state,
+        isWifi: action.payload.isWifi,
+      };
+    }
+    case SET_IS_NO_SERVICE: {
+      return {
+        ...state,
+        isNoService: action.payload.isNoService,
+      };
+    }
+    case SET_WIFI_AND_SERVICE: {
+      return {
+        ...state,
+        isNoService: action.payload.isNoService,
         isWifi: action.payload.isWifi,
       };
     }

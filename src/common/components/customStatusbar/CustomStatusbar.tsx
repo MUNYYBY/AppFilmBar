@@ -52,12 +52,23 @@ export default function CustomStatusbar(props: Props) {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <Icon
-            name="signal"
-            color={barStyle === 'dark-content' ? 'black' : 'white'}
-            size={scaleSize(16)}
-            style={{paddingLeft: 7.5}}
-          />
+          {!settings.isNoService ? (
+            <Icon
+              name="signal"
+              color={barStyle === 'dark-content' ? 'black' : 'white'}
+              size={scaleSize(16)}
+              style={{paddingLeft: 7.5}}
+            />
+          ) : (
+            <Text
+              style={{
+                fontSize: scaleFontSize(16),
+                color: barStyle === 'dark-content' ? 'black' : 'white',
+              }}>
+              No service
+            </Text>
+          )}
+
           {settings.isWifi && (
             <Icon
               name="wifi"
