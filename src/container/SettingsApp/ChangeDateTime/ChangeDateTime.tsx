@@ -71,7 +71,6 @@ export default function ChangeDateTime() {
         <CustomButton
           title="Update"
           onPress={() => {
-            console.log(control._formValues.Date, control._formValues.Time);
             dispatch({
               type: SET_DATE_AND_TIME,
               payload: {
