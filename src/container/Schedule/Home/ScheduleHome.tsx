@@ -30,7 +30,7 @@ export default function ScheduleHome() {
                 Messages
               </Text>
               <Text>Muneeb ur rehman</Text>
-              <Text>Schedule for 11:45</Text>
+              <Text>Schedule for 11:46</Text>
             </View>
             <Text>1 minute ago</Text>
           </View>

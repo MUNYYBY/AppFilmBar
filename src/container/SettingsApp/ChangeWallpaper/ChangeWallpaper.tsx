@@ -43,10 +43,11 @@ export default function SettingsChangeWallpaper() {
                   height: scaleSize(250),
                   width: '70%',
                   resizeMode: 'contain',
+                  borderRadius: scaleSize(10),
                 },
                 settings.wallpaper === 1 && {
                   borderColor: Colors.GREEN_COLOR,
-                  borderWidth: scaleSize(3),
+                  borderWidth: scaleSize(5),
                 },
               ]}
             />
@@ -69,10 +70,11 @@ export default function SettingsChangeWallpaper() {
                   height: scaleSize(250),
                   width: '70%',
                   resizeMode: 'contain',
+                  borderRadius: scaleSize(10),
                 },
                 settings.wallpaper === 2 && {
                   borderColor: Colors.GREEN_COLOR,
-                  borderWidth: scaleSize(3),
+                  borderWidth: scaleSize(5),
                 },
               ]}
             />
@@ -105,10 +107,11 @@ export default function SettingsChangeWallpaper() {
                   height: scaleSize(250),
                   width: '35%',
                   resizeMode: 'contain',
+                  borderRadius: scaleSize(10),
                 },
                 settings.wallpaper === 3 && {
                   borderColor: Colors.GREEN_COLOR,
-                  borderWidth: scaleSize(3),
+                  borderWidth: scaleSize(5),
                 },
               ]}
             />
