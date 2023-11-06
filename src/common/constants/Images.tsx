@@ -13,6 +13,7 @@ export const Images = {
   CONTACT_1: require('../assets/contacts/contact_1.png'),
   CONTACT_2: require('../assets/contacts/contact_2.png'),
   CONTACT_3: require('../assets/contacts/contact_3.png'),
+  CONTACT_LARGE: require('../assets/contacts/contact_large.png'),
 };
 
 export const WelcomeImages = {};

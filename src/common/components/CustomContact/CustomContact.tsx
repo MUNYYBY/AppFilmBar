@@ -21,9 +21,11 @@ export default function CustomContact(props: Props) {
   return (
     <>
       <TouchableOpacity
-        onPress={() => navigate(NavScreenTags.MESSAGES_CHAT, {contact, user})}
+        onPress={() =>
+          !isCall && navigate(NavScreenTags.MESSAGES_CHAT, {contact, user})
+        }
         style={styles.contactcontainer}
-        activeOpacity={0.65}
+        activeOpacity={!isCall ? 0.65 : 1}
         key={key}>
         <View style={styles.innerContainer}>
           <View style={{marginRight: scaleSize(10)}}>
@@ -34,7 +36,15 @@ export default function CustomContact(props: Props) {
             {!isCall && <Text style={styles.secText}>Available</Text>}
           </View>
         </View>
-        <View>
+        <TouchableOpacity
+          onPress={() =>
+            isCall &&
+            navigate(NavScreenTags.CALL_SCREEN, {
+              isOutGoing: true,
+              contactName: contact.name,
+              contactNumber: '+92 3401839004',
+            })
+          }>
           {!isCall ? (
             <Text style={styles.secText}>
               {moment(contact.createdOn).fromNow()}
@@ -42,7 +52,7 @@ export default function CustomContact(props: Props) {
           ) : (
             <Icon name="add-call" size={26} color="black" />
           )}
-        </View>
+        </TouchableOpacity>
       </TouchableOpacity>
       <View style={styles.devider} />
     </>

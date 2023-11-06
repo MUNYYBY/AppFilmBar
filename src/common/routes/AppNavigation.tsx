@@ -13,6 +13,7 @@ import ScheduleStack from './ScheduleStack';
 import CallerAppStack from './CallerAppStack';
 import MessagesAppStack from './MessagesAppStack';
 import SettingsStack from './SettingsStack';
+import Call from '../../container/CallerApp/Call/Call';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,7 @@ const AppNavigation = () => {
         name={NavScreenTags.CALLERAPP_STACK}
         component={CallerAppStack}
       />
+      <Stack.Screen name={NavScreenTags.CALL_SCREEN} component={Call} />
       <Stack.Screen
         name={NavScreenTags.MESSAGES_STACK}
         component={MessagesAppStack}
