@@ -42,7 +42,7 @@ export default function CustomContact(props: Props) {
             navigate(NavScreenTags.CALL_SCREEN, {
               isOutGoing: true,
               contactName: contact.name,
-              contactNumber: '+92 3401839004',
+              contactNumber: '+923401839004',
             })
           }>
           {!isCall ? (
