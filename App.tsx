@@ -7,7 +7,7 @@
 
 import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
-import {LogBox, StatusBar} from 'react-native';
+import {LogBox, Platform, StatusBar} from 'react-native';
 import AppStore from './src/common/redux/store/AppStore';
 import AppNavigation from './src/common/routes/AppNavigation';
 import {Immersive} from 'react-native-immersive';
@@ -19,7 +19,7 @@ function App(): JSX.Element {
     __DEV__ && console.warn('Immersive State Changed!');
     Immersive.on();
   };
-  Immersive.addImmersiveListener(restoreImmersive);
+  if (Platform.OS !== 'ios') Immersive.addImmersiveListener(restoreImmersive);
   // Immersive.removeImmersiveListener(restoreImmersive);
 
   StatusBar.setTranslucent(true);

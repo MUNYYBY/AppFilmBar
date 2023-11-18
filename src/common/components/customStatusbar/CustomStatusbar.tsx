@@ -19,32 +19,64 @@ export default function CustomStatusbar(props: Props) {
   const settings = useSelector((state: any) => state.settings);
 
   return (
-    Platform.OS !== 'ios' && (
+    <View
+      style={[
+        {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          zIndex: 2000,
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingVertical:
+            Platform.OS === 'ios' ? scaleSize(16.5) : scaleSize(12.5),
+          paddingHorizontal: scaleSize(20),
+          backgroundColor: backgroundColor,
+        },
+        // backgroundColor && {},
+      ]}>
+      <Text
+        style={{
+          fontSize: scaleFontSize(16),
+          color: barStyle === 'dark-content' ? 'black' : 'white',
+        }}>
+        {moment(settings.time).format('hh:mm')}
+      </Text>
       <View
-        style={[
-          {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: 2000,
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingVertical: scaleSize(12.5),
-            paddingHorizontal: scaleSize(20),
-            backgroundColor: backgroundColor,
-          },
-          // backgroundColor && {},
-        ]}>
-        <Text
-          style={{
-            fontSize: scaleFontSize(16),
-            color: barStyle === 'dark-content' ? 'black' : 'white',
-          }}>
-          {moment(settings.time).format('hh:mm')}
-        </Text>
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        {!settings.isNoService ? (
+          <Icon
+            name="signal"
+            color={barStyle === 'dark-content' ? 'black' : 'white'}
+            size={scaleSize(16)}
+            style={{paddingLeft: 7.5}}
+          />
+        ) : (
+          <Text
+            style={{
+              fontSize: scaleFontSize(16),
+              color: barStyle === 'dark-content' ? 'black' : 'white',
+            }}>
+            No service
+          </Text>
+        )}
+
+        {settings.isWifi && (
+          <Icon
+            name="wifi"
+            color={barStyle === 'dark-content' ? 'black' : 'white'}
+            size={scaleSize(16)}
+            style={{paddingLeft: 7.5}}
+          />
+        )}
         <View
           style={{
             display: 'flex',
@@ -52,55 +84,22 @@ export default function CustomStatusbar(props: Props) {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          {!settings.isNoService ? (
-            <Icon
-              name="signal"
-              color={barStyle === 'dark-content' ? 'black' : 'white'}
-              size={scaleSize(16)}
-              style={{paddingLeft: 7.5}}
-            />
-          ) : (
-            <Text
-              style={{
-                fontSize: scaleFontSize(16),
-                color: barStyle === 'dark-content' ? 'black' : 'white',
-              }}>
-              No service
-            </Text>
-          )}
-
-          {settings.isWifi && (
-            <Icon
-              name="wifi"
-              color={barStyle === 'dark-content' ? 'black' : 'white'}
-              size={scaleSize(16)}
-              style={{paddingLeft: 7.5}}
-            />
-          )}
-          <View
+          <IconIoni
+            name="battery-full"
+            color={barStyle === 'dark-content' ? 'black' : 'white'}
+            size={scaleSize(18)}
+            style={{paddingLeft: 7.5}}
+          />
+          <Text
             style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
+              fontSize: scaleFontSize(14),
+              color: barStyle === 'dark-content' ? 'black' : 'white',
+              marginLeft: scaleSize(5),
             }}>
-            <IconIoni
-              name="battery-full"
-              color={barStyle === 'dark-content' ? 'black' : 'white'}
-              size={scaleSize(18)}
-              style={{paddingLeft: 7.5}}
-            />
-            <Text
-              style={{
-                fontSize: scaleFontSize(14),
-                color: barStyle === 'dark-content' ? 'black' : 'white',
-                marginLeft: scaleSize(5),
-              }}>
-              {settings.battery}%
-            </Text>
-          </View>
+            {settings.battery}%
+          </Text>
         </View>
       </View>
-    )
+    </View>
   );
 }
