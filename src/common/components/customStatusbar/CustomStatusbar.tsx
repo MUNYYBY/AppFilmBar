@@ -32,7 +32,7 @@ export default function CustomStatusbar(props: Props) {
           justifyContent: 'space-between',
           alignItems: 'center',
           paddingVertical:
-            Platform.OS === 'ios' ? scaleSize(16.5) : scaleSize(12.5),
+            Platform.OS === 'ios' ? scaleSize(18.5) : scaleSize(12.5),
           paddingHorizontal: scaleSize(20),
           backgroundColor: backgroundColor,
         },
@@ -90,14 +90,16 @@ export default function CustomStatusbar(props: Props) {
             size={scaleSize(18)}
             style={{paddingLeft: 7.5}}
           />
-          <Text
-            style={{
-              fontSize: scaleFontSize(14),
-              color: barStyle === 'dark-content' ? 'black' : 'white',
-              marginLeft: scaleSize(5),
-            }}>
-            {settings.battery}%
-          </Text>
+          {Platform.OS === 'android' && (
+            <Text
+              style={{
+                fontSize: scaleFontSize(14),
+                color: barStyle === 'dark-content' ? 'black' : 'white',
+                marginLeft: scaleSize(5),
+              }}>
+              {settings.battery}%
+            </Text>
+          )}
         </View>
       </View>
     </View>

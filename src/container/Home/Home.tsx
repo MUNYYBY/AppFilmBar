@@ -26,7 +26,7 @@ export default function Home() {
           style={styles.background}
         />
         <SafeAreaView style={styles.safeAreaViewContainer}>
-          <View style={styles.dateAndTimeContainer}>
+          <View style={[styles.dateAndTimeContainer, {opacity: 0}]}>
             <Text style={styles.timeText}>
               {moment(settings.time).format('hh')}
             </Text>
