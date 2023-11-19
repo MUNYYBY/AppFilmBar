@@ -65,7 +65,7 @@ export default function Login() {
       <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
         <View style={styles.LoginContainer}>
-          <Text style={styles.textMain}>Login</Text>
+          <Text style={styles.textMain}>Login In </Text>
           <View style={{marginTop: scaleSize(30)}}>
             <CustomInput
               placeholder={'Email'}
