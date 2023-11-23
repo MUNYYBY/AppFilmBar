@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../../../common/styles/Colors';
 import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import {callNumber} from '../../../common/utils/defualtAppUtils';
+import {navigate} from '../../../common/utils/NavigatorUtils';
+import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 
 export default function Dailer() {
   const [typedText, setTypedText] = useState('');
@@ -125,7 +127,14 @@ export default function Dailer() {
       <View style={styles.stack}>
         <View style={[styles.dailerItem, {opacity: 0}]} />
         <TouchableOpacity
-          onPress={() => typedText !== '' && callNumber(typedText)}
+          onPress={() =>
+            typedText !== '' &&
+            navigate(NavScreenTags.CALL_SCREEN, {
+              isOutGoing: true,
+              contactName: 'unknown',
+              contactNumber: typedText,
+            })
+          }
           style={[styles.dailerItem, {backgroundColor: Colors.GREEN_COLOR}]}>
           <MaterialIcon name="call" size={32} color="white" />
         </TouchableOpacity>
