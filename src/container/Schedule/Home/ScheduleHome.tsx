@@ -6,7 +6,7 @@ import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../../common/styles/Colors';
 import styles from './styles';
-import {navigate} from '../../../common/utils/NavigatorUtils';
+import {goBack, navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 
@@ -16,9 +16,22 @@ export default function ScheduleHome() {
       <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
         <View style={styles.headerContent}>
-          <Text style={{fontSize: scaleSize(24), fontWeight: '500'}}>
-            Schedule Tasks
-          </Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: scaleSize(-16),
+            }}>
+            <TouchableOpacity style={{}} onPress={goBack}>
+              <Icon name="chevron-left" size={45} color={'#000'} />
+            </TouchableOpacity>
+            <Text style={{fontSize: scaleSize(24), fontWeight: '500'}}>
+              Schedule Tasks
+            </Text>
+          </View>
+
           <TouchableOpacity onPress={() => navigate(NavScreenTags.ADD_TASK)}>
             <Icon name="plus" size={36} color={Colors.BLACK_COLOR} />
           </TouchableOpacity>

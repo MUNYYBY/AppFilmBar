@@ -4,9 +4,10 @@ import React from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import styles from './styles';
-import {navigate} from '../../../common/utils/NavigatorUtils';
+import {goBack, navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function SettingsHome() {
   return (
@@ -14,9 +15,21 @@ export default function SettingsHome() {
       <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
         <View style={styles.headerContent}>
-          <Text style={{fontSize: scaleSize(28), fontWeight: '500'}}>
-            Settings
-          </Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: scaleSize(-16),
+            }}>
+            <TouchableOpacity style={{}} onPress={goBack}>
+              <Icon name="chevron-left" size={45} color={'#000'} />
+            </TouchableOpacity>
+            <Text style={{fontSize: scaleSize(24), fontWeight: '500'}}>
+              Settings
+            </Text>
+          </View>
         </View>
         <View style={{}}>
           <TouchableOpacity

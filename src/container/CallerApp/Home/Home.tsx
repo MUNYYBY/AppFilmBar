@@ -10,6 +10,7 @@ import Dailer from '../Dailer/Dailer';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Contacts from '../Contacts/Contacts';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import {goBack} from '../../../common/utils/NavigatorUtils';
 
 const renderScene = SceneMap({
   0: Dailer,
@@ -38,14 +39,23 @@ export default function CallerAppHome() {
     <>
       <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
-        <TouchableOpacity
+        <View
           style={{
-            marginTop: scaleSize(20),
-            alignItems: 'flex-end',
-            paddingHorizontal: scaleSize(16),
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginTop: scaleSize(30),
           }}>
-          <Icon name="plus" size={40} color={Colors.BLACK_COLOR} />
-        </TouchableOpacity>
+          <TouchableOpacity style={{}} onPress={goBack}>
+            <Icon name="chevron-left" size={45} color={'#000'} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: scaleSize(16),
+            }}>
+            <Icon name="plus" size={40} color={Colors.BLACK_COLOR} />
+          </TouchableOpacity>
+        </View>
         <View style={{marginHorizontal: scaleSize(-16), flex: 1}}>
           <TabView
             navigationState={{index, routes}}

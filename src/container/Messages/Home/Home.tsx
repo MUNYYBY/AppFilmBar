@@ -9,6 +9,7 @@ import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import CustomContact from '../../../common/components/CustomContact/CustomContact';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import {goBack} from '../../../common/utils/NavigatorUtils';
 
 export default function InboxScreen() {
   const [contacts, setContacts] = useState<any>([
@@ -25,9 +26,25 @@ export default function InboxScreen() {
       <CustomStatusbar barStyle="dark-content" />
       <PageSkeleton hasHeader={false} headerTitle="">
         <View style={styles.headerContent}>
-          <Text style={{fontSize: scaleSize(32), fontWeight: '500'}}>
-            Messages
-          </Text>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginLeft: scaleSize(-16),
+            }}>
+            <TouchableOpacity style={{}} onPress={goBack}>
+              <Icon name="chevron-left" size={45} color={'#000'} />
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: scaleSize(32),
+                fontWeight: '500',
+              }}>
+              Messages
+            </Text>
+          </View>
           <TouchableOpacity>
             <Icon name="plus" size={36} color={Colors.BLACK_COLOR} />
           </TouchableOpacity>
