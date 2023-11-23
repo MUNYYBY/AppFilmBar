@@ -67,7 +67,7 @@ const SettingsReducer = (state: any = initialState, action: any) => {
       return {
         ...state,
         wallpaper: action.payload.wallpaper,
-        customWallpaper: action.payload.wallpaper,
+        customWallpaper: action.payload.customWallpaper,
       };
     }
     case SET_TIME: {
