@@ -2,6 +2,7 @@ import moment from 'moment';
 import {
   CHANGE_LANUAGE_SUCCESS,
   SET_BATTERY,
+  SET_CUSTOM_WALLAPPER,
   SET_DATE,
   SET_DATE_AND_TIME,
   SET_IS_NO_SERVICE,
@@ -24,6 +25,7 @@ const initialState = {
   isOnline: false,
   isRefresh: false,
   wallpaper: 1,
+  customWallpaper: '',
   time: String(moment()),
   date: String(moment()),
   battery: 100,
@@ -65,6 +67,7 @@ const SettingsReducer = (state: any = initialState, action: any) => {
       return {
         ...state,
         wallpaper: action.payload.wallpaper,
+        customWallpaper: action.payload.wallpaper,
       };
     }
     case SET_TIME: {
@@ -115,6 +118,13 @@ const SettingsReducer = (state: any = initialState, action: any) => {
       return {
         ...state,
         signals: action.payload.signals,
+      };
+    }
+    case SET_CUSTOM_WALLAPPER: {
+      return {
+        ...state,
+        customWallpaper: action.payload.customWallpaper,
+        wallpaper: action.payload.customWallpaper,
       };
     }
     default: {

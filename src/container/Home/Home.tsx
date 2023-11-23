@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity, StatusBar} from 'react-native';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import styles from './styles';
@@ -17,7 +17,9 @@ export default function Home() {
       <View style={styles.container}>
         <Image
           source={
-            settings.wallpaper === 1
+            settings.customWallpaper !== ''
+              ? {uri: settings.customWallpaper.uri}
+              : settings.wallpaper === 1
               ? Images.BACKGROUND_1
               : settings.wallpaper === 2
               ? Images.BACKGROUND_2

@@ -16,6 +16,7 @@ export const CHANGE_LANUAGE_SUCCESS = 'CHANGE_LANUAGE_SUCCESS';
 export const SET_IS_ONLINE = 'SET_IS_ONLINE';
 export const SET_REFRESH = 'SET_REFRESH';
 export const SET_WALLPAPER = 'SET_WALLPAPER';
+export const SET_CUSTOM_WALLAPPER = 'SET_CUSTOM_WALLAPPER';
 export const SET_TIME = 'SET_TIME';
 export const SET_DATE = 'SET_DATE';
 export const SET_DATE_AND_TIME = 'SET_DATE_AND_TIME';

@@ -1,17 +1,48 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, Pressable} from 'react-native';
+import {View, Image, Pressable} from 'react-native';
 import React from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import {Images} from '../../../common/constants/Images';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import {useDispatch, useSelector} from 'react-redux';
-import {SET_WALLPAPER} from '../../../common/constants/ActionTypes';
+import {
+  SET_CUSTOM_WALLAPPER,
+  SET_WALLPAPER,
+} from '../../../common/constants/ActionTypes';
 import Colors from '../../../common/styles/Colors';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import CustomButton from '../../../common/components/customButton';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 export default function SettingsChangeWallpaper() {
   const dispatch = useDispatch();
   const settings = useSelector((state: any) => state.settings);
+
+  function handleWallpaperSelect() {
+    launchImageLibrary(
+      {mediaType: 'photo', selectionLimit: 1},
+      (response: any) => {
+        console.log('Response = ', response);
+
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          // You can also display the image using data:
+          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+          // console.log(response.assets[0]);
+          dispatch({
+            type: SET_CUSTOM_WALLAPPER,
+            payload: {customWallpaper: response.assets[0], wallpaper: 0},
+          });
+        }
+      },
+    );
+  }
   return (
     <>
       <CustomStatusbar barStyle="dark-content" />
@@ -26,7 +57,10 @@ export default function SettingsChangeWallpaper() {
           }}>
           <Pressable
             onPress={() =>
-              dispatch({type: SET_WALLPAPER, payload: {wallpaper: 1}})
+              dispatch({
+                type: SET_WALLPAPER,
+                payload: {wallpaper: 1, customWallpaper: ''},
+              })
             }
             style={{
               flex: 1,
@@ -54,7 +88,10 @@ export default function SettingsChangeWallpaper() {
           </Pressable>
           <Pressable
             onPress={() =>
-              dispatch({type: SET_WALLPAPER, payload: {wallpaper: 2}})
+              dispatch({
+                type: SET_WALLPAPER,
+                payload: {wallpaper: 2, customWallpaper: ''},
+              })
             }
             style={{
               flex: 1,
@@ -90,7 +127,10 @@ export default function SettingsChangeWallpaper() {
           }}>
           <Pressable
             onPress={() =>
-              dispatch({type: SET_WALLPAPER, payload: {wallpaper: 3}})
+              dispatch({
+                type: SET_WALLPAPER,
+                payload: {wallpaper: 3, customWallpaper: ''},
+              })
             }
             style={{
               flex: 1,
@@ -116,6 +156,21 @@ export default function SettingsChangeWallpaper() {
               ]}
             />
           </Pressable>
+        </View>
+        <View
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-end',
+            marginBottom: scaleSize(24),
+          }}>
+          <CustomButton
+            title={'Select wallpaper from gallery'}
+            onPress={() => {
+              handleWallpaperSelect();
+            }}
+          />
         </View>
       </PageSkeleton>
     </>
