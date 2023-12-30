@@ -2,15 +2,18 @@
 import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
-import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
+import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../../common/styles/Colors';
 import styles from './styles';
 import {goBack, navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import {useSelector} from 'react-redux';
+import moment from 'moment';
 
 export default function ScheduleHome() {
+  const schedule = useSelector((state: any) => state.schedule);
   return (
     <>
       <CustomStatusbar barStyle="dark-content" />
@@ -37,36 +40,37 @@ export default function ScheduleHome() {
           </TouchableOpacity>
         </View>
         <View style={{}}>
-          <View style={styles.taskPlaceHolder}>
-            <View>
-              <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
-                Messages
+          {!schedule.call && (
+            <Text
+              style={{
+                width: '100%',
+                textAlign: 'center',
+                fontWeight: '400',
+                marginTop: scaleSize(75),
+                fontSize: scaleFontSize(20),
+              }}>
+              No tasks scheduled yet!
+            </Text>
+          )}
+          {schedule.call && (
+            <View style={styles.taskPlaceHolder}>
+              <View>
+                <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
+                  Call
+                </Text>
+                <Text>{schedule.call?.callerId}</Text>
+                <Text>
+                  {schedule.call.countdown &&
+                    'Schedule for ' +
+                      moment(schedule.call.countdown).format('HH:MM')}
+                </Text>
+              </View>
+              <Text>
+                {schedule.call.createdAt &&
+                  moment(schedule.call.createdAt).fromNow()}
               </Text>
-              <Text>Muneeb ur rehman</Text>
-              <Text>Schedule for 11:46</Text>
             </View>
-            <Text>1 minute ago</Text>
-          </View>
-          <View style={styles.taskPlaceHolder}>
-            <View>
-              <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
-                Call
-              </Text>
-              <Text>Amir Jibran</Text>
-              <Text>Schedule for 11:45</Text>
-            </View>
-            <Text>5 minute ago</Text>
-          </View>
-          <View style={styles.taskPlaceHolder}>
-            <View>
-              <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
-                Video Call
-              </Text>
-              <Text>Jeff A.</Text>
-              <Text>Schedule for 11:45</Text>
-            </View>
-            <Text>10 minute ago</Text>
-          </View>
+          )}
         </View>
       </PageSkeleton>
     </>

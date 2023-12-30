@@ -14,48 +14,48 @@ import CallerAppStack from './CallerAppStack';
 import MessagesAppStack from './MessagesAppStack';
 import SettingsStack from './SettingsStack';
 import Call from '../../container/CallerApp/Call/Call';
+import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
+const RootStack = () => (
+  <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+      contentStyle: {
+        backgroundColor: Colors.WHITE_COLOR,
+      },
+    }}>
+    <Stack.Screen name={NavScreenTags.SPLASH} component={Splash} />
+    <Stack.Screen name={NavScreenTags.SIGN_IN} component={Login} />
+    <Stack.Screen name={NavScreenTags.SIGN_UP} component={Signup} />
+    <Stack.Screen name={NavScreenTags.HOME} component={Home} />
+    <Stack.Screen
+      name={NavScreenTags.SCHEDULE_STACK}
+      component={ScheduleStack}
+    />
+    <Stack.Screen
+      name={NavScreenTags.CALLERAPP_STACK}
+      component={CallerAppStack}
+    />
+    <Stack.Screen name={NavScreenTags.CALL_SCREEN} component={Call} />
+    <Stack.Screen
+      name={NavScreenTags.MESSAGES_STACK}
+      component={MessagesAppStack}
+    />
+    <Stack.Screen
+      name={NavScreenTags.SETTINGS_STACK}
+      component={SettingsStack}
+    />
+  </Stack.Navigator>
+);
 const AppNavigation = () => {
-  const RootStack = () => (
-    <Stack.Navigator
-      screenOptions={{
-        headerShown: false,
-        contentStyle: {
-          backgroundColor: Colors.WHITE_COLOR,
-        },
-      }}>
-      <Stack.Screen name={NavScreenTags.SPLASH} component={Splash} />
-      <Stack.Screen name={NavScreenTags.SIGN_IN} component={Login} />
-      <Stack.Screen name={NavScreenTags.SIGN_UP} component={Signup} />
-      <Stack.Screen name={NavScreenTags.HOME} component={Home} />
-      <Stack.Screen
-        name={NavScreenTags.SCHEDULE_STACK}
-        component={ScheduleStack}
-      />
-      <Stack.Screen
-        name={NavScreenTags.CALLERAPP_STACK}
-        component={CallerAppStack}
-      />
-      <Stack.Screen name={NavScreenTags.CALL_SCREEN} component={Call} />
-      <Stack.Screen
-        name={NavScreenTags.MESSAGES_STACK}
-        component={MessagesAppStack}
-      />
-      <Stack.Screen
-        name={NavScreenTags.SETTINGS_STACK}
-        component={SettingsStack}
-      />
-    </Stack.Navigator>
-  );
-
   // ** ** ** ** RENDER RETURNS ** ** ** **
+
+  const schedule = useSelector((state: any) => state.schedule);
   return (
     //@ts-ignore
-    <NavigationContainer
-      // theme={usedTheme === true ? DarkTheme : LightTheme}
-      ref={navigationRef}>
+    <NavigationContainer ref={navigationRef}>
       <RootStack />
     </NavigationContainer>
   );

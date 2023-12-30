@@ -40,16 +40,7 @@ export default function AddTask() {
     <>
       <CustomStatusbar barStyle="dark-content" />
 
-      <PageSkeleton
-        hasHeader={true}
-        headerTitle="Schedule task"
-        headerRightContent={
-          <CustomButton
-            onPress={() => {}}
-            title={'Schedule'}
-            varient="secondary"
-          />
-        }>
+      <PageSkeleton hasHeader={true} headerTitle="Schedule task">
         <View style={{marginHorizontal: scaleSize(-16), flex: 1}}>
           <TabView
             navigationState={{index, routes}}
