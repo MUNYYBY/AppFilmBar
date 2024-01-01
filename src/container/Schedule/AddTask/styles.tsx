@@ -13,16 +13,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     flex: 1,
-    marginTop: scaleSize(30),
+    marginTop: scaleSize(5),
   },
   uploadContainer: {
-    width: scaleSize(100),
-    height: scaleSize(100),
+    width: scaleSize(125),
+    height: scaleSize(125),
     backgroundColor: '#EEEEEE',
     borderRadius: scaleSize(100),
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: scaleSize(1.25),
+    borderColor: Colors.INPUT_BORDER,
   },
   videoUploadContainer: {
     width: scaleSize(150),
@@ -34,6 +36,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: scaleSize(1.25),
     borderColor: Colors.INPUT_BORDER,
+    marginTop: scaleSize(15),
   },
 });
 

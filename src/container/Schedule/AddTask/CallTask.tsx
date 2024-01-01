@@ -46,10 +46,6 @@ export default function CallTask() {
         } else if (response.customButton) {
           console.log('User tapped custom button: ', response.customButton);
         } else {
-          // You can also display the image using data:
-          // const source = { uri: 'data:image/jpeg;base64,' + response.data };
-
-          // console.log(response.assets[0]);
           setAvatar(response.assets[0]);
         }
       },
@@ -80,7 +76,7 @@ export default function CallTask() {
           {!avatar ? (
             <>
               <Icon size={32} color="black" name="add-photo-alternate" />
-              <Text>Photo</Text>
+              <Text>Avatar</Text>
             </>
           ) : (
             <Image
