@@ -13,21 +13,28 @@ import {useDispatch} from 'react-redux';
 import {launchImageLibrary} from 'react-native-image-picker';
 import CustomButton from '../../../common/components/customButton';
 import Colors from '../../../common/styles/Colors';
+import {SET_VIDEO_TASK_SCHEDULE} from '../../../common/constants/ActionTypes';
+import {v4 as uuidv4} from 'uuid';
+import {VideoModal} from '../../../common/types/schedule';
+import {showToast} from '../../../common/utils/AlertUtils';
+import CustomErrorText from '../../../common/components/customErrorText';
 
 export default function VideoCallTask() {
   const {
     control,
     watch,
     reset,
-    formState: {},
+    setError,
+    clearErrors,
+    formState: {errors, isValid},
   } = useForm({
     defaultValues: {CountDown: '', Number: '', CallerId: ''},
     mode: 'onChange',
   });
 
   const [avatar, setAvatar] = React.useState<any>(null);
-  const [incomingVideo, setIncomingVideo] = useState<null>(null);
-  const [outgoingVideo, setOutgoingVideo] = useState<null>(null);
+  const [incomingVideo, setIncomingVideo] = useState<any>(null);
+  const [outgoingVideo, setOutgoingVideo] = useState<any>(null);
 
   const dispatch = useDispatch();
 
@@ -82,6 +89,35 @@ export default function VideoCallTask() {
       },
     );
   }
+
+  function handleScheduleVideoTask() {
+    clearErrors('root');
+    if (!incomingVideo || !outgoingVideo) {
+      setError('root', {
+        type: 'manual',
+        message: 'Please select both outgoinng and incoming videos',
+      });
+      return false;
+    }
+    dispatch({
+      type: SET_VIDEO_TASK_SCHEDULE,
+      payload: {
+        id: uuidv4(),
+        avatar: avatar ? avatar.uri : null,
+        callerId: control._formValues.CallerId,
+        number: control._formValues.Number,
+        countdown: String(control._formValues.CountDown),
+        incomingVideo: incomingVideo.uri,
+        outgoingVideo: outgoingVideo.uri,
+        createdAt: String(new Date()),
+      } as VideoModal,
+    });
+    reset();
+    setAvatar(null);
+    setIncomingVideo(null);
+    setOutgoingVideo(null);
+    showToast('Task scheduled!');
+  }
   return (
     <PageSkeleton hasHeader={false} headerTitle="">
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -100,8 +136,8 @@ export default function VideoCallTask() {
                 style={{
                   position: 'absolute',
                   top: 0,
-                  width: scaleSize(100),
-                  height: scaleSize(100),
+                  width: scaleSize(130),
+                  height: scaleSize(130),
                   backgroundColor: '#EEEEEE',
                   borderRadius: scaleSize(100),
                 }}
@@ -118,16 +154,26 @@ export default function VideoCallTask() {
             }}>
             <TouchableOpacity
               style={styles.videoUploadContainer}
-              onPress={() => handleIncomingVideoSelection()}>
+              onPress={() => handleIncomingVideoSelection()}
+              disabled={incomingVideo ? true : false}>
               <Icon size={40} color="black" name="video-outline" />
-              <Text>Incoming Video</Text>
+              <Text>{incomingVideo ? 'Video Selected' : 'Incoming Video'}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.videoUploadContainer}
-              onPress={() => handleOutgoingVideoSelection()}>
+              onPress={() => handleOutgoingVideoSelection()}
+              disabled={outgoingVideo ? true : false}>
               <Icon size={40} color="black" name="video-outline" />
-              <Text>Outgoing Video</Text>
+              <Text>{outgoingVideo ? 'Video Selected' : 'Outgoing Video'}</Text>
             </TouchableOpacity>
+          </View>
+          <View style={{marginTop: scaleSize(20)}}>
+            {errors.root && (
+              <CustomErrorText
+                errorText={errors.root?.message}
+                isError={errors.root ? true : false}
+              />
+            )}
           </View>
           <View style={{marginTop: scaleSize(20)}}>
             <Text style={styles.BoldText}>Countdown</Text>
@@ -174,9 +220,10 @@ export default function VideoCallTask() {
           <View style={{width: '100%'}}>
             <CustomButton
               onPress={() => {
-                // handleScheduleCallTask();
+                handleScheduleVideoTask();
               }}
               title={'Schedule'}
+              shouldEnable={isValid}
               buttonStyle={{
                 width: '100%',
                 marginVertical: scaleSize(20),

@@ -36,7 +36,7 @@ const ScheduleReducer = (state: any = initialState, action: any) => {
     case SET_VIDEO_TASK_SCHEDULE: {
       return {
         ...state,
-        call: {
+        video: {
           id: action.payload.id,
           avatar: action.payload.avatar,
           callerId: action.payload.callerId,

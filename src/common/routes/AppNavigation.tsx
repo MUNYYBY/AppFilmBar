@@ -17,8 +17,10 @@ import Call from '../../container/CallerApp/Call/Call';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   CLEAR_CALL_SCHEDULE,
+  CLEAR_VIDEO_SCHEDULE,
   SET_CALL_TASK_SCHEDULE,
 } from '../constants/ActionTypes';
+import VideoCallScreen from '../../container/CallerApp/Video/Video';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +46,10 @@ const RootStack = () => (
     />
     <Stack.Screen name={NavScreenTags.CALL_SCREEN} component={Call} />
     <Stack.Screen
+      name={NavScreenTags.VIDEO_SCREEN}
+      component={VideoCallScreen}
+    />
+    <Stack.Screen
       name={NavScreenTags.MESSAGES_STACK}
       component={MessagesAppStack}
     />
@@ -60,38 +66,51 @@ const AppNavigation = () => {
   const dispatch = useDispatch();
   React.useEffect(() => {
     if (schedule.call) {
-      // Set the target date and time
-      const targetDate = new Date(schedule.call.countdown); // Replace with your target date and time
-
-      // Update the code inside this function to execute when the target date and time is reached
+      const targetDate = new Date(schedule.call.countdown);
       const checkDateTime = () => {
         const currentDate = new Date();
 
         if (currentDate >= targetDate) {
-          // Your code to run when the target date and time is reached
           navigate(NavScreenTags.CALL_SCREEN, {
             isOutGoing: false,
             contactName: schedule.call.callerId,
             contactNumber: schedule.call.number,
             avatar: schedule.call.avatar,
           });
-
           dispatch({type: CLEAR_CALL_SCHEDULE, payload: {}});
-          // Clear the interval once the code is executed
           clearInterval(interval);
         }
       };
-
-      // Set up the interval to check the date and time every second
       const interval = setInterval(checkDateTime, 1000);
+      return () => {
+        clearInterval(interval);
+      };
+    }
+    if (schedule.video) {
+      const targetDate = new Date(schedule.video.countdown);
+      const checkDateTime = () => {
+        const currentDate = new Date();
 
-      // Clean up the interval when the component is unmounted
+        if (currentDate >= targetDate) {
+          navigate(NavScreenTags.VIDEO_SCREEN, {
+            isOutGoing: false,
+            contactName: schedule.video.callerId,
+            contactNumber: schedule.video.number,
+            avatar: schedule.video.avatar,
+            incomingVideo: schedule.video.incomingVideo,
+            outgoingVideo: schedule.video.outgoingVideo,
+          });
+          dispatch({type: CLEAR_VIDEO_SCHEDULE, payload: {}});
+          clearInterval(interval);
+        }
+      };
+      const interval = setInterval(checkDateTime, 1000);
       return () => {
         clearInterval(interval);
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schedule.call]);
+  }, [schedule.call, schedule.video]);
 
   React.useEffect(() => {}, [schedule.call]);
   return (

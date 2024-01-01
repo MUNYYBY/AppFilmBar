@@ -84,8 +84,8 @@ export default function CallTask() {
               style={{
                 position: 'absolute',
                 top: 0,
-                width: scaleSize(100),
-                height: scaleSize(100),
+                width: scaleSize(130),
+                height: scaleSize(130),
                 backgroundColor: '#EEEEEE',
                 borderRadius: scaleSize(100),
               }}

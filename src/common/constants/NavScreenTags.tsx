@@ -27,6 +27,7 @@ export const NavScreenTags = {
   CALLERAPP_SPLASH: 'Caller App Splash',
   CALLERAPP_HOME: 'Caller App Home',
   CALL_SCREEN: 'Call',
+  VIDEO_SCREEN: 'VIDEO',
   MESSAGES_STACK: 'MessagesAppStack',
   MESSAGES_SPLASH: 'Messages App Splash',
   MESSAGES_HOME: 'Messages App Home',
