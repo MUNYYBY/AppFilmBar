@@ -10,7 +10,7 @@ import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import {goBack} from '../../../common/utils/NavigatorUtils';
 
 export default function Call({route}: any) {
-  const {isOutGoing, contactName, contactNumber} = route.params;
+  const {isOutGoing, contactName, contactNumber, avatar} = route.params;
   const [isCallAttended, setIsCallAttended] = useState(
     isOutGoing ? true : false,
   );
@@ -26,11 +26,28 @@ export default function Call({route}: any) {
             alignItems: 'center',
           }}>
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Image
-              source={Images.CONTACT_LARGE}
-              style={{height: 130, width: 130, resizeMode: 'contain'}}
-            />
-            <Text style={{fontSize: scaleFontSize(24), fontWeight: '500'}}>
+            {avatar ? (
+              <Image
+                source={{uri: avatar}}
+                style={{
+                  width: scaleSize(130),
+                  height: scaleSize(130),
+                  backgroundColor: '#EEEEEE',
+                  borderRadius: scaleSize(100),
+                }}
+              />
+            ) : (
+              <Image
+                source={Images.CONTACT_LARGE}
+                style={{height: 130, width: 130, resizeMode: 'contain'}}
+              />
+            )}
+            <Text
+              style={{
+                fontSize: scaleFontSize(24),
+                fontWeight: '500',
+                marginTop: scaleSize(20),
+              }}>
               {contactName}
             </Text>
             <Text style={{fontSize: scaleFontSize(18.5)}}>{contactNumber}</Text>

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {navigationRef} from '../utils/NavigatorUtils';
+import {navigate, navigationRef} from '../utils/NavigatorUtils';
 import Colors from '../styles/Colors';
 import Home from '../../container/Home/Home';
 import {NavScreenTags} from '../constants/NavScreenTags';
@@ -14,7 +14,11 @@ import CallerAppStack from './CallerAppStack';
 import MessagesAppStack from './MessagesAppStack';
 import SettingsStack from './SettingsStack';
 import Call from '../../container/CallerApp/Call/Call';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  CLEAR_CALL_SCHEDULE,
+  SET_CALL_TASK_SCHEDULE,
+} from '../constants/ActionTypes';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +57,43 @@ const AppNavigation = () => {
   // ** ** ** ** RENDER RETURNS ** ** ** **
 
   const schedule = useSelector((state: any) => state.schedule);
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    if (schedule.call) {
+      // Set the target date and time
+      const targetDate = new Date(schedule.call.countdown); // Replace with your target date and time
+
+      // Update the code inside this function to execute when the target date and time is reached
+      const checkDateTime = () => {
+        const currentDate = new Date();
+
+        if (currentDate >= targetDate) {
+          // Your code to run when the target date and time is reached
+          navigate(NavScreenTags.CALL_SCREEN, {
+            isOutGoing: false,
+            contactName: schedule.call.callerId,
+            contactNumber: schedule.call.number,
+            avatar: schedule.call.avatar,
+          });
+
+          dispatch({type: CLEAR_CALL_SCHEDULE, payload: {}});
+          // Clear the interval once the code is executed
+          clearInterval(interval);
+        }
+      };
+
+      // Set up the interval to check the date and time every second
+      const interval = setInterval(checkDateTime, 1000);
+
+      // Clean up the interval when the component is unmounted
+      return () => {
+        clearInterval(interval);
+      };
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schedule.call]);
+
+  React.useEffect(() => {}, [schedule.call]);
   return (
     //@ts-ignore
     <NavigationContainer ref={navigationRef}>

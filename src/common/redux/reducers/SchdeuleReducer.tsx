@@ -1,4 +1,7 @@
-import {SET_CALL_TASK_SCHEDULE} from '../../constants/ActionTypes';
+import {
+  CLEAR_CALL_SCHEDULE,
+  SET_CALL_TASK_SCHEDULE,
+} from '../../constants/ActionTypes';
 import {CallModal} from '../../types/schedule';
 
 const initialState = {
@@ -20,6 +23,12 @@ const ScheduleReducer = (state: any = initialState, action: any) => {
           countdown: action.payload.countdown,
           createdAt: action.payload.createdAt,
         } as CallModal,
+      };
+    }
+    case CLEAR_CALL_SCHEDULE: {
+      return {
+        ...state,
+        call: null,
       };
     }
     default: {
