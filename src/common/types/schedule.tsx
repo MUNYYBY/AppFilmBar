@@ -16,3 +16,11 @@ export interface VideoModal {
   outgoingVideo: string | null;
   createdAt: string;
 }
+export interface MessagesModal {
+  id: string;
+  avatar: string | null;
+  callerId: string;
+  countdown: string;
+  messages: Array<object>;
+  createdAt: string;
+}

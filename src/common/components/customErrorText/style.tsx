@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {scaleFontSize, scaleSize} from '../../utils/ScaleSheetUtils';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import Colors from '../../styles/Colors';
 
 export const styles = StyleSheet.create({
   img: {
@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   errorText: {
-    color: Colors.GRAY_TEXT_COLOR,
+    color: Colors.ERROR_CHECK_ICON,
     fontSize: scaleFontSize(14),
     fontFamily: 'Lato-Regular',
     // fontWeight: '400',

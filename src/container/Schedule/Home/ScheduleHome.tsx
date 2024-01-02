@@ -40,7 +40,7 @@ export default function ScheduleHome() {
           </TouchableOpacity>
         </View>
         <View style={{}}>
-          {!schedule.call && !schedule.video && (
+          {!schedule.call && !schedule.video && !schedule.messages && (
             <Text
               style={{
                 width: '100%',
@@ -87,6 +87,25 @@ export default function ScheduleHome() {
               <Text>
                 {schedule.video.createdAt &&
                   moment(schedule.video.createdAt).fromNow()}
+              </Text>
+            </View>
+          )}
+          {schedule.messages && (
+            <View style={styles.taskPlaceHolder}>
+              <View>
+                <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
+                  Messages
+                </Text>
+                <Text>{schedule.messages?.callerId}</Text>
+                <Text>
+                  {schedule.messages.countdown &&
+                    'Schedule for ' +
+                      moment(schedule.messages.countdown).format('hh:mm a')}
+                </Text>
+              </View>
+              <Text>
+                {schedule.messages.createdAt &&
+                  moment(schedule.messages.createdAt).fromNow()}
               </Text>
             </View>
           )}

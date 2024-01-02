@@ -17,6 +17,7 @@ import Call from '../../container/CallerApp/Call/Call';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   CLEAR_CALL_SCHEDULE,
+  CLEAR_MESSAGE_SCHEDULE,
   CLEAR_VIDEO_SCHEDULE,
   SET_CALL_TASK_SCHEDULE,
 } from '../constants/ActionTypes';
@@ -109,8 +110,31 @@ const AppNavigation = () => {
         clearInterval(interval);
       };
     }
+    if (schedule.messages) {
+      const targetDate = new Date(schedule.messages.countdown);
+      const checkDateTime = () => {
+        const currentDate = new Date();
+
+        if (currentDate >= targetDate) {
+          // navigate(NavScreenTags.VIDEO_SCREEN, {
+          //   isOutGoing: false,
+          //   contactName: schedule.video.callerId,
+          //   contactNumber: schedule.video.number,
+          //   avatar: schedule.video.avatar,
+          //   incomingVideo: schedule.video.incomingVideo,
+          //   outgoingVideo: schedule.video.outgoingVideo,
+          // });
+          dispatch({type: CLEAR_MESSAGE_SCHEDULE, payload: {}});
+          clearInterval(interval);
+        }
+      };
+      const interval = setInterval(checkDateTime, 1000);
+      return () => {
+        clearInterval(interval);
+      };
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schedule.call, schedule.video]);
+  }, [schedule.call, schedule.video, schedule.messages]);
 
   React.useEffect(() => {}, [schedule.call]);
   return (
