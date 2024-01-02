@@ -16,7 +16,6 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import CustomErrorText from '../../../common/components/customErrorText';
 import CustomButton from '../../../common/components/customButton';
 import {v4 as uuidv4} from 'uuid';
-import moment from 'moment';
 import {useDispatch} from 'react-redux';
 import {showToast} from '../../../common/utils/AlertUtils';
 import {MessagesModal} from '../../../common/types/schedule';
@@ -87,7 +86,7 @@ export default function MessagesTask() {
         id: uuidv4(),
         message: control._formValues.Messages,
         type: value,
-        createdAt: moment(),
+        createdAt: String(new Date()),
       },
     ]);
     setValue('');
