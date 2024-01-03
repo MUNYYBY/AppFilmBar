@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {TouchableOpacity, View, useWindowDimensions} from 'react-native';
+import {Text, TouchableOpacity, View, useWindowDimensions} from 'react-native';
 import React from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import CustomButton from '../../../common/components/customButton';
@@ -46,15 +46,30 @@ export default function CallerAppHome() {
             justifyContent: 'space-between',
             marginTop: scaleSize(30),
           }}>
-          <TouchableOpacity style={{}} onPress={goBack}>
-            <Icon name="chevron-left" size={45} color={'#000'} />
-          </TouchableOpacity>
-          <TouchableOpacity
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <TouchableOpacity style={{}} onPress={goBack}>
+              <Icon name="chevron-left" size={45} color={'#000'} />
+            </TouchableOpacity>
+            <Text
+              style={{
+                fontSize: scaleSize(24),
+                fontWeight: '500',
+              }}>
+              Phone
+            </Text>
+          </View>
+          {/* <TouchableOpacity
             style={{
               paddingHorizontal: scaleSize(16),
             }}>
             <Icon name="plus" size={40} color={Colors.BLACK_COLOR} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <View style={{marginHorizontal: scaleSize(-16), flex: 1}}>
           <TabView

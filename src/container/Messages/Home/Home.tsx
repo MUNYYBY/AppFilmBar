@@ -12,14 +12,11 @@ import CustomStatusbar from '../../../common/components/customStatusbar/CustomSt
 import {goBack} from '../../../common/utils/NavigatorUtils';
 
 export default function InboxScreen() {
-  const [contacts, setContacts] = useState<any>([
+  const [contacts, _] = useState<any>([
     {name: 'Muneeb', createdOn: '2021-09-12T12:00:00.000Z'},
     {name: 'Muneeb', createdOn: '2021-09-12T12:00:00.000Z'},
   ]);
-  const [filterContacts, setFilterContacts] = useState<null | []>(contacts);
-  const [value, setValue] = useState('');
   const [user, setUser] = useState<any>(false);
-  const [refreshing, setRefreshing] = React.useState(false);
 
   return (
     <>
@@ -45,17 +42,17 @@ export default function InboxScreen() {
               Messages
             </Text>
           </View>
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Icon name="plus" size={36} color={Colors.BLACK_COLOR} />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <ScrollView style={styles.scrollContainer}>
           <View style={styles.secContainer}>
-            {!filterContacts ? (
+            {!contacts ? (
               <View style={{marginTop: 40}}>
                 <ActivityIndicator size={32} color={Colors.PRIMARY_COLOR_1} />
               </View>
-            ) : filterContacts.length === 0 ? (
+            ) : contacts.length === 0 ? (
               <View
                 style={{
                   marginTop: 40,
@@ -76,7 +73,7 @@ export default function InboxScreen() {
               </View>
             ) : (
               <View style={styles.messagesStack}>
-                {filterContacts.map((contact: any, index: number) => {
+                {contacts.map((contact: any, index: number) => {
                   return (
                     <CustomContact contact={contact} user={user} key={index} />
                   );
