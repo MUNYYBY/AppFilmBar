@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerContainer: {
-    marginTop: scaleSize(19.9),
+    marginTop: scaleSize(10.484),
     paddingVertical: scaleSize(20),
     marginBottom: scaleSize(10),
     borderBottomEndRadius: scaleSize(10),
@@ -65,10 +65,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: scaleSize(15),
     height: scaleSize(45),
     borderRadius: scaleSize(10),
-    color: Colors.WHITE_COLOR,
+    color: Colors.BLACK_COLOR,
   },
   recievedMessageContainer: {
-    backgroundColor: 'rgba(256,256,265,0.1)',
+    backgroundColor: 'rgba(0,0,0,0.1)',
     padding: scaleSize(15),
     borderTopRightRadius: scaleFontSize(20),
     borderBottomRightRadius: scaleFontSize(20),
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
   recievedMessageText: {
     fontSize: scaleFontSize(16),
-    color: Colors.WHITE_COLOR,
+    color: Colors.BLACK_COLOR,
   },
   sendMessageContainer: {
     padding: scaleSize(15),

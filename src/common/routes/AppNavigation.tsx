@@ -22,6 +22,7 @@ import {
   SET_CALL_TASK_SCHEDULE,
 } from '../constants/ActionTypes';
 import VideoCallScreen from '../../container/CallerApp/Video/Video';
+import ChatScreen from '../../container/Messages/Chat/Chat';
 
 const Stack = createNativeStackNavigator();
 
@@ -58,6 +59,7 @@ const RootStack = () => (
       name={NavScreenTags.SETTINGS_STACK}
       component={SettingsStack}
     />
+    <Stack.Screen name={NavScreenTags.MESSAGES_CHAT} component={ChatScreen} />
   </Stack.Navigator>
 );
 const AppNavigation = () => {
@@ -116,14 +118,9 @@ const AppNavigation = () => {
         const currentDate = new Date();
 
         if (currentDate >= targetDate) {
-          // navigate(NavScreenTags.VIDEO_SCREEN, {
-          //   isOutGoing: false,
-          //   contactName: schedule.video.callerId,
-          //   contactNumber: schedule.video.number,
-          //   avatar: schedule.video.avatar,
-          //   incomingVideo: schedule.video.incomingVideo,
-          //   outgoingVideo: schedule.video.outgoingVideo,
-          // });
+          navigate(NavScreenTags.MESSAGES_CHAT, {
+            messagesTask: schedule.messages,
+          });
           dispatch({type: CLEAR_MESSAGE_SCHEDULE, payload: {}});
           clearInterval(interval);
         }
