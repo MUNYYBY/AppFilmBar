@@ -1,5 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, ScrollView, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  TextInput,
+} from 'react-native';
 import React, {useState} from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
@@ -35,6 +42,8 @@ export default function VideoCallTask() {
   const [avatar, setAvatar] = React.useState<any>(null);
   const [incomingVideo, setIncomingVideo] = useState<any>(null);
   const [outgoingVideo, setOutgoingVideo] = useState<any>(null);
+  const [minutes, setMinutes] = useState<any>();
+  const [seconds, setSeconds] = useState<any>();
 
   const dispatch = useDispatch();
 
@@ -92,6 +101,12 @@ export default function VideoCallTask() {
 
   function handleScheduleVideoTask() {
     clearErrors('root');
+    if (!minutes && !seconds) {
+      return setError('root', {
+        type: 'manual',
+        message: 'Please enter countdown value',
+      });
+    }
     if (!incomingVideo || !outgoingVideo) {
       setError('root', {
         type: 'manual',
@@ -112,6 +127,8 @@ export default function VideoCallTask() {
         createdAt: String(new Date()),
       } as VideoModal,
     });
+    setMinutes(null);
+    setSeconds(null);
     reset();
     setAvatar(null);
     setIncomingVideo(null);
@@ -175,19 +192,28 @@ export default function VideoCallTask() {
               />
             )}
           </View>
-          <View style={{marginTop: scaleSize(20)}}>
+          <View style={{marginTop: scaleSize(20), width: '100%'}}>
             <Text style={styles.BoldText}>Countdown</Text>
-            <CustomInput
-              placeholder={'CountDown'}
-              type={InputTypes.DATE_PICKER}
-              control={control}
-              name={'CountDown'}
-              returnKeyType={'done'}
-              rules={{
-                required: 'Count Down is required',
-              }}
-              shouldShowIcon={watch('CountDown') !== undefined ? true : false}
-            />
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="MM"
+                keyboardType="numeric"
+                value={minutes}
+                onChangeText={(text: string) => setMinutes(text)}
+              />
+              <Text
+                style={{fontSize: 30, fontWeight: '700', marginHorizontal: 10}}>
+                :
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="SS"
+                keyboardType="numeric"
+                value={seconds}
+                onChangeText={(text: string) => setSeconds(text)}
+              />
+            </View>
           </View>
           <View style={{marginTop: scaleSize(20)}}>
             <Text style={styles.BoldText}>Caller Id</Text>

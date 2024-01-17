@@ -20,6 +20,8 @@ import {useDispatch} from 'react-redux';
 import {showToast} from '../../../common/utils/AlertUtils';
 import {MessagesModal} from '../../../common/types/schedule';
 import {SET_MESSAGE_TASK_SCHEDULE} from '../../../common/constants/ActionTypes';
+import {TextInput} from 'react-native';
+import moment from 'moment';
 
 export default function MessagesTask() {
   const {
@@ -43,6 +45,8 @@ export default function MessagesTask() {
     {value: 'Send', label: 'Send'},
     {value: 'Recieve', label: 'Recieve'},
   ]);
+  const [minutes, setMinutes] = useState<any>();
+  const [seconds, setSeconds] = useState<any>();
 
   //** redux */
   const dispatch = useDispatch();
@@ -94,7 +98,13 @@ export default function MessagesTask() {
 
   function handleSaveMessageTask() {
     clearErrors('root');
-    if (!control._formValues.CountDown || !control._formValues.CallerId) {
+    if (!minutes && !seconds) {
+      return setError('root', {
+        type: 'manual',
+        message: 'Please enter countdown value',
+      });
+    }
+    if (!control._formValues.CallerId) {
       setError('root', {
         type: 'manual',
         message: 'Please enter all the fields',
@@ -107,11 +117,17 @@ export default function MessagesTask() {
         id: uuidv4(),
         avatar: avatar ? avatar.uri : null,
         callerId: control._formValues.CallerId,
-        countdown: String(control._formValues.CountDown),
+        countdown: String(
+          moment()
+            .add(minutes ? minutes : 0, 'm')
+            .add(seconds ? seconds : 0, 's'),
+        ),
         messages: messages,
         createdAt: String(new Date()),
       } as MessagesModal,
     });
+    setMinutes(null);
+    setSeconds(null);
     reset();
     setAvatar(null);
     setMessages([]);
@@ -144,19 +160,28 @@ export default function MessagesTask() {
               />
             )}
           </TouchableOpacity>
-          <View style={{marginTop: scaleSize(20)}}>
+          <View style={{marginTop: scaleSize(20), width: '100%'}}>
             <Text style={styles.BoldText}>Countdown</Text>
-            <CustomInput
-              placeholder={'CountDown'}
-              type={InputTypes.DATE_PICKER}
-              control={control}
-              name={'CountDown'}
-              returnKeyType={'done'}
-              rules={{
-                required: 'Count Down is required',
-              }}
-              shouldShowIcon={watch('CountDown') !== undefined ? true : false}
-            />
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="MM"
+                keyboardType="numeric"
+                value={minutes}
+                onChangeText={(text: string) => setMinutes(text)}
+              />
+              <Text
+                style={{fontSize: 30, fontWeight: '700', marginHorizontal: 10}}>
+                :
+              </Text>
+              <TextInput
+                style={styles.input}
+                placeholder="SS"
+                keyboardType="numeric"
+                value={seconds}
+                onChangeText={(text: string) => setSeconds(text)}
+              />
+            </View>
           </View>
           <View style={{marginTop: scaleSize(20)}}>
             <Text style={styles.BoldText}>Caller Id</Text>

@@ -17,19 +17,26 @@ import {CallModal} from '../../../common/types/schedule';
 import {showToast} from '../../../common/utils/AlertUtils';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
+import {TextInput} from 'react-native';
+import CustomErrorText from '../../../common/components/customErrorText';
+import moment from 'moment';
 
 export default function CallTask() {
   const {
     control,
     watch,
     reset,
-    formState: {},
+    setError,
+    clearErrors,
+    formState: {errors},
   } = useForm({
     defaultValues: {CountDown: '', Number: '', CallerId: ''},
     mode: 'onChange',
   });
 
   const [avatar, setAvatar] = useState<any>(null);
+  const [minutes, setMinutes] = useState<any>(null);
+  const [seconds, setSeconds] = useState<any>(null);
 
   const dispatch = useDispatch();
 
@@ -52,17 +59,30 @@ export default function CallTask() {
     );
   }
   function handleScheduleCallTask() {
+    clearErrors('root');
+    if (!minutes && !seconds) {
+      return setError('root', {
+        type: 'manual',
+        message: 'Please enter countdown value',
+      });
+    }
     dispatch({
       type: SET_CALL_TASK_SCHEDULE,
       payload: {
         id: uuidv4(),
-        avatar: avatar.uri,
+        avatar: avatar ? avatar.uri : null,
         callerId: control._formValues.CallerId,
         number: control._formValues.Number,
-        countdown: String(control._formValues.CountDown),
+        countdown: String(
+          moment()
+            .add(minutes ? minutes : 0, 'm')
+            .add(seconds ? seconds : 0, 's'),
+        ),
         createdAt: String(new Date()),
       } as CallModal,
     });
+    setMinutes(null);
+    setSeconds(null);
     reset();
     setAvatar(null);
     showToast('Task scheduled!');
@@ -92,19 +112,28 @@ export default function CallTask() {
             />
           )}
         </TouchableOpacity>
-        <View style={{marginTop: scaleSize(20)}}>
+        <View style={{marginTop: scaleSize(20), width: '100%'}}>
           <Text style={styles.BoldText}>Countdown</Text>
-          <CustomInput
-            placeholder={'CountDown'}
-            type={InputTypes.DATE_PICKER}
-            control={control}
-            name={'CountDown'}
-            returnKeyType={'done'}
-            rules={{
-              required: 'Count Down is required',
-            }}
-            shouldShowIcon={watch('CountDown') !== undefined ? true : false}
-          />
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="MM"
+              keyboardType="numeric"
+              value={minutes}
+              onChangeText={(text: string) => setMinutes(text)}
+            />
+            <Text
+              style={{fontSize: 30, fontWeight: '700', marginHorizontal: 10}}>
+              :
+            </Text>
+            <TextInput
+              style={styles.input}
+              placeholder="SS"
+              keyboardType="numeric"
+              value={seconds}
+              onChangeText={(text: string) => setSeconds(text)}
+            />
+          </View>
         </View>
         <View style={{marginTop: scaleSize(20)}}>
           <Text style={styles.BoldText}>Caller Id</Text>
@@ -133,6 +162,14 @@ export default function CallTask() {
             }}
             shouldShowIcon={watch('Number') !== undefined ? true : false}
           />
+        </View>
+        <View style={{marginTop: scaleSize(20)}}>
+          {errors.root && (
+            <CustomErrorText
+              errorText={errors.root?.message}
+              isError={errors.root ? true : false}
+            />
+          )}
         </View>
         <View style={{width: '100%'}}>
           <CustomButton

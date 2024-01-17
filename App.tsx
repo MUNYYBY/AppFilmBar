@@ -11,6 +11,7 @@ import {LogBox, Platform, StatusBar} from 'react-native';
 import AppStore from './src/common/redux/store/AppStore';
 import AppNavigation from './src/common/routes/AppNavigation';
 import {Immersive} from 'react-native-immersive';
+import FlashMessage from 'react-native-flash-message';
 
 function App(): JSX.Element {
   const store = AppStore({});
@@ -19,7 +20,9 @@ function App(): JSX.Element {
     __DEV__ && console.warn('Immersive State Changed!');
     Immersive.on();
   };
-  if (Platform.OS !== 'ios') Immersive.addImmersiveListener(restoreImmersive);
+  if (Platform.OS !== 'ios') {
+    Immersive.addImmersiveListener(restoreImmersive);
+  }
   // Immersive.removeImmersiveListener(restoreImmersive);
 
   StatusBar.setTranslucent(true);
@@ -34,6 +37,7 @@ function App(): JSX.Element {
     <>
       <Provider store={store}>
         <AppNavigation />
+        <FlashMessage position="top" />
       </Provider>
     </>
   );

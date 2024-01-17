@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -19,10 +18,10 @@ import {
   CLEAR_CALL_SCHEDULE,
   CLEAR_MESSAGE_SCHEDULE,
   CLEAR_VIDEO_SCHEDULE,
-  SET_CALL_TASK_SCHEDULE,
 } from '../constants/ActionTypes';
 import VideoCallScreen from '../../container/CallerApp/Video/Video';
 import ChatScreen from '../../container/Messages/Chat/Chat';
+import {showMessage} from 'react-native-flash-message';
 
 const Stack = createNativeStackNavigator();
 
@@ -118,10 +117,18 @@ const AppNavigation = () => {
         const currentDate = new Date();
 
         if (currentDate >= targetDate) {
-          navigate(NavScreenTags.MESSAGES_CHAT, {
-            messagesTask: schedule.messages,
+          showMessage({
+            message: 'New Message',
+            type: 'warning',
+            duration: 10000,
+            onPress: () => {
+              navigate(NavScreenTags.MESSAGES_CHAT, {
+                messagesTask: schedule.messages,
+              });
+              dispatch({type: CLEAR_MESSAGE_SCHEDULE, payload: {}});
+            },
           });
-          dispatch({type: CLEAR_MESSAGE_SCHEDULE, payload: {}});
+
           clearInterval(interval);
         }
       };
@@ -133,7 +140,6 @@ const AppNavigation = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [schedule.call, schedule.video, schedule.messages]);
 
-  React.useEffect(() => {}, [schedule.call]);
   return (
     //@ts-ignore
     <NavigationContainer ref={navigationRef}>

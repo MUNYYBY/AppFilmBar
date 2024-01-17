@@ -53,7 +53,7 @@ interface Props {
 
 const CustomInput = (props: Props) => {
   const {
-    formState: {errors},
+    formState: {},
   } = useForm();
   const [isError, setIsError] = useState(false);
   const [showPasswordEye, setShouPasswordEye] = useState(false);
@@ -151,7 +151,7 @@ const CustomInput = (props: Props) => {
         control={props.control}
         rules={props.rules}
         name={props.name}
-        render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
+        render={({field: {onChange, value}, fieldState: {}}) => (
           <>
             <View style={styles.mainVw}>
               <View style={{flexDirection: 'row'}}>
@@ -349,7 +349,7 @@ const CustomInput = (props: Props) => {
       <Controller
         control={props.control}
         rules={props.rules}
-        render={({field: {onChange, onBlur, value}, fieldState: {error}}) => (
+        render={({field: {onChange}, fieldState: {error}}) => (
           <Pressable
             style={{width: '100%'}}
             onPress={() => handleImageOpen(onChange)}>
@@ -433,7 +433,7 @@ const CustomInput = (props: Props) => {
       <Controller
         control={props.control}
         rules={props.rules}
-        render={({field: {onChange, value}, fieldState: {error}}) => (
+        render={({field: {onChange}, fieldState: {error}}) => (
           <>
             <DatePicker
               modal
@@ -447,7 +447,7 @@ const CustomInput = (props: Props) => {
               onCancel={() => {
                 setOpen(false);
               }}
-              mode="datetime"
+              mode="time"
               minimumDate={new Date()}
             />
             <Pressable style={{width: '100%'}} onPress={() => setOpen(true)}>

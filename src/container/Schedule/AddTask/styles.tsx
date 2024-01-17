@@ -38,6 +38,23 @@ const styles = StyleSheet.create({
     borderColor: Colors.INPUT_BORDER,
     marginTop: scaleSize(15),
   },
+  inputContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input: {
+    width: 70,
+    height: 70,
+    borderColor: 'gray',
+    borderWidth: 2,
+    borderRadius: 10,
+    textAlign: 'center',
+    fontSize: 20,
+  },
 });
 
 export default styles;
