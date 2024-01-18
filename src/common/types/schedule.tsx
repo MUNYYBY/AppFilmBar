@@ -13,7 +13,6 @@ export interface VideoModal {
   number: number;
   countdown: string;
   incomingVideo: string;
-  outgoingVideo: string | null;
   createdAt: string;
 }
 export interface MessagesModal {

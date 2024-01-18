@@ -51,7 +51,6 @@ const ScheduleReducer = (state: StateTypes = initialState, action: any) => {
           number: action.payload.number,
           countdown: action.payload.countdown,
           incomingVideo: action.payload.incomingVideo,
-          outgoingVideo: action.payload.outgoingVideo,
           createdAt: action.payload.createdAt,
         } as VideoModal,
       };

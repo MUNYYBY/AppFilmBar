@@ -25,6 +25,7 @@ import {v4 as uuidv4} from 'uuid';
 import {VideoModal} from '../../../common/types/schedule';
 import {showToast} from '../../../common/utils/AlertUtils';
 import CustomErrorText from '../../../common/components/customErrorText';
+import moment from 'moment';
 
 export default function VideoCallTask() {
   const {
@@ -41,7 +42,6 @@ export default function VideoCallTask() {
 
   const [avatar, setAvatar] = React.useState<any>(null);
   const [incomingVideo, setIncomingVideo] = useState<any>(null);
-  const [outgoingVideo, setOutgoingVideo] = useState<any>(null);
   const [minutes, setMinutes] = useState<any>();
   const [seconds, setSeconds] = useState<any>();
 
@@ -81,23 +81,6 @@ export default function VideoCallTask() {
       },
     );
   }
-  function handleOutgoingVideoSelection() {
-    launchImageLibrary(
-      {mediaType: 'video', selectionLimit: 1},
-      (response: any) => {
-        console.log(response);
-        if (response.didCancel) {
-          console.log('User cancelled image picker');
-        } else if (response.error) {
-          console.log('ImagePicker Error: ', response.error);
-        } else if (response.customButton) {
-          console.log('User tapped custom button: ', response.customButton);
-        } else {
-          setOutgoingVideo(response.assets[0]);
-        }
-      },
-    );
-  }
 
   function handleScheduleVideoTask() {
     clearErrors('root');
@@ -107,7 +90,7 @@ export default function VideoCallTask() {
         message: 'Please enter countdown value',
       });
     }
-    if (!incomingVideo || !outgoingVideo) {
+    if (!incomingVideo) {
       setError('root', {
         type: 'manual',
         message: 'Please select both outgoinng and incoming videos',
@@ -121,9 +104,12 @@ export default function VideoCallTask() {
         avatar: avatar ? avatar.uri : null,
         callerId: control._formValues.CallerId,
         number: control._formValues.Number,
-        countdown: String(control._formValues.CountDown),
+        countdown: String(
+          moment()
+            .add(minutes ? minutes : 0, 'm')
+            .add(seconds ? seconds : 0, 's'),
+        ),
         incomingVideo: incomingVideo.uri,
-        outgoingVideo: outgoingVideo.uri,
         createdAt: String(new Date()),
       } as VideoModal,
     });
@@ -132,7 +118,6 @@ export default function VideoCallTask() {
     reset();
     setAvatar(null);
     setIncomingVideo(null);
-    setOutgoingVideo(null);
     showToast('Task scheduled!');
   }
   return (
@@ -175,13 +160,6 @@ export default function VideoCallTask() {
               disabled={incomingVideo ? true : false}>
               <Icon size={40} color="black" name="video-outline" />
               <Text>{incomingVideo ? 'Video Selected' : 'Incoming Video'}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.videoUploadContainer}
-              onPress={() => handleOutgoingVideoSelection()}
-              disabled={outgoingVideo ? true : false}>
-              <Icon size={40} color="black" name="video-outline" />
-              <Text>{outgoingVideo ? 'Video Selected' : 'Outgoing Video'}</Text>
             </TouchableOpacity>
           </View>
           <View style={{marginTop: scaleSize(20)}}>

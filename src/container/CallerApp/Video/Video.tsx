@@ -8,16 +8,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import {goBack} from '../../../common/utils/NavigatorUtils';
 import Video from 'react-native-video';
+import {RNCamera} from 'react-native-camera';
 
 export default function VideoCallScreen({route}: any) {
-  const {
-    isOutGoing,
-    contactName,
-    contactNumber,
-    avatar,
-    incomingVideo,
-    outgoingVideo,
-  } = route.params;
+  const {isOutGoing, contactName, contactNumber, avatar, incomingVideo} =
+    route.params;
   const [isCallAttended, setIsCallAttended] = useState(
     isOutGoing ? true : false,
   );
@@ -74,31 +69,34 @@ export default function VideoCallScreen({route}: any) {
                 resizeMode="cover"
                 style={{height: '100%', width: '100%'}}
               />
-              <Video
-                source={{uri: outgoingVideo}}
-                onError={(err: any) => console.log(err)}
-                controls={false}
-                fullscreen={true}
-                resizeMode="cover"
-                style={{
-                  height: scaleSize(200),
-                  width: scaleSize(120),
-                  borderColor: 'white',
-                  borderWidth: 3,
-                  borderRadius: scaleSize(10),
-                  position: 'absolute',
-                  bottom: 10,
-                  left: 20,
-                  shadowColor: 'white',
-                  shadowOffset: {
-                    width: 0,
-                    height: 11,
-                  },
-                  shadowOpacity: 0.55,
-                  shadowRadius: 14.78,
-                  elevation: 22,
-                }}
-              />
+              <View style={{}}>
+                <RNCamera
+                  style={{
+                    height: scaleSize(200),
+                    width: scaleSize(120),
+                    borderRadius: scaleSize(10),
+                    position: 'absolute',
+                    bottom: 10,
+                    left: -170,
+                    shadowColor: 'white',
+                    shadowOffset: {
+                      width: 0,
+                      height: 11,
+                    },
+                    shadowOpacity: 0.55,
+                    shadowRadius: 14.78,
+                    elevation: 22,
+                  }}
+                  type={RNCamera.Constants.Type.front}
+                  flashMode={RNCamera.Constants.FlashMode.off}
+                  androidCameraPermissionOptions={{
+                    title: 'Permission to use camera',
+                    message: 'We need your permission to use your camera',
+                    buttonPositive: 'Ok',
+                    buttonNegative: 'Cancel',
+                  }}
+                />
+              </View>
             </>
           )}
           <View

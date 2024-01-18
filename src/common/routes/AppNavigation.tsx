@@ -100,7 +100,6 @@ const AppNavigation = () => {
             contactNumber: schedule.video.number,
             avatar: schedule.video.avatar,
             incomingVideo: schedule.video.incomingVideo,
-            outgoingVideo: schedule.video.outgoingVideo,
           });
           dispatch({type: CLEAR_VIDEO_SCHEDULE, payload: {}});
           clearInterval(interval);
