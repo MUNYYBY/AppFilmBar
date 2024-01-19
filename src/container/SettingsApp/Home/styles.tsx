@@ -18,10 +18,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: scaleSize(20),
     paddingHorizontal: scaleSize(15),
-    backgroundColor: Colors.WHITE_COLOR,
+    backgroundColor: '#EEEEEE',
     borderRadius: scaleSize(10),
-    borderColor: '#EEEEEE',
-    borderWidth: scaleSize(1.5),
+    borderColor: Colors.INPUT_BORDER,
+    borderWidth: scaleSize(1),
   },
 });
 

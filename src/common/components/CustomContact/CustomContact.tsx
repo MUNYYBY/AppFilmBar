@@ -55,7 +55,7 @@ export default function CustomContact(props: Props) {
           )}
         </TouchableOpacity>
       </TouchableOpacity>
-      <View style={styles.devider} />
+      {/* <View style={styles.devider} /> */}
     </>
   );
 }

@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, {useState} from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
@@ -26,6 +27,7 @@ import {VideoModal} from '../../../common/types/schedule';
 import {showToast} from '../../../common/utils/AlertUtils';
 import CustomErrorText from '../../../common/components/customErrorText';
 import moment from 'moment';
+import {KEYBOARD_OFFSET} from '../../../common/constants/KeyboardOffset';
 
 export default function VideoCallTask() {
   const {
@@ -122,126 +124,140 @@ export default function VideoCallTask() {
   }
   return (
     <PageSkeleton hasHeader={false} headerTitle="">
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.Container}>
-          <TouchableOpacity
-            style={[styles.uploadContainer, {position: 'relative'}]}
-            onPress={() => handleAvatarSelection()}>
-            {!avatar ? (
-              <>
-                <Icon2
-                  size={32}
-                  color={Colors.BLACK_COLOR}
-                  name="add-photo-alternate"
-                />
-                <Text>Avatar</Text>
-              </>
-            ) : (
-              <Image
-                source={{uri: avatar.uri}}
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  width: scaleSize(130),
-                  height: scaleSize(130),
-                  backgroundColor: '#EEEEEE',
-                  borderRadius: scaleSize(100),
-                }}
-              />
-            )}
-          </TouchableOpacity>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              width: '100%',
-            }}>
+      <KeyboardAvoidingView
+        behavior="position"
+        keyboardVerticalOffset={KEYBOARD_OFFSET}>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.Container}>
             <TouchableOpacity
-              style={styles.videoUploadContainer}
-              onPress={() => handleIncomingVideoSelection()}
-              disabled={incomingVideo ? true : false}>
-              <Icon size={40} color={Colors.BLACK_COLOR} name="video-outline" />
-              <Text>{incomingVideo ? 'Video Selected' : 'Incoming Video'}</Text>
+              style={[styles.uploadContainer, {position: 'relative'}]}
+              onPress={() => handleAvatarSelection()}>
+              {!avatar ? (
+                <>
+                  <Icon2
+                    size={32}
+                    color={Colors.BLACK_COLOR}
+                    name="add-photo-alternate"
+                  />
+                  <Text>Avatar</Text>
+                </>
+              ) : (
+                <Image
+                  source={{uri: avatar.uri}}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    width: scaleSize(130),
+                    height: scaleSize(130),
+                    backgroundColor: '#EEEEEE',
+                    borderRadius: scaleSize(100),
+                  }}
+                />
+              )}
             </TouchableOpacity>
-          </View>
-          <View style={{marginTop: scaleSize(20)}}>
-            {errors.root && (
-              <CustomErrorText
-                errorText={errors.root?.message}
-                isError={errors.root ? true : false}
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                width: '100%',
+              }}>
+              <TouchableOpacity
+                style={styles.videoUploadContainer}
+                onPress={() => handleIncomingVideoSelection()}
+                disabled={incomingVideo ? true : false}>
+                <Icon
+                  size={40}
+                  color={Colors.BLACK_COLOR}
+                  name="video-outline"
+                />
+                <Text>
+                  {incomingVideo ? 'Video Selected' : 'Incoming Video'}
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={{marginTop: scaleSize(20)}}>
+              {errors.root && (
+                <CustomErrorText
+                  errorText={errors.root?.message}
+                  isError={errors.root ? true : false}
+                />
+              )}
+            </View>
+            <View style={{marginTop: scaleSize(20), width: '100%'}}>
+              <Text style={styles.BoldText}>Countdown</Text>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="MM"
+                  keyboardType="numeric"
+                  value={minutes}
+                  onChangeText={(text: string) => setMinutes(text)}
+                />
+                <Text
+                  style={{
+                    fontSize: 30,
+                    fontWeight: '700',
+                    marginHorizontal: 10,
+                  }}>
+                  :
+                </Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder="SS"
+                  keyboardType="numeric"
+                  value={seconds}
+                  onChangeText={(text: string) => setSeconds(text)}
+                />
+              </View>
+            </View>
+            <View style={{marginTop: scaleSize(20)}}>
+              <Text style={styles.BoldText}>Caller Id</Text>
+              <CustomInput
+                placeholder={'Caller Id'}
+                type={InputTypes.TEXT_INPUT}
+                control={control}
+                name={'CallerId'}
+                returnKeyType={'done'}
+                rules={{
+                  required: 'Caller Id is required',
+                }}
+                shouldShowIcon={watch('CallerId') !== undefined ? true : false}
               />
-            )}
-          </View>
-          <View style={{marginTop: scaleSize(20), width: '100%'}}>
-            <Text style={styles.BoldText}>Countdown</Text>
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="MM"
-                keyboardType="numeric"
-                value={minutes}
-                onChangeText={(text: string) => setMinutes(text)}
+            </View>
+            <View style={{marginTop: scaleSize(20), width: '100%'}}>
+              <Text style={styles.BoldText}>Number</Text>
+              <CustomInput
+                placeholder={'Number'}
+                type={InputTypes.PHONE_NUMBER_INPUT}
+                control={control}
+                name={'Number'}
+                returnKeyType={'done'}
+                rules={{
+                  required: 'Number is required',
+                }}
+                shouldShowIcon={watch('Number') !== undefined ? true : false}
               />
-              <Text
-                style={{fontSize: 30, fontWeight: '700', marginHorizontal: 10}}>
-                :
-              </Text>
-              <TextInput
-                style={styles.input}
-                placeholder="SS"
-                keyboardType="numeric"
-                value={seconds}
-                onChangeText={(text: string) => setSeconds(text)}
+            </View>
+            <View style={{width: '100%'}}>
+              <CustomButton
+                onPress={() => {
+                  handleScheduleVideoTask();
+                }}
+                title={'Schedule'}
+                shouldEnable={isValid}
+                buttonStyle={{
+                  width: '100%',
+                  marginVertical: scaleSize(20),
+                  backgroundColor: Colors.GREEN_COLOR,
+                }}
+                buttonText={{color: 'white'}}
               />
             </View>
           </View>
-          <View style={{marginTop: scaleSize(20)}}>
-            <Text style={styles.BoldText}>Caller Id</Text>
-            <CustomInput
-              placeholder={'Caller Id'}
-              type={InputTypes.TEXT_INPUT}
-              control={control}
-              name={'CallerId'}
-              returnKeyType={'done'}
-              rules={{
-                required: 'Caller Id is required',
-              }}
-              shouldShowIcon={watch('CallerId') !== undefined ? true : false}
-            />
-          </View>
-          <View style={{marginTop: scaleSize(20), width: '100%'}}>
-            <Text style={styles.BoldText}>Number</Text>
-            <CustomInput
-              placeholder={'Number'}
-              type={InputTypes.PHONE_NUMBER_INPUT}
-              control={control}
-              name={'Number'}
-              returnKeyType={'done'}
-              rules={{
-                required: 'Number is required',
-              }}
-              shouldShowIcon={watch('Number') !== undefined ? true : false}
-            />
-          </View>
-          <View style={{width: '100%'}}>
-            <CustomButton
-              onPress={() => {
-                handleScheduleVideoTask();
-              }}
-              title={'Schedule'}
-              shouldEnable={isValid}
-              buttonStyle={{
-                width: '100%',
-                marginVertical: scaleSize(20),
-                backgroundColor: Colors.GREEN_COLOR,
-              }}
-              buttonText={{color: 'white'}}
-            />
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </PageSkeleton>
   );
 }

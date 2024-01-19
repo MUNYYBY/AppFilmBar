@@ -20,13 +20,16 @@ const styles = StyleSheet.create({
     marginVertical: scaleSize(15),
   },
   contactcontainer: {
-    backgroundColor: 'rgba(256,256,265,0.10)',
+    backgroundColor: '#EEEEEE',
     width: '100%',
     borderRadius: scaleSize(10),
+    paddingVertical: scaleSize(20),
+    paddingHorizontal: scaleSize(10),
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: scaleSize(10),
   },
   innerContainer: {
     display: 'flex',

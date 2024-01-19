@@ -1,4 +1,4 @@
-import {View, Text, ScrollView} from 'react-native';
+import {ScrollView} from 'react-native';
 import React from 'react';
 import CustomContact from '../../../common/components/CustomContact/CustomContact';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';

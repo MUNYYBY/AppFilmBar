@@ -117,7 +117,8 @@ const AppNavigation = () => {
 
         if (currentDate >= targetDate) {
           showMessage({
-            message: 'New Message',
+            animated: true,
+            message: 'New Message from ' + schedule.messages.callerId,
             type: 'warning',
             duration: 10000,
             onPress: () => {

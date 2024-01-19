@@ -79,12 +79,9 @@ export default function ChatScreen({route}: any) {
         setMessages((prevMessages: any) => [...prevMessages, message]);
       }
     };
-    if (
-      initialMessagesStack.length <=
-      messagesTask.messages.length + messagesTask.recentMessages.length
-    ) {
-      displayMessages();
-    }
+
+    displayMessages();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [messagesTask]);
   return (

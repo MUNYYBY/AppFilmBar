@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: scaleSize(20),
-    backgroundColor: Colors.WHITE_COLOR,
+    backgroundColor: '#EEEEEE',
     borderRadius: scaleSize(10),
-    borderColor: '#EEEEEE',
-    borderWidth: scaleSize(1.5),
+    borderColor: Colors.INPUT_BORDER,
+    borderWidth: scaleSize(1),
   },
 });
 
