@@ -129,7 +129,11 @@ export default function VideoCallTask() {
             onPress={() => handleAvatarSelection()}>
             {!avatar ? (
               <>
-                <Icon2 size={32} color="black" name="add-photo-alternate" />
+                <Icon2
+                  size={32}
+                  color={Colors.BLACK_COLOR}
+                  name="add-photo-alternate"
+                />
                 <Text>Avatar</Text>
               </>
             ) : (
@@ -158,7 +162,7 @@ export default function VideoCallTask() {
               style={styles.videoUploadContainer}
               onPress={() => handleIncomingVideoSelection()}
               disabled={incomingVideo ? true : false}>
-              <Icon size={40} color="black" name="video-outline" />
+              <Icon size={40} color={Colors.BLACK_COLOR} name="video-outline" />
               <Text>{incomingVideo ? 'Video Selected' : 'Incoming Video'}</Text>
             </TouchableOpacity>
           </View>

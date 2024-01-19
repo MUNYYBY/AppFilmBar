@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {scaleSize} from '../../utils/ScaleSheetUtils';
 import moment from 'moment';
 import {Images} from '../../constants/Images';
+import Colors from '../../styles/Colors';
 
 interface Props {
   contact: any;
@@ -50,7 +51,7 @@ export default function CustomContact(props: Props) {
               {moment(contact.createdOn).fromNow()}
             </Text>
           ) : (
-            <Icon name="add-call" size={26} color="black" />
+            <Icon name="add-call" size={26} color={Colors.BLACK_COLOR} />
           )}
         </TouchableOpacity>
       </TouchableOpacity>

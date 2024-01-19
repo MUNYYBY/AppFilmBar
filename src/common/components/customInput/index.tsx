@@ -221,10 +221,7 @@ const CustomInput = (props: Props) => {
       <Controller
         control={props.control}
         rules={props.rules}
-        render={({
-          field: {onChange, onBlur, value},
-          fieldState: {error, isDirty},
-        }) => (
+        render={({field: {onChange, value}, fieldState: {error, isDirty}}) => (
           <>
             <TextInput
               style={[
@@ -477,7 +474,7 @@ const CustomInput = (props: Props) => {
                 <MaterialIcon
                   name="clock-time-eight-outline"
                   size={24}
-                  color={'black'}
+                  color={Colors.BLACK_COLOR}
                 />
               </View>
               {error?.message && props.shouldShowError === undefined ? (

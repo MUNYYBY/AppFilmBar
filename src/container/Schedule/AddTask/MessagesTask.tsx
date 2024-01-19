@@ -32,7 +32,12 @@ export default function MessagesTask() {
     reset,
     formState: {errors},
   } = useForm({
-    defaultValues: {CountDown: '', Messages: '', CallerId: ''},
+    defaultValues: {
+      CountDown: '',
+      Messages: '',
+      CallerId: '',
+      RecentMessages: '',
+    },
     mode: 'onChange',
   });
 
@@ -40,11 +45,14 @@ export default function MessagesTask() {
   const [avatar, setAvatar] = React.useState<any>(null);
   const [open, setOpen] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>('');
-  const [messages, setMessages] = useState<Array<any>>([]);
+  const [open1, setOpen1] = React.useState<boolean>(false);
+  const [value1, setValue1] = React.useState<string>('');
   const [items, setItems] = React.useState<Array<object>>([
     {value: 'Send', label: 'Send'},
     {value: 'Recieve', label: 'Recieve'},
   ]);
+  const [messages, setMessages] = useState<Array<any>>([]);
+  const [recentMessages, setRecentMessages] = useState<Array<any>>([]);
   const [minutes, setMinutes] = useState<any>();
   const [seconds, setSeconds] = useState<any>();
 
@@ -83,7 +91,6 @@ export default function MessagesTask() {
       });
       return false;
     }
-    console.log(control._formValues.Messages);
     setMessages((prev: any) => [
       ...prev,
       {
@@ -94,6 +101,33 @@ export default function MessagesTask() {
       },
     ]);
     setValue('');
+  }
+  function handleRecentMessageSave() {
+    clearErrors('root');
+    if (!value1) {
+      setError('root', {
+        type: 'manual',
+        message: 'Please select recent message type',
+      });
+      return false;
+    }
+    if (!control._formValues.RecentMessages) {
+      setError('root', {
+        type: 'manual',
+        message: 'Please enter recent message content',
+      });
+      return false;
+    }
+    setRecentMessages((prev: any) => [
+      ...prev,
+      {
+        id: uuidv4(),
+        message: control._formValues.RecentMessages,
+        type: value1,
+        createdAt: String(new Date()),
+      },
+    ]);
+    setValue1('');
   }
 
   function handleSaveMessageTask() {
@@ -123,6 +157,7 @@ export default function MessagesTask() {
             .add(seconds ? seconds : 0, 's'),
         ),
         messages: messages,
+        recentMessages: recentMessages,
         createdAt: String(new Date()),
       } as MessagesModal,
     });
@@ -131,6 +166,7 @@ export default function MessagesTask() {
     reset();
     setAvatar(null);
     setMessages([]);
+    setRecentMessages([]);
     showToast('Task scheduled!');
   }
 
@@ -143,7 +179,11 @@ export default function MessagesTask() {
             onPress={() => handleAvatarSelection()}>
             {!avatar ? (
               <>
-                <Icon size={32} color="black" name="add-photo-alternate" />
+                <Icon
+                  size={32}
+                  color={Colors.BLACK_COLOR}
+                  name="add-photo-alternate"
+                />
                 <Text>Avatar</Text>
               </>
             ) : (
@@ -171,7 +211,11 @@ export default function MessagesTask() {
                 onChangeText={(text: string) => setMinutes(text)}
               />
               <Text
-                style={{fontSize: 30, fontWeight: '700', marginHorizontal: 10}}>
+                style={{
+                  fontSize: 30,
+                  fontWeight: '700',
+                  marginHorizontal: 10,
+                }}>
                 :
               </Text>
               <TextInput
@@ -217,10 +261,16 @@ export default function MessagesTask() {
                   }}>
                   <View>
                     <Text
-                      style={{color: 'black', fontSize: 18, fontWeight: '500'}}>
+                      style={{
+                        color: Colors.BLACK_COLOR,
+                        fontSize: 18,
+                        fontWeight: '500',
+                      }}>
                       {message.type}
                     </Text>
-                    <Text style={{color: 'black'}}>{message.message}</Text>
+                    <Text style={{color: Colors.BLACK_COLOR}}>
+                      {message.message}
+                    </Text>
                   </View>
                   <TouchableOpacity
                     style={{opacity: 0.55}}
@@ -267,6 +317,7 @@ export default function MessagesTask() {
                     borderColor: 'white',
                     borderWidth: 0,
                     paddingHorizontal: scaleSize(15),
+                    backgroundColor: 'transparent',
                   }}
                   textStyle={{color: Colors.BLACK_COLOR}}
                   dropDownContainerStyle={{
@@ -304,6 +355,128 @@ export default function MessagesTask() {
               <TouchableOpacity
                 style={{marginLeft: 10, opacity: 0.55}}
                 onPress={() => handleMessageSave()}>
+                <IconOcti name="plus" color={Colors.BLACK_COLOR} size={42} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          {recentMessages.length > 0 && (
+            <View style={{width: '100%', marginTop: scaleSize(20)}}>
+              <Text style={styles.BoldText}>Recent Messages</Text>
+              {recentMessages.map((message: any, index: number) => (
+                <View
+                  key={index}
+                  style={{
+                    marginTop: scaleSize(5),
+                    backgroundColor: '#EEEEEE',
+                    borderRadius: 12,
+                    borderWidth: scaleSize(1.25),
+                    borderColor: Colors.INPUT_BORDER,
+                    padding: 10,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                  }}>
+                  <View>
+                    <Text
+                      style={{
+                        color: Colors.BLACK_COLOR,
+                        fontSize: 18,
+                        fontWeight: '500',
+                      }}>
+                      {message.type}
+                    </Text>
+                    <Text style={{color: Colors.BLACK_COLOR}}>
+                      {message.message}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    style={{opacity: 0.55}}
+                    onPress={() =>
+                      setRecentMessages(
+                        recentMessages.filter(
+                          (item: any) => item.id !== message.id,
+                        ),
+                      )
+                    }>
+                    <IconEntypo name="cross" size={28} />
+                  </TouchableOpacity>
+                </View>
+              ))}
+            </View>
+          )}
+          <View style={{marginTop: scaleSize(10), width: '100%'}}>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '90%',
+              }}>
+              <Text style={styles.BoldText}>Recent Messages</Text>
+              <View
+                style={{
+                  width: 100,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-end',
+                }}>
+                <DropDownPicker
+                  open={open1}
+                  value={value1}
+                  items={items}
+                  setOpen={setOpen1}
+                  setValue={setValue1}
+                  setItems={setItems}
+                  placeholder="Action type for message"
+                  style={{
+                    height: scaleSize(55),
+                    width: 150,
+                    borderColor: 'white',
+                    borderWidth: 0,
+                    paddingHorizontal: scaleSize(15),
+                    backgroundColor: 'transparent',
+                  }}
+                  textStyle={{color: Colors.BLACK_COLOR}}
+                  dropDownContainerStyle={{
+                    borderColor: Colors.INPUT_BORDER,
+                    backgroundColor: Colors.INPUT_BACKGROUND,
+                    paddingBottom: scaleSize(10),
+                    paddingLeft: scaleSize(5),
+                    width: 130,
+                  }}
+                  labelStyle={{
+                    color: Colors.GRAY_COLOR,
+                  }}
+                  placeholderStyle={{
+                    color: Colors.GRAY_COLOR,
+                  }}
+                />
+              </View>
+            </View>
+            <View
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '90%',
+              }}>
+              <CustomInput
+                placeholder={'Add a recent message'}
+                type={InputTypes.TEXT_INPUT}
+                control={control}
+                name={'RecentMessages'}
+                returnKeyType={'done'}
+                shouldShowIcon={
+                  watch('RecentMessages') !== undefined ? true : false
+                }
+              />
+              <TouchableOpacity
+                style={{marginLeft: 10, opacity: 0.55}}
+                onPress={() => handleRecentMessageSave()}>
                 <IconOcti name="plus" color={Colors.BLACK_COLOR} size={42} />
               </TouchableOpacity>
             </View>

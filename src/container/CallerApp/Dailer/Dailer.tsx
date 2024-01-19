@@ -1,12 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Colors from '../../../common/styles/Colors';
 import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
-import {callNumber} from '../../../common/utils/defualtAppUtils';
 import {navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 
@@ -136,7 +135,7 @@ export default function Dailer() {
             })
           }
           style={[styles.dailerItem, {backgroundColor: Colors.GREEN_COLOR}]}>
-          <MaterialIcon name="call" size={32} color="white" />
+          <MaterialIcon name="call" size={32} color={Colors.WHITE_COLOR} />
         </TouchableOpacity>
         <TouchableOpacity
           style={{

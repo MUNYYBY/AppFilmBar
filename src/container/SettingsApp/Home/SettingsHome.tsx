@@ -8,6 +8,7 @@ import {goBack, navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Colors from '../../../common/styles/Colors';
 
 export default function SettingsHome() {
   return (
@@ -24,9 +25,14 @@ export default function SettingsHome() {
               marginLeft: scaleSize(-16),
             }}>
             <TouchableOpacity style={{}} onPress={goBack}>
-              <Icon name="chevron-left" size={45} color={'#000'} />
+              <Icon name="chevron-left" size={45} color={Colors.BLACK_COLOR} />
             </TouchableOpacity>
-            <Text style={{fontSize: scaleSize(24), fontWeight: '500'}}>
+            <Text
+              style={{
+                fontSize: scaleSize(24),
+                fontWeight: '500',
+                color: Colors.BLACK_COLOR,
+              }}>
               Settings
             </Text>
           </View>

@@ -70,6 +70,7 @@ const ScheduleReducer = (state: StateTypes = initialState, action: any) => {
           callerId: action.payload.callerId,
           countdown: action.payload.countdown,
           messages: action.payload.messages,
+          recentMessages: action.payload.recentMessages,
           createdAt: action.payload.createdAt,
         } as MessagesModal,
       };

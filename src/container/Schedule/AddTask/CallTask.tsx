@@ -95,7 +95,11 @@ export default function CallTask() {
           onPress={() => handleAvatarSelection()}>
           {!avatar ? (
             <>
-              <Icon size={32} color="black" name="add-photo-alternate" />
+              <Icon
+                size={32}
+                color={Colors.BLACK_COLOR}
+                name="add-photo-alternate"
+              />
               <Text>Avatar</Text>
             </>
           ) : (

@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import {goBack} from '../../../common/utils/NavigatorUtils';
+import Colors from '../../../common/styles/Colors';
 
 export default function Call({route}: any) {
   const {isOutGoing, contactName, contactNumber, avatar} = route.params;
@@ -63,18 +64,26 @@ export default function Call({route}: any) {
                   width: '100%',
                 }}>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                  <Icon2 name="volume-mute" size={36} color={'black'} />
+                  <Icon2
+                    name="volume-mute"
+                    size={36}
+                    color={Colors.BLACK_COLOR}
+                  />
                   <Text>Mute</Text>
                 </View>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                  <Icon name="speaker-phone" size={36} color={'black'} />
+                  <Icon
+                    name="speaker-phone"
+                    size={36}
+                    color={Colors.BLACK_COLOR}
+                  />
                   <Text>Speaker</Text>
                 </View>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
                   <Icon2
                     name="record-circle-outline"
                     size={36}
-                    color={'black'}
+                    color={Colors.BLACK_COLOR}
                   />
                   <Text>Record</Text>
                 </View>
@@ -89,15 +98,15 @@ export default function Call({route}: any) {
                   marginTop: scaleSize(50),
                 }}>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                  <Icon2 name="video" size={36} color={'black'} />
+                  <Icon2 name="video" size={36} color={Colors.BLACK_COLOR} />
                   <Text>Video</Text>
                 </View>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                  <Icon name="dialpad" size={36} color={'black'} />
+                  <Icon name="dialpad" size={36} color={Colors.BLACK_COLOR} />
                   <Text>Dialpad</Text>
                 </View>
                 <View style={{alignItems: 'center', justifyContent: 'center'}}>
-                  <Icon2 name="pause" size={36} color={'black'} />
+                  <Icon2 name="pause" size={36} color={Colors.BLACK_COLOR} />
                   <Text>Pause</Text>
                 </View>
               </View>

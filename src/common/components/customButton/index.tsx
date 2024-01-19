@@ -1,6 +1,7 @@
 import {Text, TouchableOpacity, ActivityIndicator} from 'react-native';
 import React from 'react';
 import styles from './style';
+import Colors from '../../styles/Colors';
 
 interface Props {
   onPress: any;
@@ -26,7 +27,7 @@ const CustomButton = (props: Props) => {
         buttonStyle ?? {},
       ]}>
       {loading ? (
-        <ActivityIndicator color="black" />
+        <ActivityIndicator color={Colors.BLACK_COLOR} />
       ) : (
         <Text
           style={[

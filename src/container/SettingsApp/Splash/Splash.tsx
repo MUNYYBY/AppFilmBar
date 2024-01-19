@@ -7,6 +7,7 @@ import {reset} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import {DURATION_TO_OPEN_APP} from '../../../common/constants/AppContants';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import Colors from '../../../common/styles/Colors';
 
 export default function SettingsSplash() {
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function SettingsSplash() {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'white',
+          backgroundColor: Colors.WHITE_COLOR,
         }}>
         <Image
           source={Images.SETTINGS_ICON}

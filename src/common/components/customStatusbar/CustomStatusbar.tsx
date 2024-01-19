@@ -6,6 +6,7 @@ import {scaleFontSize, scaleSize} from '../../utils/ScaleSheetUtils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconIoni from 'react-native-vector-icons/Ionicons';
 import {useSelector} from 'react-redux';
+import Colors from '../../styles/Colors';
 
 interface Props {
   barStyle: 'dark-content' | 'light-content';
@@ -41,7 +42,10 @@ export default function CustomStatusbar(props: Props) {
       <Text
         style={{
           fontSize: scaleFontSize(16),
-          color: barStyle === 'dark-content' ? 'black' : 'white',
+          color:
+            barStyle === 'dark-content'
+              ? Colors.BLACK_COLOR
+              : Colors.WHITE_COLOR,
         }}>
         {moment(settings.time).format('hh:mm')}
       </Text>
@@ -55,7 +59,11 @@ export default function CustomStatusbar(props: Props) {
         {!settings.isNoService ? (
           <Icon
             name="signal"
-            color={barStyle === 'dark-content' ? 'black' : 'white'}
+            color={
+              barStyle === 'dark-content'
+                ? Colors.BLACK_COLOR
+                : Colors.WHITE_COLOR
+            }
             size={scaleSize(16)}
             style={{paddingLeft: 7.5}}
           />
@@ -63,7 +71,10 @@ export default function CustomStatusbar(props: Props) {
           <Text
             style={{
               fontSize: scaleFontSize(16),
-              color: barStyle === 'dark-content' ? 'black' : 'white',
+              color:
+                barStyle === 'dark-content'
+                  ? Colors.BLACK_COLOR
+                  : Colors.WHITE_COLOR,
             }}>
             No service
           </Text>
@@ -72,7 +83,11 @@ export default function CustomStatusbar(props: Props) {
         {settings.isWifi && (
           <Icon
             name="wifi"
-            color={barStyle === 'dark-content' ? 'black' : 'white'}
+            color={
+              barStyle === 'dark-content'
+                ? Colors.BLACK_COLOR
+                : Colors.WHITE_COLOR
+            }
             size={scaleSize(16)}
             style={{paddingLeft: 7.5}}
           />
@@ -86,7 +101,11 @@ export default function CustomStatusbar(props: Props) {
           }}>
           <IconIoni
             name="battery-full"
-            color={barStyle === 'dark-content' ? 'black' : 'white'}
+            color={
+              barStyle === 'dark-content'
+                ? Colors.BLACK_COLOR
+                : Colors.WHITE_COLOR
+            }
             size={scaleSize(18)}
             style={{paddingLeft: 7.5}}
           />
@@ -94,7 +113,10 @@ export default function CustomStatusbar(props: Props) {
             <Text
               style={{
                 fontSize: scaleFontSize(14),
-                color: barStyle === 'dark-content' ? 'black' : 'white',
+                color:
+                  barStyle === 'dark-content'
+                    ? Colors.BLACK_COLOR
+                    : Colors.WHITE_COLOR,
                 marginLeft: scaleSize(5),
               }}>
               {settings.battery}%

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {Image, StatusBar, View} from 'react-native';
+import {Image, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {Images} from '../../../common/constants/Images';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
@@ -7,6 +7,7 @@ import {reset} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import {DURATION_TO_OPEN_APP} from '../../../common/constants/AppContants';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import Colors from '../../../common/styles/Colors';
 
 export default function CallerSplash() {
   useEffect(() => {
@@ -23,7 +24,7 @@ export default function CallerSplash() {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: 'white',
+          backgroundColor: Colors.WHITE_COLOR,
         }}>
         <Image
           source={Images.CALLER_ICON}

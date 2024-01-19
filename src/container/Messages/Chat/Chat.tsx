@@ -56,7 +56,9 @@ export default function ChatScreen({route}: any) {
   const [initialMessagesStack, _] = useState(
     messagesTask ? messagesTask.messages : [],
   );
-  const [messages, setMessages] = useState<any>([]);
+  const [messages, setMessages] = useState<any>(
+    messagesTask ? messagesTask.recentMessages : [],
+  );
 
   //** ref */
   const scrollViewRef = useRef<any>();
@@ -77,7 +79,10 @@ export default function ChatScreen({route}: any) {
         setMessages((prevMessages: any) => [...prevMessages, message]);
       }
     };
-    if (initialMessagesStack.length >= messages.length) {
+    if (
+      initialMessagesStack.length <=
+      messagesTask.messages.length + messagesTask.recentMessages.length
+    ) {
       displayMessages();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,5 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
+import Colors from '../../../common/styles/Colors';
 
 const styles = StyleSheet.create({
   headerContent: {
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: scaleSize(20),
-    backgroundColor: 'white',
+    backgroundColor: Colors.WHITE_COLOR,
     borderRadius: scaleSize(10),
     borderColor: '#EEEEEE',
     borderWidth: scaleSize(1.5),

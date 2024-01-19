@@ -21,5 +21,6 @@ export interface MessagesModal {
   callerId: string;
   countdown: string;
   messages: Array<object>;
+  recentMessages: Array<object>;
   createdAt: string;
 }
