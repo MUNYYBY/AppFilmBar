@@ -2,8 +2,7 @@
 import {View, useWindowDimensions} from 'react-native';
 import React from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
-import CustomButton from '../../../common/components/customButton';
-import {TabView, SceneMap, TabBar, TabBarProps} from 'react-native-tab-view';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Colors from '../../../common/styles/Colors';
 import MessagesTask from './MessagesTask';
 import CallTask from './CallTask';
@@ -26,7 +25,7 @@ export default function AddTask() {
     {key: 1, title: 'Call'},
     {key: 2, title: 'Video Call'},
   ]);
-  const renderTabBar = (props: TabBarProps) => (
+  const renderTabBar = (props: any) => (
     <TabBar
       {...props}
       indicatorStyle={{backgroundColor: Colors.GREEN_COLOR}}

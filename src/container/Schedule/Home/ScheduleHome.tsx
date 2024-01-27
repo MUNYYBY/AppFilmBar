@@ -39,6 +39,24 @@ export default function ScheduleHome() {
             <Icon name="plus" size={36} color={Colors.BLACK_COLOR} />
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={() => navigate(NavScreenTags.BLANK_SCREEN)}
+          activeOpacity={0.75}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'black',
+            height: 65,
+            width: 65,
+            borderRadius: 100,
+            position: 'absolute',
+            bottom: 30,
+            right: 10,
+            zIndex: 1000,
+          }}>
+          <Icon name="fit-to-screen" size={32} color={'white'} />
+        </TouchableOpacity>
         <View style={{}}>
           {!schedule.call && !schedule.video && !schedule.messages && (
             <Text

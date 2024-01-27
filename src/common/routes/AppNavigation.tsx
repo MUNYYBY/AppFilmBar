@@ -16,12 +16,11 @@ import Call from '../../container/CallerApp/Call/Call';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   CLEAR_CALL_SCHEDULE,
-  CLEAR_MESSAGE_SCHEDULE,
   CLEAR_VIDEO_SCHEDULE,
 } from '../constants/ActionTypes';
 import VideoCallScreen from '../../container/CallerApp/Video/Video';
 import ChatScreen from '../../container/Messages/Chat/Chat';
-import {showMessage} from 'react-native-flash-message';
+import BlankScreen from '../../container/blank/BlankScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -59,6 +58,7 @@ const RootStack = () => (
       component={SettingsStack}
     />
     <Stack.Screen name={NavScreenTags.MESSAGES_CHAT} component={ChatScreen} />
+    <Stack.Screen name={NavScreenTags.BLANK_SCREEN} component={BlankScreen} />
   </Stack.Navigator>
 );
 const AppNavigation = () => {
@@ -110,35 +110,8 @@ const AppNavigation = () => {
         clearInterval(interval);
       };
     }
-    if (schedule.messages) {
-      const targetDate = new Date(schedule.messages.countdown);
-      const checkDateTime = () => {
-        const currentDate = new Date();
-
-        if (currentDate >= targetDate) {
-          showMessage({
-            animated: true,
-            message: 'New Message from ' + schedule.messages.callerId,
-            type: 'warning',
-            duration: 10000,
-            onPress: () => {
-              navigate(NavScreenTags.MESSAGES_CHAT, {
-                messagesTask: schedule.messages,
-              });
-              dispatch({type: CLEAR_MESSAGE_SCHEDULE, payload: {}});
-            },
-          });
-
-          clearInterval(interval);
-        }
-      };
-      const interval = setInterval(checkDateTime, 1000);
-      return () => {
-        clearInterval(interval);
-      };
-    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [schedule.call, schedule.video, schedule.messages]);
+  }, [schedule.call, schedule.video]);
 
   return (
     //@ts-ignore

@@ -52,8 +52,8 @@ export const goBack = () => {
  * replace current screen with new one
  * @param routeName
  */
-export const replace = (routeName: string) => {
-  navigationRef.current?.replace(routeName);
+export const replace = (routeName: string, params?: any) => {
+  navigationRef.current?.dispatch(StackActions.replace(routeName, params));
 };
 
 export const replace2Screens = (routeName?: string) => {
