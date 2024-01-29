@@ -84,29 +84,33 @@ export default function BlankScreen() {
             alignItems: 'center',
           }}
           onPress={() => handleGoToMessages()}>
-          <Animated.View
-            style={[
-              {
-                backgroundColor: Colors.PRIMARY,
-                borderColor: 'white',
-                borderWidth: 1.5,
-                height: 100,
-                width: '80%',
-                borderRadius: 20,
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                padding: 20,
-              },
-              {transform: [{scale: scaleValue}]},
-            ]}>
-            <View>
-              <Text style={{fontWeight: '700', fontSize: 20}}>New Message</Text>
-              <Text style={{fontSize: 18}}>
-                From: {schedule.messages.callerId}
-              </Text>
-            </View>
-          </Animated.View>
+          {schedule.messages && (
+            <Animated.View
+              style={[
+                {
+                  backgroundColor: Colors.PRIMARY,
+                  borderColor: 'white',
+                  borderWidth: 1.5,
+                  height: 100,
+                  width: '80%',
+                  borderRadius: 20,
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  padding: 20,
+                },
+                {transform: [{scale: scaleValue}]},
+              ]}>
+              <View>
+                <Text style={{fontWeight: '700', fontSize: 20}}>
+                  New Message
+                </Text>
+                <Text style={{fontSize: 18}}>
+                  From: {schedule.messages.callerId}
+                </Text>
+              </View>
+            </Animated.View>
+          )}
         </TouchableOpacity>
       </TouchableOpacity>
     </>

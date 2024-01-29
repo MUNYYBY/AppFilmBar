@@ -23,13 +23,11 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import CustomErrorText from '../../../common/components/customErrorText';
 import CustomButton from '../../../common/components/customButton';
 import {v4 as uuidv4} from 'uuid';
-import {useDispatch} from 'react-redux';
 import {showToast} from '../../../common/utils/AlertUtils';
-import {MessagesModal} from '../../../common/types/schedule';
-import {SET_MESSAGE_TASK_SCHEDULE} from '../../../common/constants/ActionTypes';
 import {TextInput} from 'react-native';
-import moment from 'moment';
 import {KEYBOARD_OFFSET} from '../../../common/constants/KeyboardOffset';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 
 export default function MessagesTask() {
   const {
@@ -63,9 +61,6 @@ export default function MessagesTask() {
   const [recentMessages, setRecentMessages] = useState<Array<any>>([]);
   const [minutes, setMinutes] = useState<any>();
   const [seconds, setSeconds] = useState<any>();
-
-  //** redux */
-  const dispatch = useDispatch();
 
   function handleAvatarSelection() {
     launchImageLibrary(
@@ -153,22 +148,19 @@ export default function MessagesTask() {
       });
       return false;
     }
-    dispatch({
-      type: SET_MESSAGE_TASK_SCHEDULE,
-      payload: {
+    AsyncStorage.setItem(
+      StorageKeysTags.Messages,
+      JSON.stringify({
         id: uuidv4(),
         avatar: avatar ? avatar.uri : null,
         callerId: control._formValues.CallerId,
-        countdown: String(
-          moment()
-            .add(minutes ? minutes : 0, 'm')
-            .add(seconds ? seconds : 0, 's'),
-        ),
+        minutes: minutes ?? 0,
+        seconds: seconds ?? 0,
         messages: messages,
         recentMessages: recentMessages,
         createdAt: String(new Date()),
-      } as MessagesModal,
-    });
+      }),
+    );
     setMinutes(null);
     setSeconds(null);
     reset();

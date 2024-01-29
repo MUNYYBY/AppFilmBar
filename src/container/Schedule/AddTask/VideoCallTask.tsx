@@ -17,17 +17,15 @@ import styles from './styles';
 import CustomInput from '../../../common/components/customInput';
 import {useForm} from 'react-hook-form';
 import {InputTypes} from '../../../common/constants/InputTypes';
-import {useDispatch} from 'react-redux';
 import {launchImageLibrary} from 'react-native-image-picker';
 import CustomButton from '../../../common/components/customButton';
 import Colors from '../../../common/styles/Colors';
-import {SET_VIDEO_TASK_SCHEDULE} from '../../../common/constants/ActionTypes';
 import {v4 as uuidv4} from 'uuid';
-import {VideoModal} from '../../../common/types/schedule';
 import {showToast} from '../../../common/utils/AlertUtils';
 import CustomErrorText from '../../../common/components/customErrorText';
-import moment from 'moment';
 import {KEYBOARD_OFFSET} from '../../../common/constants/KeyboardOffset';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 
 export default function VideoCallTask() {
   const {
@@ -46,8 +44,6 @@ export default function VideoCallTask() {
   const [incomingVideo, setIncomingVideo] = useState<any>(null);
   const [minutes, setMinutes] = useState<any>();
   const [seconds, setSeconds] = useState<any>();
-
-  const dispatch = useDispatch();
 
   function handleAvatarSelection() {
     launchImageLibrary(
@@ -99,22 +95,19 @@ export default function VideoCallTask() {
       });
       return false;
     }
-    dispatch({
-      type: SET_VIDEO_TASK_SCHEDULE,
-      payload: {
+    AsyncStorage.setItem(
+      StorageKeysTags.VideoCalls,
+      JSON.stringify({
         id: uuidv4(),
         avatar: avatar ? avatar.uri : null,
         callerId: control._formValues.CallerId,
         number: control._formValues.Number,
-        countdown: String(
-          moment()
-            .add(minutes ? minutes : 0, 'm')
-            .add(seconds ? seconds : 0, 's'),
-        ),
+        minutes: minutes ?? 0,
+        seconds: seconds ?? 0,
         incomingVideo: incomingVideo.uri,
         createdAt: String(new Date()),
-      } as VideoModal,
-    });
+      }),
+    );
     setMinutes(null);
     setSeconds(null);
     reset();

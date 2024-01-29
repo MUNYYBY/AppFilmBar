@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -9,11 +9,105 @@ import styles from './styles';
 import {goBack, navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 import moment from 'moment';
+import {
+  SET_CALL_TASK_SCHEDULE,
+  SET_MESSAGE_TASK_SCHEDULE,
+  SET_VIDEO_TASK_SCHEDULE,
+} from '../../../common/constants/ActionTypes';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function ScheduleHome() {
+  //** states */
+  const [messages, setMessages] = useState<null | any>(null);
+  const [calls, setCalls] = useState<null | any>(null);
+  const [videoCalls, setVideosCalls] = useState<null | any>(null);
+
+  //** native */
+  const isFocused = useIsFocused();
+
+  //** redux */
   const schedule = useSelector((state: any) => state.schedule);
+  const dispatch = useDispatch();
+
+  async function fetchAll() {
+    const message = await AsyncStorage.getItem(StorageKeysTags.Messages);
+    if (message !== null) {
+      setMessages(JSON.parse(message));
+    }
+    const call = await AsyncStorage.getItem(StorageKeysTags.Calls);
+    if (call !== null) {
+      setCalls(JSON.parse(call));
+    }
+    const videoCall = await AsyncStorage.getItem(StorageKeysTags.VideoCalls);
+    if (videoCall !== null) {
+      setVideosCalls(JSON.parse(videoCall));
+    }
+  }
+
+  useEffect(() => {
+    fetchAll();
+  }, []);
+  useEffect(() => {
+    fetchAll();
+  }, [isFocused]);
+
+  function handleRunMessages() {
+    dispatch({
+      type: SET_MESSAGE_TASK_SCHEDULE,
+      payload: {
+        id: messages.id,
+        avatar: messages.avatar,
+        callerId: messages.callerId,
+        countdown: String(
+          moment().add(messages.minutes, 'm').add(messages.seconds, 's'),
+        ),
+        messages: messages.messages,
+        recentMessages: messages.recentMessages,
+        createdAt: String(new Date()),
+      },
+    });
+    AsyncStorage.removeItem(StorageKeysTags.Messages);
+    setMessages(null);
+  }
+  function handleRunCall() {
+    dispatch({
+      type: SET_CALL_TASK_SCHEDULE,
+      payload: {
+        id: calls.id,
+        avatar: calls.avatar,
+        callerId: calls.callerId,
+        number: calls.number,
+        countdown: String(
+          moment().add(calls.minutes, 'm').add(calls.seconds, 's'),
+        ),
+        createdAt: String(new Date()),
+      },
+    });
+    AsyncStorage.removeItem(StorageKeysTags.Calls);
+    setCalls(null);
+  }
+  function handleRunVideoCall() {
+    dispatch({
+      type: SET_VIDEO_TASK_SCHEDULE,
+      payload: {
+        id: videoCalls.id,
+        avatar: videoCalls.avatar,
+        callerId: videoCalls.CallerId,
+        number: videoCalls.Number,
+        countdown: String(
+          moment().add(videoCalls.minutes).add(videoCalls.seconds),
+        ),
+        incomingVideo: videoCalls.incomingVideo,
+        createdAt: String(new Date()),
+      },
+    });
+    AsyncStorage.removeItem(StorageKeysTags.VideoCalls);
+    setVideosCalls(null);
+  }
   return (
     <>
       <CustomStatusbar barStyle="dark-content" />
@@ -58,23 +152,65 @@ export default function ScheduleHome() {
           <Icon name="fit-to-screen" size={32} color={'white'} />
         </TouchableOpacity>
         <View style={{}}>
-          {!schedule.call && !schedule.video && !schedule.messages && (
+          {!calls && !videoCalls && !messages && (
             <Text
               style={{
                 width: '100%',
                 textAlign: 'center',
                 fontWeight: '400',
-                marginTop: scaleSize(75),
+                marginTop: scaleSize(20),
                 fontSize: scaleFontSize(20),
               }}>
               No tasks scheduled yet!
             </Text>
           )}
-          {schedule.call && (
+          {calls && (
             <View style={styles.taskPlaceHolder}>
               <View>
                 <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
                   Call
+                </Text>
+                <Text>{calls?.callerId}</Text>
+                <Text>
+                  {(calls.seconds || calls.minutes) &&
+                    'Schedule for ' +
+                      calls.minutes +
+                      'min & ' +
+                      calls.seconds +
+                      'sec'}
+                </Text>
+              </View>
+              <View
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'flex-end',
+                }}>
+                <Text>
+                  {calls.createdAt && moment(calls.createdAt).fromNow()}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => handleRunCall()}
+                  style={{
+                    backgroundColor: Colors.GREEN_COLOR,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 80,
+                    height: 40,
+                    borderRadius: 100,
+                    marginTop: 10,
+                  }}>
+                  <Text style={{color: 'black'}}>Start</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+          {schedule.call && (
+            <View style={styles.taskPlaceHolder}>
+              <View>
+                <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
+                  Call - Running
                 </Text>
                 <Text>{schedule.call?.callerId}</Text>
                 <Text>
@@ -89,11 +225,54 @@ export default function ScheduleHome() {
               </Text>
             </View>
           )}
-          {schedule.video && (
+          {videoCalls && (
             <View style={styles.taskPlaceHolder}>
               <View>
                 <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
                   Video Call
+                </Text>
+                <Text>{videoCalls?.callerId}</Text>
+                <Text>
+                  {(videoCalls.seconds || videoCalls.minutes) &&
+                    'Schedule for ' +
+                      videoCalls.minutes +
+                      'min &' +
+                      videoCalls.seconds +
+                      'sec'}
+                </Text>
+              </View>
+              <View
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'flex-end',
+                }}>
+                <Text>
+                  {videoCalls.createdAt &&
+                    moment(videoCalls.createdAt).fromNow()}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => handleRunVideoCall()}
+                  style={{
+                    backgroundColor: Colors.GREEN_COLOR,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 80,
+                    height: 40,
+                    borderRadius: 100,
+                    marginTop: 10,
+                  }}>
+                  <Text style={{color: 'black'}}>Start</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+          {schedule.video && (
+            <View style={styles.taskPlaceHolder}>
+              <View>
+                <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
+                  Video Call - Running
                 </Text>
                 <Text>{schedule.video?.callerId}</Text>
                 <Text>
@@ -108,11 +287,53 @@ export default function ScheduleHome() {
               </Text>
             </View>
           )}
-          {schedule.messages && (
+          {messages && (
             <View style={styles.taskPlaceHolder}>
               <View>
                 <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
                   Messages
+                </Text>
+                <Text>{messages?.callerId}</Text>
+                <Text>
+                  {(messages.seconds || messages.minutes) &&
+                    'Schedule for ' +
+                      messages.minutes +
+                      'min & ' +
+                      messages.seconds +
+                      'sec'}
+                </Text>
+              </View>
+              <View
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'flex-end',
+                }}>
+                <Text>
+                  {messages.createdAt && moment(messages.createdAt).fromNow()}
+                </Text>
+                <TouchableOpacity
+                  onPress={() => handleRunMessages()}
+                  style={{
+                    backgroundColor: Colors.GREEN_COLOR,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    width: 80,
+                    height: 40,
+                    borderRadius: 100,
+                    marginTop: 10,
+                  }}>
+                  <Text style={{color: 'black'}}>Start</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+          {schedule.messages && (
+            <View style={styles.taskPlaceHolder}>
+              <View>
+                <Text style={{fontSize: scaleSize(22), fontWeight: '500'}}>
+                  Messages - Running
                 </Text>
                 <Text>{schedule.messages?.callerId}</Text>
                 <Text>

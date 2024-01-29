@@ -18,16 +18,14 @@ import {InputTypes} from '../../../common/constants/InputTypes';
 import CustomButton from '../../../common/components/customButton';
 import Colors from '../../../common/styles/Colors';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {useDispatch} from 'react-redux';
-import {SET_CALL_TASK_SCHEDULE} from '../../../common/constants/ActionTypes';
-import {CallModal} from '../../../common/types/schedule';
 import {showToast} from '../../../common/utils/AlertUtils';
 import 'react-native-get-random-values';
 import {v4 as uuidv4} from 'uuid';
 import {TextInput} from 'react-native';
 import CustomErrorText from '../../../common/components/customErrorText';
-import moment from 'moment';
 import {KEYBOARD_OFFSET} from '../../../common/constants/KeyboardOffset';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 
 export default function CallTask() {
   const {
@@ -45,8 +43,6 @@ export default function CallTask() {
   const [avatar, setAvatar] = useState<any>(null);
   const [minutes, setMinutes] = useState<any>(null);
   const [seconds, setSeconds] = useState<any>(null);
-
-  const dispatch = useDispatch();
 
   function handleAvatarSelection() {
     launchImageLibrary(
@@ -74,21 +70,18 @@ export default function CallTask() {
         message: 'Please enter countdown value',
       });
     }
-    dispatch({
-      type: SET_CALL_TASK_SCHEDULE,
-      payload: {
+    AsyncStorage.setItem(
+      StorageKeysTags.Calls,
+      JSON.stringify({
         id: uuidv4(),
         avatar: avatar ? avatar.uri : null,
         callerId: control._formValues.CallerId,
         number: control._formValues.Number,
-        countdown: String(
-          moment()
-            .add(minutes ? minutes : 0, 'm')
-            .add(seconds ? seconds : 0, 's'),
-        ),
+        minutes: minutes ?? 0,
+        seconds: seconds ?? 0,
         createdAt: String(new Date()),
-      } as CallModal,
-    });
+      }),
+    );
     setMinutes(null);
     setSeconds(null);
     reset();
