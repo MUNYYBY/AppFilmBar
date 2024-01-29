@@ -4,8 +4,8 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
-  Keyboard,
   ScrollView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, {useState, useRef, useEffect} from 'react';
 import styles from './styles';
@@ -18,6 +18,8 @@ import {goBack} from '../../../common/utils/NavigatorUtils';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 import Colors from '../../../common/styles/Colors';
 import {Image} from 'react-native';
+import {Keyboard} from 'react-native';
+import {KEYBOARD_OFFSET} from '../../../common/constants/KeyboardOffset';
 
 const RecievedMessageContainer = ({msg, date}: any) => (
   <>
@@ -59,6 +61,8 @@ export default function ChatScreen({route}: any) {
   const [messages, setMessages] = useState<any>(
     messagesTask ? messagesTask.recentMessages : [],
   );
+  const [trigger, setTrigger] = useState(false);
+  const [msgIndex, setMsgIndex] = useState(0);
 
   //** ref */
   const scrollViewRef = useRef<any>();
@@ -69,21 +73,39 @@ export default function ChatScreen({route}: any) {
         {message: value, createdAt: new Date(), type: 'Send'},
       ]);
       onChangeText('');
+      setTrigger(true);
     }
   };
 
-  useEffect(() => {
-    const displayMessages = async () => {
-      for (const message of initialMessagesStack) {
-        await new Promise(resolve => setTimeout(resolve, 2500));
-        setMessages((prevMessages: any) => [...prevMessages, message]);
+  const displayMessages = async (secs?: number, instantRun?: boolean) => {
+    if (initialMessagesStack.length > 0) {
+      if (instantRun) {
+        setMessages((prevMessages: any) => [
+          ...prevMessages,
+          initialMessagesStack[msgIndex],
+        ]);
+      } else {
+        await new Promise(resolve => setTimeout(resolve, secs ?? 2500));
+        setMessages((prevMessages: any) => [
+          ...prevMessages,
+          initialMessagesStack[msgIndex],
+        ]);
       }
-    };
-
-    displayMessages();
-
+      setMsgIndex(msgIndex + 1);
+    }
+  };
+  useEffect(() => {
+    if (trigger && msgIndex < initialMessagesStack.length) {
+      displayMessages();
+      setTrigger(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [messagesTask]);
+  }, [trigger]);
+  useEffect(() => {
+    displayMessages(500);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <CustomStatusbar
@@ -138,53 +160,59 @@ export default function ChatScreen({route}: any) {
               justifyContent: 'flex-end',
               flexGrow: 1,
             }}
+            showsVerticalScrollIndicator={false}
             onContentSizeChange={() =>
               scrollViewRef.current.scrollToEnd({animated: true})
             }>
-            {messages.map((message: any, index: number) => {
-              return message.type === 'Recieve' ? (
-                <View key={index}>
-                  <RecievedMessageContainer
-                    msg={message.message}
-                    date={message.createdAt}
-                  />
-                </View>
-              ) : (
-                <View key={index}>
-                  <SendMessageContainer
-                    msg={message.message}
-                    date={message.createdAt}
-                  />
-                </View>
-              );
-            })}
+            {messages.length > 0 &&
+              messages.map((message: any, index: number) => {
+                return message.type === 'Recieve' ? (
+                  <View key={index}>
+                    <RecievedMessageContainer
+                      msg={message.message}
+                      date={message.createdAt}
+                    />
+                  </View>
+                ) : (
+                  <View key={index}>
+                    <SendMessageContainer
+                      msg={message.message}
+                      date={message.createdAt}
+                    />
+                  </View>
+                );
+              })}
           </ScrollView>
-          <View style={[styles.lowerContainer, styles.container]}>
-            <TextInput
-              style={styles.InputField}
-              onChangeText={text => onChangeText(text)}
-              value={value}
-              placeholder={'Type here...'}
-              placeholderTextColor={Colors.BLACK_COLOR}
-              returnKeyType={'send'}
-              multiline={true}
-              editable={true}
-              onSubmitEditing={Keyboard.dismiss}
-            />
-            <TouchableOpacity
-              style={{
-                width: 50,
-                height: 50,
-                borderRadius: 100,
-                backgroundColor: Colors.PRIMARY,
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-              onPress={handleSendMessage}>
-              <Icon name="send" size={20} color={Colors.BLACK_COLOR} />
-            </TouchableOpacity>
-          </View>
+          <KeyboardAvoidingView
+            behavior="position"
+            keyboardVerticalOffset={KEYBOARD_OFFSET - 60}>
+            <View style={[styles.lowerContainer, styles.container]}>
+              <TextInput
+                style={styles.InputField}
+                onChangeText={text => onChangeText(text)}
+                value={value}
+                placeholder={'Type here...'}
+                placeholderTextColor={Colors.BLACK_COLOR}
+                returnKeyType={'send'}
+                multiline={true}
+                editable={true}
+                onSubmitEditing={Keyboard.dismiss}
+              />
+              <TouchableOpacity
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 100,
+                  backgroundColor: Colors.PRIMARY,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+                onPress={handleSendMessage}>
+                <Icon name="send" size={20} color={Colors.BLACK_COLOR} />
+              </TouchableOpacity>
+            </View>
+          </KeyboardAvoidingView>
         </View>
       </PageSkeleton>
     </>
