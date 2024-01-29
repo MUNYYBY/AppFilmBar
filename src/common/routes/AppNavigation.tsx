@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {navigate, navigationRef} from '../utils/NavigatorUtils';
+import {navigationRef, replace} from '../utils/NavigatorUtils';
 import Colors from '../styles/Colors';
 import Home from '../../container/Home/Home';
 import {NavScreenTags} from '../constants/NavScreenTags';
@@ -73,7 +73,7 @@ const AppNavigation = () => {
         const currentDate = new Date();
 
         if (currentDate >= targetDate) {
-          navigate(NavScreenTags.CALL_SCREEN, {
+          replace(NavScreenTags.CALL_SCREEN, {
             isOutGoing: false,
             contactName: schedule.call.callerId,
             contactNumber: schedule.call.number,
@@ -94,7 +94,7 @@ const AppNavigation = () => {
         const currentDate = new Date();
 
         if (currentDate >= targetDate) {
-          navigate(NavScreenTags.VIDEO_SCREEN, {
+          replace(NavScreenTags.VIDEO_SCREEN, {
             isOutGoing: false,
             contactName: schedule.video.callerId,
             contactNumber: schedule.video.number,
