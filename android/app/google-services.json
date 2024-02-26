@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "163568470589",
+    "project_id": "appfilmbar-6ea12",
+    "storage_bucket": "appfilmbar-6ea12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163568470589:android:102189b6c5f53b14627854",
+        "android_client_info": {
+          "package_name": "com.appfilmbar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiUOfalw2DS8TMkqZuxrsU5zXTC6ZrXlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

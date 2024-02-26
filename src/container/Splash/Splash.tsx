@@ -2,37 +2,36 @@ import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {NavScreenTags} from '../../common/constants/NavScreenTags';
 import {onAuthStateChanged} from '../../common/services/Auth';
-import {navigate} from '../../common/utils/NavigatorUtils';
+import {replace} from '../../common/utils/NavigatorUtils';
 
-const Splash = ({navigation}: any) => {
+const Splash = () => {
   //** ** ** ** EFFECTS ** ** ** ** **  */
-  // const [user, setUser] = useState<any>('default');
+  const [user, setUser] = useState<any>('default');
 
   //TODO: implement firebase auth check
 
-  //   function HandleUser(authUser: any) {
-  //     setUser(authUser);
-  //   }
-
-  //   useEffect(() => {
-  //     onAuthStateChanged(HandleUser);
-  //     return () => {};
-  //   }, []);
+  function HandleUser(authUser: any) {
+    setUser(authUser);
+  }
 
   useEffect(() => {
-    //     if (user !== 'default') {
-    //       if (user && user.uid) {
-    //         props.navigation.navigate(NavScreenTags.DASHBOARD_STACK);
-    //         SplashScreen.hide();
-    //       } else {
-    //         props.navigation.navigate(NavScreenTags.AUTH_STACK);
-    //     }
-    // }
-    navigation.navigate(NavScreenTags.SIGN_IN);
-    SplashScreen.hide();
+    onAuthStateChanged(HandleUser);
     return () => {};
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (user !== 'default') {
+      console.log(user);
+      if (user && user.uid) {
+        replace(NavScreenTags.HOME);
+        SplashScreen.hide();
+      } else {
+        replace(NavScreenTags.SIGN_IN);
+      }
+      SplashScreen.hide();
+    }
+    return () => {};
+  }, [user]);
 
   // ** ** ** ** ** RENEDER RETURNS ** ** ** **
   return <></>;

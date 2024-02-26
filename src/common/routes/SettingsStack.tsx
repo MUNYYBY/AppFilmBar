@@ -8,6 +8,7 @@ import SettingsChangeWallpaper from '../../container/SettingsApp/ChangeWallpaper
 import ChangeMobileConnection from '../../container/SettingsApp/ChangeMobileConnection/ChangeMobileConnection';
 import ChangeDateTime from '../../container/SettingsApp/ChangeDateTime/ChangeDateTime';
 import ChangeBatteryPercentage from '../../container/SettingsApp/ChangeBatteryPercentage/ChangeBatteryPercentage';
+import DeleteAccount from '../../container/SettingsApp/DeleteAccount/DeleteAccount';
 
 const SettingsStack = () => {
   const Stack = createNativeStackNavigator();
@@ -44,6 +45,10 @@ const SettingsStack = () => {
       <Stack.Screen
         name={NavScreenTags.SETTINGS_CHANGE_BATTERY_PERCENTAGE}
         component={ChangeBatteryPercentage}
+      />
+      <Stack.Screen
+        name={NavScreenTags.DELETE_ACCOUNT}
+        component={DeleteAccount}
       />
     </Stack.Navigator>
   );

@@ -26,6 +26,7 @@ import CustomErrorText from '../../../common/components/customErrorText';
 import {showToast} from '../../../common/utils/AlertUtils';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 import {KEYBOARD_OFFSET} from '../../../common/constants/KeyboardOffset';
+import {SignUp} from '../../../common/services/Auth';
 
 export default function Signup() {
   const {
@@ -45,37 +46,37 @@ export default function Signup() {
   let firstNameRef = useRef();
   let lastNameRef = useRef();
 
-  // function handle() {
-  //   setLoading(true);
-  //   clearErrors('Credentials');
-  //   SignUp(
-  //     control._formValues.email,
-  //     control._formValues.password,
-  //     control._formValues.firstName + ' ' + control._formValues.lastName,
-  //   )
-  //     .then((result: any) => {
-  //       console.log(result);
-  //       if (result.data) {
-  //         setLoading(false);
-  //         showToast('Sucessfully created account!');
-  //         navigate(NavScreenTags.DASHBOARD_STACK);
-  //       } else {
-  //         setLoading(false);
-  //         setError('Credentials', {
-  //           type: 'manual',
-  //           message: result.error,
-  //         });
-  //       }
-  //     })
-  //     .catch((err: any) => {
-  //       console.log(err);
-  //       setLoading(false);
-  //       setError('Credentials', {
-  //         type: 'manual',
-  //         message: err,
-  //       });
-  //     });
-  // }
+  function handle() {
+    setLoading(true);
+    clearErrors('Credentials');
+    SignUp(
+      control._formValues.email,
+      control._formValues.password,
+      control._formValues.firstName + ' ' + control._formValues.lastName,
+    )
+      .then((result: any) => {
+        console.log(result);
+        if (result.data) {
+          setLoading(false);
+          showToast('Sucessfully created account!');
+          navigate(NavScreenTags.HOME);
+        } else {
+          setLoading(false);
+          setError('Credentials', {
+            type: 'manual',
+            message: result.error,
+          });
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+        setLoading(false);
+        setError('Credentials', {
+          type: 'manual',
+          message: err,
+        });
+      });
+  }
   return (
     <>
       <CustomStatusbar barStyle="dark-content" />
@@ -163,10 +164,9 @@ export default function Signup() {
               )}
               <CustomButton
                 title="Sign up"
-                // shouldEnable={isValid}
+                shouldEnable={isValid}
                 onPress={() => {
-                  navigate(NavScreenTags.HOME);
-                  // handle();
+                  handle();
                 }}
                 buttonStyle={{marginTop: scaleSize(10)}}
                 loading={loading}

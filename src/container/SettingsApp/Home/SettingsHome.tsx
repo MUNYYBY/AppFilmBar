@@ -9,6 +9,7 @@ import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../../common/styles/Colors';
+import {Logout} from '../../../common/services/Auth';
 
 export default function SettingsHome() {
   return (
@@ -91,6 +92,26 @@ export default function SettingsHome() {
                 Change all the connection and network settings like signals bar,
                 service, ISP etc
               </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.taskPlaceHolder}
+            onPress={() => navigate(NavScreenTags.DELETE_ACCOUNT)}>
+            <View>
+              <Text style={{fontSize: scaleSize(18), fontWeight: '500'}}>
+                Delete Account
+              </Text>
+              <Text>Remove your account and all the preferances</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.taskPlaceHolder}
+            onPress={() => Logout()}>
+            <View>
+              <Text style={{fontSize: scaleSize(18), fontWeight: '500'}}>
+                Logout
+              </Text>
+              <Text>Sign out of the current session</Text>
             </View>
           </TouchableOpacity>
         </View>

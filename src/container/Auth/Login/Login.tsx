@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, TouchableOpacity, StatusBar} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useRef, useState} from 'react';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
 import styles from './styles';
@@ -15,6 +15,7 @@ import {navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomErrorText from '../../../common/components/customErrorText';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
+import {SignIn} from '../../../common/services/Auth';
 
 export default function Login() {
   const {
@@ -33,32 +34,38 @@ export default function Login() {
   let emailRef = useRef<any>();
   let passwordRef = useRef<any>();
 
-  // function handle() {
-  //   setLoading(true);
-  //   clearErrors('Credentials');
-  //   SignIn(control._formValues.email, control._formValues.password)
-  //     .then((result: any) => {
-  //       if (result.data) {
-  //         console.log(result);
-  //         setLoading(false);
-  //         navigate(NavScreenTags.DASHBOARD_STACK);
-  //       } else {
-  //         setLoading(false);
-  //         setError('Credentials', {
-  //           type: 'manual',
-  //           message: result.error,
-  //         });
-  //       }
-  //     })
-  //     .catch((err: any) => {
-  //       console.log(err);
-  //       setLoading(false);
-  //       setError('Credentials', {
-  //         type: 'manual',
-  //         message: err,
-  //       });
-  //     });
-  // }
+  function handle() {
+    if (!control._formValues.email || !control._formValues.password) {
+      return setError('Credentials', {
+        type: 'manual',
+        message: 'Email and password are required',
+      });
+    }
+    setLoading(true);
+    clearErrors('Credentials');
+    SignIn(control._formValues.email, control._formValues.password)
+      .then((result: any) => {
+        if (result.data) {
+          console.log(result);
+          setLoading(false);
+          navigate(NavScreenTags.HOME);
+        } else {
+          setLoading(false);
+          setError('Credentials', {
+            type: 'manual',
+            message: result.error,
+          });
+        }
+      })
+      .catch((err: any) => {
+        console.log(err);
+        setLoading(false);
+        setError('Credentials', {
+          type: 'manual',
+          message: err,
+        });
+      });
+  }
 
   return (
     <>
@@ -134,7 +141,7 @@ export default function Login() {
             title="Log in"
             // shouldEnable={isValid}
             onPress={() => {
-              navigate(NavScreenTags.HOME);
+              handle();
             }}
             loading={loading}
           />
