@@ -20,6 +20,7 @@ import Colors from '../../../common/styles/Colors';
 import {Image} from 'react-native';
 import {Keyboard} from 'react-native';
 import {KEYBOARD_OFFSET} from '../../../common/constants/KeyboardOffset';
+import RealChat from './RealChat';
 
 const RecievedMessageContainer = ({msg, date}: any) => (
   <>
@@ -53,7 +54,24 @@ const SendMessageContainer = ({msg, date}: any) => (
 
 export default function ChatScreen({route}: any) {
   //** fetch params */
-  const {messagesTask} = route.params;
+  const {messagesTask, contact, user} = route.params;
+
+  return (
+    <>
+      <CustomStatusbar
+        barStyle="dark-content"
+        backgroundColor="rgba(0,0,0,0.05)"
+      />
+      {messagesTask ? (
+        <FakeChatScreen messagesTask={messagesTask} />
+      ) : (
+        <RealChat contact={contact} user={user} />
+      )}
+    </>
+  );
+}
+
+function FakeChatScreen({messagesTask}: any) {
   const [value, onChangeText] = React.useState('');
   const [initialMessagesStack, _] = useState(
     messagesTask ? messagesTask.messages : [],
@@ -108,11 +126,6 @@ export default function ChatScreen({route}: any) {
 
   return (
     <>
-      <CustomStatusbar
-        barStyle="dark-content"
-        backgroundColor="rgba(0,0,0,0.05)"
-      />
-
       <PageSkeleton headerTitle="" hasHeader={false}>
         <View style={{height: '100%'}}>
           <View style={[styles.headerContainer, styles.container]}>

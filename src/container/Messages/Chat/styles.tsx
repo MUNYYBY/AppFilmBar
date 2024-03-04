@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     opacity: 0.75,
   },
   container: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: '#EEEEEE',
     marginHorizontal: scaleSize(-16),
     padding: scaleSize(16),
     width: '110%',
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   lowerContainer: {
     position: 'absolute',
     bottom: 0,
-    zIndex: 50,
+    zIndex: 100,
     marginTop: scaleSize(10),
     borderTopEndRadius: scaleSize(10),
     borderTopStartRadius: scaleSize(10),

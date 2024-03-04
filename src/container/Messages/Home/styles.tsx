@@ -53,7 +53,10 @@ const styles = StyleSheet.create({
   },
   HeaderSearchInput: {
     color: Colors.WHITE_COLOR,
-    backgroundColor: Colors.BLACK_COLOR,
+    backgroundColor: '#EEEEEE',
+    width: '90%',
+    borderRadius: 10,
+    paddingHorizontal: 10,
   },
   sendButton: {
     height: scaleSize(35),

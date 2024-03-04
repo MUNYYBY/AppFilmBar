@@ -32,7 +32,7 @@ export default function Login() {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   let emailRef = useRef<any>();
-  let passwordRef = useRef<any>();
+  let passwordRef = useRef<any>(null);
 
   function handle() {
     if (!control._formValues.email || !control._formValues.password) {
@@ -139,7 +139,7 @@ export default function Login() {
 
           <CustomButton
             title="Log in"
-            // shouldEnable={isValid}
+            shouldEnable={isValid}
             onPress={() => {
               handle();
             }}
