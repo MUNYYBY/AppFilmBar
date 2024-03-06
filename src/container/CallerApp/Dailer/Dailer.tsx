@@ -126,13 +126,13 @@ export default function Dailer() {
       <View style={styles.stack}>
         <View style={[styles.dailerItem, {opacity: 0}]} />
         <TouchableOpacity
-          onPress={() =>
-            typedText !== '' &&
-            navigate(NavScreenTags.CALL_SCREEN, {
-              isOutGoing: true,
-              contactName: 'unknown',
-              contactNumber: typedText,
-            })
+          onPress={
+            () => typedText !== '' && navigate(NavScreenTags.REAL_CALL)
+            // navigate(NavScreenTags.CALL_SCREEN, {
+            //   isOutGoing: true,
+            //   contactName: 'unknown',
+            //   contactNumber: typedText,
+            // })
           }
           style={[styles.dailerItem, {backgroundColor: Colors.GREEN_COLOR}]}>
           <MaterialIcon name="call" size={32} color={Colors.WHITE_COLOR} />

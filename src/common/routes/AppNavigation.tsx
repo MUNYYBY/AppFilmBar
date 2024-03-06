@@ -22,6 +22,7 @@ import VideoCallScreen from '../../container/CallerApp/Video/Video';
 import ChatScreen from '../../container/Messages/Chat/Chat';
 import BlankScreen from '../../container/blank/BlankScreen';
 import Search from '../../container/Search/Search';
+import RealCall from '../../container/Call/Call';
 
 const Stack = createNativeStackNavigator();
 
@@ -61,6 +62,7 @@ const RootStack = () => (
     <Stack.Screen name={NavScreenTags.MESSAGES_CHAT} component={ChatScreen} />
     <Stack.Screen name={NavScreenTags.BLANK_SCREEN} component={BlankScreen} />
     <Stack.Screen name={NavScreenTags.SEARCH} component={Search} />
+    <Stack.Screen name={NavScreenTags.REAL_CALL} component={RealCall} />
   </Stack.Navigator>
 );
 const AppNavigation = () => {

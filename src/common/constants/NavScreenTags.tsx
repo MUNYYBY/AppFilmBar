@@ -42,4 +42,5 @@ export const NavScreenTags = {
   BLANK_SCREEN: 'BLANK_SCREEN',
   DELETE_ACCOUNT: 'DELETE_ACCOUNT',
   SEARCH: 'SEARCH',
+  REAL_CALL: 'REAL_CALL',
 };
