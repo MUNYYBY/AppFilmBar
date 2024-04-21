@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import CustomButton from '../../../common/components/customButton';
 import {SET_WIFI_AND_SERVICE} from '../../../common/constants/ActionTypes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 
 export default function ChangeMobileConnection() {
   //** redux */
@@ -62,6 +64,13 @@ export default function ChangeMobileConnection() {
                 isNoService: showNoService,
               },
             });
+            AsyncStorage.setItem(
+              StorageKeysTags.Signals_and_Wifi,
+              JSON.stringify({
+                isWifi: showWifi,
+                isNoService: showNoService,
+              }),
+            );
           }}
         />
       </PageSkeleton>

@@ -7,13 +7,11 @@ import CustomInput from '../../../common/components/customInput';
 import {InputTypes} from '../../../common/constants/InputTypes';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import {useDispatch} from 'react-redux';
-import {
-  SET_DATE,
-  SET_DATE_AND_TIME,
-  SET_TIME,
-} from '../../../common/constants/ActionTypes';
+import {SET_DATE_AND_TIME} from '../../../common/constants/ActionTypes';
 import CustomButton from '../../../common/components/customButton';
 import moment from 'moment';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 
 export default function ChangeDateTime() {
   const {
@@ -78,6 +76,13 @@ export default function ChangeDateTime() {
                 time: moment(control._formValues.Time).format(),
               },
             });
+            AsyncStorage.setItem(
+              StorageKeysTags.Time,
+              JSON.stringify({
+                date: moment(control._formValues.Date).format(),
+                time: moment(control._formValues.Time).format(),
+              }),
+            );
           }}
         />
       </PageSkeleton>

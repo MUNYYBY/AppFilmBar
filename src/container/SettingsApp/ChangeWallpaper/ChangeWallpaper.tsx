@@ -13,12 +13,14 @@ import Colors from '../../../common/styles/Colors';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 import CustomButton from '../../../common/components/customButton';
 import {launchImageLibrary} from 'react-native-image-picker';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 
 export default function SettingsChangeWallpaper() {
   const dispatch = useDispatch();
   const settings = useSelector((state: any) => state.settings);
 
-  function handleWallpaperSelect() {
+  async function handleWallpaperSelect() {
     launchImageLibrary(
       {mediaType: 'photo', selectionLimit: 1},
       (response: any) => {
@@ -39,6 +41,13 @@ export default function SettingsChangeWallpaper() {
             type: SET_CUSTOM_WALLAPPER,
             payload: {customWallpaper: response.assets[0], wallpaper: 0},
           });
+          AsyncStorage.setItem(
+            StorageKeysTags.Wallpaper,
+            JSON.stringify({
+              customWallpaper: response.assets[0],
+              wallpaper: 0,
+            }),
+          );
         }
       },
     );
@@ -56,12 +65,19 @@ export default function SettingsChangeWallpaper() {
             alignItems: 'center',
           }}>
           <Pressable
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.setItem(
+                StorageKeysTags.Wallpaper,
+                JSON.stringify({
+                  wallpaper: 1,
+                  customWallpaper: '',
+                }),
+              );
               dispatch({
                 type: SET_WALLPAPER,
                 payload: {wallpaper: 1, customWallpaper: ''},
-              })
-            }
+              });
+            }}
             style={{
               flex: 1,
               display: 'flex',
@@ -87,12 +103,16 @@ export default function SettingsChangeWallpaper() {
             />
           </Pressable>
           <Pressable
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.setItem(
+                StorageKeysTags.Wallpaper,
+                JSON.stringify({wallpaper: 2, customWallpaper: ''}),
+              );
               dispatch({
                 type: SET_WALLPAPER,
                 payload: {wallpaper: 2, customWallpaper: ''},
-              })
-            }
+              });
+            }}
             style={{
               flex: 1,
               display: 'flex',
@@ -126,12 +146,19 @@ export default function SettingsChangeWallpaper() {
             alignItems: 'center',
           }}>
           <Pressable
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.setItem(
+                StorageKeysTags.Wallpaper,
+                JSON.stringify({
+                  wallpaper: 3,
+                  customWallpaper: '',
+                }),
+              );
               dispatch({
                 type: SET_WALLPAPER,
                 payload: {wallpaper: 3, customWallpaper: ''},
-              })
-            }
+              });
+            }}
             style={{
               flex: 1,
               display: 'flex',

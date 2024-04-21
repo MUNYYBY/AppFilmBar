@@ -1,12 +1,19 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, Platform} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import moment from 'moment';
 import {scaleFontSize, scaleSize} from '../../utils/ScaleSheetUtils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconIoni from 'react-native-vector-icons/Ionicons';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Colors from '../../styles/Colors';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../constants/StorageKeysTags';
+import {
+  SET_BATTERY,
+  SET_DATE_AND_TIME,
+  SET_WIFI_AND_SERVICE,
+} from '../../constants/ActionTypes';
 
 interface Props {
   barStyle: 'dark-content' | 'light-content';
@@ -16,9 +23,48 @@ interface Props {
 export default function CustomStatusbar(props: Props) {
   const {barStyle, backgroundColor} = props;
 
+  const [time, setTime] = useState<any>(null);
+
   //** redux */
   const settings = useSelector((state: any) => state.settings);
+  const dispatch = useDispatch();
 
+  async function GetLS() {
+    const temp = await AsyncStorage.getItem(StorageKeysTags.Time);
+    const temp2 = await AsyncStorage.getItem(StorageKeysTags.Signals_and_Wifi);
+    const temp3 = await AsyncStorage.getItem(StorageKeysTags.Battery);
+    if (temp !== null) {
+      setTime(JSON.stringify(temp));
+      dispatch({
+        type: SET_DATE_AND_TIME,
+        payload: JSON.parse(temp),
+      });
+    }
+    if (temp2 !== null) {
+      dispatch({
+        type: SET_WIFI_AND_SERVICE,
+        payload: JSON.parse(temp2),
+      });
+    }
+    if (temp3 !== null) {
+      dispatch({
+        type: SET_BATTERY,
+        payload: JSON.parse(temp3),
+      });
+    }
+  }
+
+  useEffect(() => {
+    GetLS();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (time !== settings.time) {
+      GetLS();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settings.time]);
   return (
     <View
       style={[

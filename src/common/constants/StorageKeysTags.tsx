@@ -5,4 +5,8 @@ export const StorageKeysTags = {
   Messages: 'AppFilmBar_Messages',
   Calls: 'AppFilmBar_Calls',
   VideoCalls: 'AppFilmBar_VideoCalls',
+  Wallpaper: 'AppFilmBar_Wallpaper',
+  Battery: 'AppFilmBar_Battery',
+  Time: 'AppFilmBar_Time',
+  Signals_and_Wifi: 'AppFilmBar_SignalsAndWifi',
 };

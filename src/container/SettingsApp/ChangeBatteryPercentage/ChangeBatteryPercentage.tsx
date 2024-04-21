@@ -9,6 +9,8 @@ import CustomInput from '../../../common/components/customInput';
 import {InputTypes} from '../../../common/constants/InputTypes';
 import CustomButton from '../../../common/components/customButton';
 import {SET_BATTERY} from '../../../common/constants/ActionTypes';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {StorageKeysTags} from '../../../common/constants/StorageKeysTags';
 
 export default function ChangeBatteryPercentage() {
   const {
@@ -51,6 +53,12 @@ export default function ChangeBatteryPercentage() {
                 battery: control._formValues.Battery,
               },
             });
+            AsyncStorage.setItem(
+              StorageKeysTags.Battery,
+              JSON.stringify({
+                battery: control._formValues.Battery,
+              }),
+            );
           }}
         />
       </PageSkeleton>
