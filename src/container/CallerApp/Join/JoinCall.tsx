@@ -2,7 +2,11 @@
 import {View, Text} from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import moment from 'moment';
 import {onAuthStateChanged} from '../../../common/services/Auth';
+import {uid} from 'uid';
+import {AddRoom} from '../../../common/services/Cloud';
+import {showToast} from '../../../common/utils/AlertUtils';
 import {navigate} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import PageSkeleton from '../../../common/hoc/pageSkeleton';
@@ -14,45 +18,8 @@ import Colors from '../../../common/styles/Colors';
 import CustomErrorText from '../../../common/components/customErrorText';
 import CustomButton from '../../../common/components/customButton';
 import DropDownPicker from 'react-native-dropdown-picker';
-import SwitchSelector from 'react-native-switch-selector';
-import JoinCall from '../Join/JoinCall';
 
-const options = [
-  {label: 'Create Channel ', value: 0},
-  {label: 'Join Channel', value: 1},
-];
-
-export default function Contacts() {
-  const [step, setStep] = useState(0);
-  return (
-    <View
-      style={{
-        flex: 1,
-        marginTop: scaleSize(50),
-        width: '100%',
-      }}>
-      <View style={{marginHorizontal: 20}}>
-        <SwitchSelector
-          options={options}
-          initial={step}
-          onPress={(item: any) => {
-            setStep(item);
-          }}
-          textColor={Colors.BLACK_COLOR} //'#7a44cf'
-          selectedColor={Colors.BLACK_COLOR}
-          buttonColor={Colors.PRIMARY}
-          backgroundColor={'#EEEEEE'}
-          textStyle={{fontSize: scaleSize(12)}}
-          selectedTextStyle={{fontSize: scaleSize(12)}}
-          height={scaleSize(40)}
-        />
-      </View>
-      {step === 0 ? <Create /> : <JoinCall />}
-    </View>
-  );
-}
-
-function Create() {
+export default function JoinCall() {
   const {
     control,
     watch,
@@ -62,7 +29,6 @@ function Create() {
   } = useForm({mode: 'onChange'});
 
   //** ref */
-  let roomNameRef = useRef();
   let roomDescRef = useRef();
 
   //** states */
@@ -100,15 +66,9 @@ function Create() {
             placeholder={'Channel Name'}
             type={InputTypes.TEXT_INPUT}
             control={control}
-            name={'RoomName'}
+            name={FIELD_NAMES.ROOM_NAME}
             editable={true}
             returnKeyType={'next'}
-            forwordRef={(input: any): any => {
-              roomNameRef = input;
-            }}
-            onSubmitEditing={(e: any) => {
-              roomDescRef.focus(e);
-            }}
             shouldShowIcon={
               watch(FIELD_NAMES.ROOM_NAME) !== undefined ? true : false
             }
@@ -147,7 +107,7 @@ function Create() {
         )}
         <View style={{marginTop: 10}}>
           <CustomButton
-            title="Create Channel"
+            title="Join Channel"
             onPress={() => {
               handleSubmit();
             }}

@@ -7,4 +7,6 @@ export const FIELD_NAMES = {
   RE_ENTER_PASSWORD: 'reEnterPassword',
   USERNAME: 'username',
   REF_NUMBER: 'ReferenceNumber',
+  ROOM_NAME: 'ROOM_NAME',
+  ROOM_DESCRIPTION: 'ROOM_DESCRIPTION',
 };

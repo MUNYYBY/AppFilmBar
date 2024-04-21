@@ -70,7 +70,7 @@ export default function ScheduleHome() {
         createdAt: String(new Date()),
       },
     });
-    AsyncStorage.removeItem(StorageKeysTags.Messages);
+    // AsyncStorage.removeItem(StorageKeysTags.Messages);
     setMessages(null);
   }
   function handleRunCall() {
@@ -87,7 +87,7 @@ export default function ScheduleHome() {
         createdAt: String(new Date()),
       },
     });
-    AsyncStorage.removeItem(StorageKeysTags.Calls);
+    // AsyncStorage.removeItem(StorageKeysTags.Calls);
     setCalls(null);
   }
   function handleRunVideoCall() {
@@ -105,7 +105,7 @@ export default function ScheduleHome() {
         createdAt: String(new Date()),
       },
     });
-    AsyncStorage.removeItem(StorageKeysTags.VideoCalls);
+    // AsyncStorage.removeItem(StorageKeysTags.VideoCalls);
     setVideosCalls(null);
   }
   return (
@@ -189,20 +189,47 @@ export default function ScheduleHome() {
                 <Text>
                   {calls.createdAt && moment(calls.createdAt).fromNow()}
                 </Text>
-                <TouchableOpacity
-                  onPress={() => handleRunCall()}
+                <View
                   style={{
-                    backgroundColor: Colors.GREEN_COLOR,
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    width: 80,
-                    height: 40,
-                    borderRadius: 100,
-                    marginTop: 10,
+                    flexDirection: 'row',
                   }}>
-                  <Text style={{color: 'black'}}>Start</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => handleRunCall()}
+                    style={{
+                      backgroundColor: Colors.GREEN_COLOR,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 80,
+                      height: 40,
+                      borderRadius: 100,
+                      marginTop: 10,
+                      marginRight: 2,
+                    }}>
+                    <Text style={{color: 'black'}}>Start</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      AsyncStorage.removeItem(StorageKeysTags.Calls);
+                      setCalls(null);
+                    }}
+                    style={{
+                      backgroundColor: Colors.ERROR_CHECK_ICON,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 40,
+                      height: 40,
+                      borderRadius: 15,
+                      marginTop: 10,
+                      marginRight: 2,
+                    }}>
+                    <Icon name="delete-outline" color="white" size={24} />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           )}
@@ -251,20 +278,47 @@ export default function ScheduleHome() {
                   {videoCalls.createdAt &&
                     moment(videoCalls.createdAt).fromNow()}
                 </Text>
-                <TouchableOpacity
-                  onPress={() => handleRunVideoCall()}
+                <View
                   style={{
-                    backgroundColor: Colors.GREEN_COLOR,
                     display: 'flex',
+                    flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    width: 80,
-                    height: 40,
-                    borderRadius: 100,
-                    marginTop: 10,
                   }}>
-                  <Text style={{color: 'black'}}>Start</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => handleRunVideoCall()}
+                    style={{
+                      backgroundColor: Colors.GREEN_COLOR,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 80,
+                      height: 40,
+                      borderRadius: 100,
+                      marginTop: 10,
+                      marginRight: 2,
+                    }}>
+                    <Text style={{color: 'black'}}>Start</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      AsyncStorage.removeItem(StorageKeysTags.VideoCalls);
+                      setVideosCalls(null);
+                    }}
+                    style={{
+                      backgroundColor: Colors.ERROR_CHECK_ICON,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 40,
+                      height: 40,
+                      borderRadius: 15,
+                      marginTop: 10,
+                      marginRight: 2,
+                    }}>
+                    <Icon name="delete-outline" color="white" size={24} />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           )}
@@ -312,20 +366,47 @@ export default function ScheduleHome() {
                 <Text>
                   {messages.createdAt && moment(messages.createdAt).fromNow()}
                 </Text>
-                <TouchableOpacity
-                  onPress={() => handleRunMessages()}
+                <View
                   style={{
-                    backgroundColor: Colors.GREEN_COLOR,
                     display: 'flex',
+                    flexDirection: 'row',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    width: 80,
-                    height: 40,
-                    borderRadius: 100,
-                    marginTop: 10,
                   }}>
-                  <Text style={{color: 'black'}}>Start</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => handleRunMessages()}
+                    style={{
+                      backgroundColor: Colors.GREEN_COLOR,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 80,
+                      height: 40,
+                      borderRadius: 100,
+                      marginTop: 10,
+                      marginRight: 2,
+                    }}>
+                    <Text style={{color: 'black'}}>Start</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => {
+                      AsyncStorage.removeItem(StorageKeysTags.Messages);
+                      setMessages(null);
+                    }}
+                    style={{
+                      backgroundColor: Colors.ERROR_CHECK_ICON,
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      width: 40,
+                      height: 40,
+                      borderRadius: 15,
+                      marginTop: 10,
+                      marginRight: 2,
+                    }}>
+                    <Icon name="delete-outline" color="white" size={24} />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           )}
