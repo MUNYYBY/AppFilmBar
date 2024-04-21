@@ -13,7 +13,7 @@ import {StorageKeysTags} from '../../common/constants/StorageKeysTags';
 import {useIsFocused} from '@react-navigation/native';
 import {SET_WALLPAPER} from '../../common/constants/ActionTypes';
 
-export default function Home() {
+export default function Home({isIcons}: any) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const settings = useSelector((state: any) => state.settings);
@@ -56,7 +56,19 @@ export default function Home() {
           style={styles.background}
         />
         <SafeAreaView style={styles.safeAreaViewContainer}>
-          <View style={[styles.dateAndTimeContainer, {opacity: 0}]}>
+          <View
+            style={[
+              isIcons
+                ? {
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 50,
+                  }
+                : styles.dateAndTimeContainer,
+              {opacity: isIcons ? 1 : 0},
+            ]}>
             <Text style={styles.timeText}>
               {moment(settings.time).format('hh')}
             </Text>
@@ -67,28 +79,30 @@ export default function Home() {
               {moment(settings.date).format('dddd, YYYY')}
             </Text>
           </View>
-          <View style={styles.iconsStacks}>
-            <TouchableOpacity
-              activeOpacity={0.65}
-              onPress={() => navigate(NavScreenTags.CALLERAPP_STACK)}>
-              <Image source={Images.CALLER_ICON} style={styles.appIcon} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.65}
-              onPress={() => navigate(NavScreenTags.MESSAGES_STACK)}>
-              <Image source={Images.MESSAGES_ICON} style={styles.appIcon} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.65}
-              onPress={() => navigate(NavScreenTags.SCHEDULE_STACK)}>
-              <Image source={Images.SCHEDULE_ICON} style={[styles.appIcon]} />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.65}
-              onPress={() => navigate(NavScreenTags.SETTINGS_STACK)}>
-              <Image source={Images.SETTINGS_ICON} style={styles.appIcon} />
-            </TouchableOpacity>
-          </View>
+          {!isIcons && (
+            <View style={styles.iconsStacks}>
+              <TouchableOpacity
+                activeOpacity={0.65}
+                onPress={() => navigate(NavScreenTags.CALLERAPP_STACK)}>
+                <Image source={Images.CALLER_ICON} style={styles.appIcon} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.65}
+                onPress={() => navigate(NavScreenTags.MESSAGES_STACK)}>
+                <Image source={Images.MESSAGES_ICON} style={styles.appIcon} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.65}
+                onPress={() => navigate(NavScreenTags.SCHEDULE_STACK)}>
+                <Image source={Images.SCHEDULE_ICON} style={[styles.appIcon]} />
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.65}
+                onPress={() => navigate(NavScreenTags.SETTINGS_STACK)}>
+                <Image source={Images.SETTINGS_ICON} style={styles.appIcon} />
+              </TouchableOpacity>
+            </View>
+          )}
         </SafeAreaView>
       </View>
     </>

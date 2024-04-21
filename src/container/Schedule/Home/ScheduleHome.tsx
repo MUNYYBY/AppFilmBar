@@ -6,7 +6,7 @@ import {scaleFontSize, scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Colors from '../../../common/styles/Colors';
 import styles from './styles';
-import {goBack, navigate} from '../../../common/utils/NavigatorUtils';
+import {goBack, navigate, replace} from '../../../common/utils/NavigatorUtils';
 import {NavScreenTags} from '../../../common/constants/NavScreenTags';
 import CustomStatusbar from '../../../common/components/customStatusbar/CustomStatusbar';
 import {useDispatch, useSelector} from 'react-redux';
@@ -134,7 +134,7 @@ export default function ScheduleHome() {
           </TouchableOpacity>
         </View>
         <TouchableOpacity
-          onPress={() => navigate(NavScreenTags.BLANK_SCREEN)}
+          onPress={() => replace(NavScreenTags.BLANK_SCREEN)}
           activeOpacity={0.75}
           style={{
             display: 'flex',

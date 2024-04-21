@@ -114,13 +114,13 @@ function FakeChatScreen({messagesTask}: any) {
   };
   useEffect(() => {
     if (trigger && msgIndex < initialMessagesStack.length) {
-      displayMessages();
+      displayMessages(2000);
       setTrigger(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trigger]);
   useEffect(() => {
-    displayMessages(500);
+    displayMessages(2500);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

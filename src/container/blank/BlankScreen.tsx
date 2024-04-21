@@ -7,6 +7,7 @@ import Colors from '../../common/styles/Colors';
 import {useDispatch, useSelector} from 'react-redux';
 import {NavScreenTags} from '../../common/constants/NavScreenTags';
 import {CLEAR_MESSAGE_SCHEDULE} from '../../common/constants/ActionTypes';
+import Home from '../Home/Home';
 
 export default function BlankScreen() {
   //** states */
@@ -64,16 +65,18 @@ export default function BlankScreen() {
   return (
     <>
       <CustomStatusbar barStyle="dark-content" />
+      <Home isIcons />
       <TouchableOpacity
         activeOpacity={1}
         onPress={() => goBack()}
         style={{
           height: '100%',
           width: '100%',
-          backgroundColor: 'black',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          position: 'absolute',
+          zIndex: 1000,
         }}>
         <TouchableOpacity
           activeOpacity={0.75}
@@ -82,6 +85,7 @@ export default function BlankScreen() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            marginTop: 200,
           }}
           onPress={() => handleGoToMessages()}>
           {schedule.messages && (

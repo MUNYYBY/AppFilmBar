@@ -72,6 +72,7 @@ export default function RealChat({contact, user}: any) {
       .collection(`Users/${user.uid}/chatUsers/${contact.uid}/messages`)
       .orderBy('timestamp', 'asc')
       .onSnapshot((documentSnapshot: any) => {
+        console.log(documentSnapshot.docs);
         setMessages(
           documentSnapshot.docs.map((doc: any) => ({
             id: doc.id,
@@ -88,6 +89,10 @@ export default function RealChat({contact, user}: any) {
     return () => subscriber();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    // console.log(messages);
+  }, [messages]);
   return (
     <PageSkeleton headerTitle="" hasHeader={false}>
       <View style={{height: '100%'}}>

@@ -223,7 +223,7 @@ export default function VideoCallTask() {
               <Text style={styles.BoldText}>Number</Text>
               <CustomInput
                 placeholder={'Number'}
-                type={InputTypes.PHONE_NUMBER_INPUT}
+                type={InputTypes.TEXT_INPUT}
                 control={control}
                 name={'Number'}
                 returnKeyType={'done'}
