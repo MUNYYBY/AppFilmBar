@@ -4,6 +4,7 @@ import styles from './styles';
 import {navigate} from '../../utils/NavigatorUtils';
 import {NavScreenTags} from '../../constants/NavScreenTags';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconFeather from 'react-native-vector-icons/Feather';
 import {scaleSize} from '../../utils/ScaleSheetUtils';
 import moment from 'moment';
 import {Images} from '../../constants/Images';
@@ -35,6 +36,9 @@ export default function CustomContact(props: Props) {
           <View>
             <Text style={styles.mainText}>{contact.name}</Text>
             {!isCall && <Text style={styles.secText}>Available</Text>}
+            {isCall && (
+              <Text style={styles.secText}>{contact?.phoneNumber}</Text>
+            )}
           </View>
         </View>
         <TouchableOpacity
@@ -51,7 +55,18 @@ export default function CustomContact(props: Props) {
               {moment(contact.createdOn).fromNow()}
             </Text>
           ) : (
-            <Icon name="add-call" size={26} color={Colors.BLACK_COLOR} />
+            <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
+              <TouchableOpacity>
+                <Icon name="add-call" size={26} color={Colors.BLACK_COLOR} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <IconFeather
+                  name="video"
+                  size={26}
+                  color={Colors.BLACK_COLOR}
+                />
+              </TouchableOpacity>
+            </View>
           )}
         </TouchableOpacity>
       </TouchableOpacity>

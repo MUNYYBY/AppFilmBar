@@ -3,6 +3,7 @@ import {reset} from '../utils/NavigatorUtils';
 import {NavScreenTags} from '../constants/NavScreenTags';
 import {AddUser, DeleteRecord} from './Cloud';
 import moment from 'moment';
+import {StreamVideoRN} from '@stream-io/video-react-native-sdk';
 
 export const SignIn = async (email: string, password: string) => {
   return auth()
@@ -24,7 +25,25 @@ export const SignIn = async (email: string, password: string) => {
     });
 };
 
-export const SignUp = async (email: string, password: string, name: string) => {
+import firestore from '@react-native-firebase/firestore'; // assuming you're using Firebase Firestore for storing user data
+
+export const SignUp = async (
+  email: string,
+  password: string,
+  name: string,
+  phoneNumber: string,
+) => {
+  // Check if the phone number is already in use
+  const phoneNumberExists = await firestore()
+    .collection('Users')
+    .where('phoneNumber', '==', phoneNumber)
+    .get();
+
+  if (!phoneNumberExists.empty) {
+    console.log('That phone number is already in use!');
+    return {error: 'That phone number is already in use!'};
+  }
+
   return auth()
     .createUserWithEmailAndPassword(email, password)
     .then((userCredentials: any) => {
@@ -39,6 +58,7 @@ export const SignUp = async (email: string, password: string, name: string) => {
             name,
             uid: userCredentials.user.uid,
             friends: [],
+            phoneNumber,
             createdOn: moment().toString(),
           }).then((res: any) => {
             if (res.data) {
@@ -67,6 +87,7 @@ export const SignUp = async (email: string, password: string, name: string) => {
 };
 
 export const Logout = async () => {
+  await StreamVideoRN.onPushLogout();
   return auth()
     .signOut()
     .then(() => {

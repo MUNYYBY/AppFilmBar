@@ -9,4 +9,6 @@ export const FIELD_NAMES = {
   REF_NUMBER: 'ReferenceNumber',
   ROOM_NAME: 'ROOM_NAME',
   ROOM_DESCRIPTION: 'ROOM_DESCRIPTION',
+  NAME: 'name',
+  PHONE_NUMBER: 'phoneNumber',
 };

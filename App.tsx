@@ -12,6 +12,7 @@ import AppStore from './src/common/redux/store/AppStore';
 import AppNavigation from './src/common/routes/AppNavigation';
 import {Immersive} from 'react-native-immersive';
 import FlashMessage from 'react-native-flash-message';
+import {requestNotifications} from 'react-native-permissions';
 
 function App(): JSX.Element {
   const store = AppStore({});
@@ -20,6 +21,7 @@ function App(): JSX.Element {
     __DEV__ && console.warn('Immersive State Changed!');
     Immersive.on();
   };
+
   if (Platform.OS !== 'ios') {
     Immersive.addImmersiveListener(restoreImmersive);
   }
@@ -29,7 +31,12 @@ function App(): JSX.Element {
   StatusBar.setBackgroundColor('transparent');
   StatusBar.setHidden(true);
 
+  async function AskForPermissions() {
+    await requestNotifications(['alert', 'sound']);
+  }
+
   useEffect(() => {
+    AskForPermissions();
     LogBox.ignoreAllLogs();
   }, []);
 

@@ -52,7 +52,8 @@ export default function Signup() {
     SignUp(
       control._formValues.email,
       control._formValues.password,
-      control._formValues.firstName + ' ' + control._formValues.lastName,
+      control._formValues.name,
+      control._formValues.phoneNumber,
     )
       .then((result: any) => {
         console.log(result);
@@ -89,37 +90,21 @@ export default function Signup() {
               <Text style={styles.textMain}>Sign up</Text>
               <View style={{marginTop: scaleSize(30)}}>
                 <CustomInput
-                  placeholder={'First Name'}
+                  placeholder={'Name'}
                   type={InputTypes.TEXT_INPUT}
                   control={control}
-                  name={FIELD_NAMES.FIRST_NAME}
+                  name={FIELD_NAMES.NAME}
                   editable={true}
                   returnKeyType={'next'}
                   forwordRef={(input: any): any => {
                     firstNameRef = input;
                   }}
                   shouldShowIcon={
-                    watch(FIELD_NAMES.FIRST_NAME) !== undefined ? true : false
+                    watch(FIELD_NAMES.NAME) !== undefined ? true : false
                   }
                   rules={{
-                    required: 'First name is required',
+                    required: 'Name is required',
                   }}
-                />
-                <CustomInput
-                  placeholder={'Last Name'}
-                  type={InputTypes.TEXT_INPUT}
-                  control={control}
-                  name={FIELD_NAMES.LAST_NAME}
-                  returnKeyType={'done'}
-                  rules={{
-                    required: 'Last name is required',
-                  }}
-                  forwordRef={(input: any): any => {
-                    lastNameRef = input;
-                  }}
-                  shouldShowIcon={
-                    watch(FIELD_NAMES.LAST_NAME) !== undefined ? true : false
-                  }
                 />
                 <CustomInput
                   placeholder={'Email'}
@@ -136,6 +121,23 @@ export default function Signup() {
                   }
                   rules={{
                     required: 'Email is required',
+                  }}
+                />
+                <CustomInput
+                  placeholder={'Phone Number'}
+                  type={InputTypes.TEXT_INPUT}
+                  control={control}
+                  name={FIELD_NAMES.PHONE_NUMBER}
+                  editable={true}
+                  returnKeyType={'next'}
+                  forwordRef={(input: any): any => {
+                    emailRef = input;
+                  }}
+                  shouldShowIcon={
+                    watch(FIELD_NAMES.PHONE_NUMBER) !== undefined ? true : false
+                  }
+                  rules={{
+                    required: 'Phone is required',
                   }}
                 />
                 <CustomInput
