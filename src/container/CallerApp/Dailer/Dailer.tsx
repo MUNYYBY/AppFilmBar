@@ -82,7 +82,7 @@ export default function Dailer() {
 
         // Check if the searched user is already in the friends array
         if (
-          currentUserData.friends &&
+          currentUserData?.friends &&
           currentUserData.friends.includes(searchedUserUid)
         ) {
           return {message: 'User is already in friends list'};
@@ -109,9 +109,9 @@ export default function Dailer() {
     const newValue = typedText + value;
     setTypedText(newValue);
 
-    // Clear the debounce timer
-    if (debounceTimeout) clearTimeout(debounceTimeout);
-
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
     // Set a new debounce timer
     const newTimeout = setTimeout(() => {
       searchUser(newValue);
@@ -133,8 +133,9 @@ export default function Dailer() {
 
   useEffect(() => {
     return () => {
-      // Clean up the debounce timer on unmount
-      if (debounceTimeout) clearTimeout(debounceTimeout);
+      if (debounceTimeout) {
+        clearTimeout(debounceTimeout);
+      }
     };
   }, [debounceTimeout]);
 

@@ -3,7 +3,6 @@ import {ScrollView, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {scaleSize} from '../../../common/utils/ScaleSheetUtils';
 import CustomContact from '../../../common/components/CustomContact/CustomContact';
-import {GetUsers} from '../../../common/services/Cloud';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 
